@@ -180,3 +180,8 @@ Breadcrumbs::for('tms.warehouse.transfer-order', function ($trail) {
     $trail->push('Warehouse', '#');
     $trail->push('Transfer Order', route('tms.warehouse.transfer-order'));
 });
+
+Breadcrumbs::for('ar_Index', function ($trail) {
+    $trail->push('Accounting', '#');
+    $trail->push('Customer Invoice', route('ar_Index'));
+});

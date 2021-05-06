@@ -381,7 +381,12 @@ Route::group([ 'middleware' => 'app.user'], function (){
         tes ubag web
         | +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         */
-
+        //Accounting
+            Route::get('/acc', 'Tms\Acc\AccCustomerController@index')->name('ar_Index');
+            Route::post('/acc/add','Tms\Acc\AccCustomerController@add');
 
     });
+
+    //PREFIX:: AR
+    
 });
