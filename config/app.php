@@ -162,6 +162,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+
         /*
          * Package Service Providers...
          */
@@ -242,6 +243,9 @@ return [
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+
+        //Modul Vendor Additional 
+        
     ],
 
 ];

@@ -64,6 +64,7 @@ Breadcrumbs::for('admin.modules.item.permission', function ($trail, $item) {
 |       2.1. - - - - - - Dashboard
 |       2.2. - - - - - - Master
 |           2.2.1. - - - - - Master Item
+            2.2.2. - - - - - Master Vendor 
 |       2.3. - - - - - - Manufacturing
 |           2.3.1. - - - - - Production Plan
 |               2.3.1.1. - - - - - Summary Loading Capacity per Month
@@ -92,10 +93,17 @@ Breadcrumbs::for('tms_Dashboard', function ($trail) {
     $trail->push('Dashboard', route('tms_Dashboard'));
 });
 
-//  2.2. Master Item
+//  2.2. Master 
+    //2.2.1. Master Item
 Breadcrumbs::for('tms_MasterItem_Index', function ($trail) {
     $trail->push('Master', '#');
     $trail->push('Master Item', route('tms_MasterItem_Index'));
+});
+
+    // 2.2.2. Master Vendor
+Breadcrumbs::for('tms.master.vendor', function ($trail) {
+    $trail->push('Mastervendor', '#');
+    $trail->push('Vendor', route('tms.master.vendor'));
 });
 
 //  2.3.    Manufacturing
@@ -180,3 +188,39 @@ Breadcrumbs::for('tms.warehouse.transfer-order', function ($trail) {
     $trail->push('Warehouse', '#');
     $trail->push('Transfer Order', route('tms.warehouse.transfer-order'));
 });
+    // 2.4.3
+Breadcrumbs::for('tms.warehouse.mto-entry', function ($trail) {
+    $trail->push('Warehouse', '#');
+    $trail->push('MTO-Entry', route('tms.warehouse.mto-entry'));
+});
+
+
+
+Breadcrumbs::for('tms.warehouse.stock_out_entry', function ($trail) {
+    $trail->push('Warehouse', '#');
+    $trail->push('Stock Out Entry', route('tms.warehouse.stock_out_entry'));
+});
+
+Breadcrumbs::for('tms.warehouse.stock_in_entry', function ($trail) {
+    $trail->push('Warehouse', '#');
+    $trail->push('Stock In Entry', route('tms.warehouse.stock_in_entry'));
+});
+
+
+Breadcrumbs::for('tms.warehouse.deliveryorder', function ($trail) {
+    $trail->push('Delivery Orders', route('tms.warehouse.deliveryorder'));
+});
+    // 2.4.4. PPB Entry
+    Breadcrumbs::for('tms.procurement.ppb_entry' , function ($trail) {
+        $trail->push('Procurement' , '#');
+        $trail->push('PPB-Entry' , route('tms.procurement.ppb_entry'));
+    });
+
+
+    Breadcrumbs::for('tms.procurement.po_entry', function ($trail) {
+        $trail->push('Title Here', route('tms.procurement.po_entry'));
+    });
+    Breadcrumbs::for('tms.procurement.rg_entry', function ($trail) {
+        $trail->push('Title Here', route('tms.procurement.rg_entry'));
+    });
+

@@ -326,38 +326,7 @@
         });
 
         // //
-        var url_select_sys_wh2 = "{{ route('tms.warehouse.stock_out_entry.stock_out_select_warehouse') }}";
-        var lookUpdataStin_wh2 =  $('#lookUpdataStinWh2').DataTable({ 
-            "pagingType": "numbers",
-            ajax: url_select_sys_wh2,
-            responsive: true,
-            paging: false,
-            "bFilter": false,
-            "order": [[1, 'asc']],
-            columns: [
-            { data: 'warehouse_id', name: 'warehouse_id' },
-            { data: 'descript', name: 'descript' }
-
-            ],
-            "bDestroy": true,
-            "initComplete": function(settings, json) {
-                // $('div.dataTables_filter input').focus();
-                $('#lookUpdataStinWh2 tbody').on('dblclick', 'tr', function () {
-                    var dataArrWh2 = [];
-                    var rowsWh2 = $(this);
-                    var rowDataWh2 = lookUpdataStin_wh2.rows(rowsWh2).data();
-                    $.each($(rowDataWh2),function(key,value){
-                        document.getElementById("types_edit_stin").value = value["warehouse_id"]; 
-                        $('#SysWarehouseModal2').modal('hide');
-                        // editTypes()
-                        $('#refs_no_edit_stin').focus();
-  
-                    });
-                });
-              
-            },
-      
-        });
+       
      
         $('#tbl-detail-stin-create').DataTable({
             paging: false,
