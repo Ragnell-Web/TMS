@@ -286,101 +286,82 @@ Route::group([ 'middleware' => 'app.user'], function (){
         Route::get('/get_dtItem', 'TMS\json_MasterController@get_dtItem');
         Route::post('/post_entryItem', 'TMS\json_MasterController@post_entryItem');
 
-        // 2. Raw Material
-        // 2.1. Dashboard  - - - - - - - - - - - - - -  :: PAGE ::
-        Route::get('/manufacturing/view_indexRawMaterial', ['uses' => 'TMS\Manufacturing\RawMaterialController@index', 'as' => 'tms.manufacturing.raw-material.index']);
-        // 2.1.1. Get Data - - - - - - - - - - - - - -  :: GET  :: JSON ::
-        // Route::get('/manufacturing/view_forecastNoteRawMaterial/{vend_code}/{period}/{flag}/get_datForecastNote', ['uses' => 'TMS\Manufacturing\RawMaterialController@get_datForecastNote', 'as' => 'tms.manufacturing.raw-material.forecast-note.get_datForecastNote']);
+         // Stock In Entry :: page ::  
+         Route::get('/warehouse/stock_in_entry', [
+            'uses' => 'TMS\Warehouse\StockInEntryController@indexStockInEntry', 
+            'as' => 'tms.warehouse.stock_in_entry'
+        ]); 
+        Route::get('/warehouse/stock_in_entry/get_stock_in_datatables', [
+            'uses' => 'TMS\Warehouse\StockInEntryController@GetStindatatablesDashboard', 
+            'as' => 'tms.warehouse.get_stock_in_datatables'
+        ]);
+        Route::get('/warehouse/stock_in_entry/get_choice_data_item_datatables_stock_in', [
+            'uses' => 'TMS\Warehouse\StockInEntryController@getChoiceDataItemDatatablesStin', 
+            'as' => 'tms.warehouse.get_choice_data_item_datatables_stock_in'
+        ]);
+        Route::get('/warehouse/stock_in_entry/stock_in_select_warehouse', [
+            'uses' => 'TMS\Warehouse\StockInEntryController@SysWarehouseStin', 
+            'as' => 'tms.warehouse.stock_in_entry.stock_in_select_warehouse'
+        ]);
+        Route::post('/warehouse/stock_in_entry/store_stin', [
+            'uses' => 'TMS\Warehouse\StockInEntryController@storeStockIn', 
+            'as' => 'tms.warehouse.stock_in_entry_storeStockIn'
+        ]);
+        Route::get('/warehouse/stock_in_entry/{id}/show_view_stock_in_entry', [
+            'uses' => 'TMS\Warehouse\StockInEntryController@showViewStin', 
+            'as' => 'tms.warehouse.show_view_stock_in_entry'
+        ]);
+        Route::get('/warehouse/stock_in_entry/{id}/stock_in_entry_edit', [
+            'uses' => 'TMS\Warehouse\StockInEntryController@editStinEntry', 
+            'as' => 'tms.warehouse.stock_in_entry_edit'
+        ]);
+        Route::get('/warehouse/stock_in_entry/{id}/stock_in_dashboard_edit_detail', [
+            'uses' => 'TMS\Warehouse\StockInEntryController@dashboardEditDetailStin', 
+            'as' => 'tms.warehouse.stock_in_dashboard_edit_detail'
+        ]);
+        
+        Route::put('/warehouse/stock_in_entry/stock_in_entry_update/{id}', [
+            'uses' => 'TMS\Warehouse\StockInEntryController@updateStin', 
+            'as' => 'tms.warehouse.stock_in_entry_update'
+        ]);
+        Route::put('/warehouse/stock_in_entry/stock_in_update_header/{id}', [
+            'uses' => 'TMS\Warehouse\StockInEntryController@updateHeaderEditPageStin', 
+            'as' => 'tms.warehouse.stock_in_update_header'
+        ]);
 
-        // 2.2. Setup Supplier Distribution- - - - - -  :: PAGE ::
-        Route::get('/manufacturing/view_setupSupplierDistributionRawMaterial', ['uses' => 'TMS\Manufacturing\RawMaterialController@setupSupplierDistribution', 'as' => 'tms.manufacturing.raw-material.setup-supplier-distribution']);
-        // 2.2.1. Get Data - - - - - - - - - - - - - -  :: GET  :: JSON ::
-        Route::get('/manufacturing/view_setupSupplierReportRawMaterial/{flag}/{itemcode}/{vendcode}/get_datSupplierDistribution', ['uses' => 'TMS\Manufacturing\RawMaterialController@get_datSupplierDistribution', 'as' => 'tms.manufacturing.raw-material.setup-supplier-distribution.get_datSupplierDistribution']);
-        // 2.2.2. CRUD Function  - - - - - - - - - - -  :: POST :: JSON ::
-        Route::get('/manufacturing/view_setupSupplierDistributionRawMaterial/control_setupSupplierDistributionRawMaterial', ['uses' => 'TMS\Manufacturing\RawMaterialController@control_setupSupplierDistributionRawMaterial', 'as' => 'tms.manufacturing.raw-material.setup-supplier-distribution.control_setupSupplierDistributionRawMaterial']);
+        Route::get('/warehouse/stock_in_entry/{id}/stock_in_entry_edit_detail_page', [
+            'uses' => 'TMS\Warehouse\StockInEntryController@editDetail', 
+            'as' => 'tms.warehouse.stock_in_entry_edit_detail_page'
+        ]);
+        Route::put('/warehouse/stock_in_entry/stock_in_entry_update_detail/{id}', [
+            'uses' => 'TMS\Warehouse\StockInEntryController@updateDetailStin', 
+            'as' => 'tms.warehouse.stock_in_entry_update_detail'
+        ]);
+        Route::delete('/warehouse/stock_in_entry/stock_in_delete_detail_page/{id}', [
+            'uses' => 'TMS\Warehouse\StockInEntryController@deleteDetailPageStin', 
+            'as' => 'tms.warehouse.stock_in_delete_detail_page'
+        ]);
+        Route::post('/warehouse/stock_in_entry/stock_in_entry_void/{param}', [
+            'uses' => 'TMS\Warehouse\StockInEntryController@voidStinEntry', 
+            'as' => 'tms.warehouse.stock_in_entry_void'
+        ]);
+        Route::get('/warehouse/stock_in_entry/{id}/stock_in_entry_report', [
+            'uses' => 'TMS\Warehouse\StockInEntryController@reportStinEntry', 
+            'as' => 'tms.warehouse.stock_in_entry_report'
+        ]);
+        Route::post('/warehouse/stock_in_entry/stock_in_entry_post/{param}', [
+            'uses' => 'TMS\Warehouse\StockInEntryController@postStinEntry', 
+            'as' => 'tms.warehouse.stock_in_entry_post'
+        ]);
+        Route::get('/warehouse/stock_in_entry/{id}/stock_in_entry_log', [
+            'uses' => 'TMS\Warehouse\StockInEntryController@logStinEntry', 
+            'as' => 'tms.warehouse.stock_in_entry_log'
+        ]);
+        Route::get('/warehouse/stock_in_entry/{id}/stock_in_check_stclose_', [
+            'uses' => 'TMS\Warehouse\StockInEntryController@checkStClose',
+            'as' => 'tms.warehouse.stock_in_check_stclose_'
+        ]);
 
-        // 2.3. Setup Lot  - - - - - - - - - - - - - -  :: PAGE ::
-        Route::get('/manufacturing/view_setupLotRawMaterial', ['uses' => 'TMS\Manufacturing\RawMaterialController@setupLot', 'as' => 'tms.manufacturing.raw-material.setup-lot']);
-
-        // 2.4. Forecast Note  - - - - - - - - - - - -  :: PAGE ::
-        Route::get('/manufacturing/view_forecastNoteRawMaterial', ['uses' => 'TMS\Manufacturing\RawMaterialController@forecastNote', 'as' => 'tms.manufacturing.raw-material.forecast-note']);
-        // 2.4.1. Get Data - - - - - - - - - - - - - -  :: GET  :: JSON ::
-        Route::get('/manufacturing/view_forecastNoteRawMaterial/{vend_code}/{period}/{flag}/get_datForecastNote', ['uses' => 'TMS\Manufacturing\RawMaterialController@get_datForecastNote', 'as' => 'tms.manufacturing.raw-material.forecast-note.get_datForecastNote']);
-        // 2.4.2 CRUD Function - - - - - - - - - - - -  :: POST :: JSON ::
-        Route::post('/manufacturing/view_forecastNoteRawMaterial/control_forecastNoteRawMaterial', ['uses' => 'TMS\Manufacturing\RawMaterialController@control_forecastNoteRawMaterial', 'as' => 'tms.manufacturing.raw-material.forecast-note.control_forecastNoteRawMaterial']);
-        // 2.4.2 APPROVE Function  - - - - - - - - - -  :: POST :: JSON ::
-        Route::post('/manufacturing/view_forecastNoteRawMaterial/approve_forecastNoteRawMaterial', ['uses' => 'TMS\Manufacturing\RawMaterialController@approve_forecastNoteRawMaterial', 'as' => 'tms.manufacturing.raw-material.forecast-note.approve_forecastNoteRawMaterial']);
-
-        // 2.5. Setup Supplier Report  - - - - - - - - - -  :: PAGE ::
-        Route::get('/manufacturing/view_setupSupplierReportRawMaterial', ['uses' => 'TMS\Manufacturing\RawMaterialController@setupSupplierReport', 'as' => 'tms.manufacturing.raw-material.setup-supplier-report']);
-        // 2.5.1. Get Data - - - - - - - - - - - - - - - -  :: GET  :: JSON ::
-        Route::get('/manufacturing/view_setupSupplierReportRawMaterial/{flag}/get_datSupplierReport', ['uses' => 'TMS\Manufacturing\RawMaterialController@get_datSupplierReport', 'as' => 'tms.manufacturing.raw-material.setup-supplier-report.get_datSupplierReport']);
-        // 2.5.2. CRUD Function  - - - - - - - - - - - - -  :: POST :: JSON ::
-        Route::post('/manufacturing/view_setupSupplierReportRawMaterial/control_setupSupplierReportRawMaterial', ['uses' => 'TMS\Manufacturing\RawMaterialController@control_setupSupplierReportRawMaterial', 'as' => 'tms.manufacturing.raw-material.setup-supplier-report.control_setupSupplierReportRawMaterial']);
-
-        // 2.6. Reference BoM  - - - - - - - - - - - - - -  :: PAGE ::
-        Route::get('/manufacturing/view_referenceBom', ['uses' => 'TMS\Manufacturing\RawMaterialController@referenceBom', 'as' => 'tms.manufacturing.raw-material.reference-bom']);
-        // 2.6.1. Get Data - - - - - - - - - - - - - - - -  :: GET  :: JSON ::
-        Route::get('/manufacturing/view_referenceBom/{flag}/{keyword}/get_datReferenceBom', ['uses' => 'TMS\Manufacturing\RawMaterialController@get_datReferenceBom', 'as' => 'tms.manufacturing.raw-material.reference-bom.get_datReferenceBom']);
-
-        /*
-        | +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        |   TMS - WAREHOUSE
-        | +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        |
-        |   1. Products - - - - - - - - - - - - - - :: PAGE ::
-        |       1.1. Get Datatables - - - - - - - - :: GET  :: JSON ::
-                2.1. View Products  - - - - - - - - :: PAGE ::
-        |   2. Transfer Order - - - - - - - - - - - :: PAGE ::
-        |       2.1. Get Datatables - - - - - - - - :: GET  :: JSON ::
-        |       2.2. Get Header - - - - - - - - - - :: GET  :: JSON ::
-        |
-        | +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        */
-
-        //  1. Products
-        Route::get('/warehouse/products', ['uses' => 'TMS\Warehouse\ProductController@index', 'as' => 'tms.warehouse.products']);
-        Route::post('/warehouse/products/datatables', ['uses' => 'TMS\Warehouse\ProductController@datatables', 'as' => 'tms.warehouse.products.datatables']);
-        Route::get('/warehouse/products/{id}/view', ['uses' => 'TMS\Warehouse\ProductController@view', 'as' => 'tms.warehouse.products.view']);
-        Route::get('/warehouse/products/{itemcode}/datatables/bom', ['uses' => 'TMS\Warehouse\ProductController@datatablesBom', 'as' => 'tms.warehouse.products.bom.datatables']);
-        Route::get('/warehouse/products/{itemcode}/highcharts/bom', ['uses' => 'TMS\Warehouse\ProductController@highchartsBom', 'as' => 'tms.warehouse.products.bom.highcharts']);
-        // Route::get('/warehouse/products/{itemcode}/balance', ['uses' => 'TMS\Warehouse\ProductController@getCurrentBalance', 'as' => 'tms.warehouse.products.balance']);
-        Route::get('/warehouse/products/{itemcode}/stock-status', ['uses' => 'TMS\Warehouse\ProductController@getStockStatus', 'as' => 'tms.warehouse.products.stock-status']);
-        Route::get('/warehouse/products/{itemcode}/stock-card', ['uses' => 'TMS\Warehouse\ProductController@printStockCard', 'as' => 'tms.warehouse.products.stock-card']);
-
-        //  2. Transfer Order   :: PAGE ::
-        Route::get('/warehouse/transfer-order', ['uses' => 'TMS\Warehouse\TransferOrderController@index', 'as' => 'tms.warehouse.transfer-order']);
-        Route::get('/warehouse/transfer-order/datatable-hdr', ['uses' => 'TMS\Warehouse\TransferOrderController@getDatatablesHeader', 'as' => 'tms.warehouse.transfer-order.datatables.header']);
-        Route::get('/warehouse/transfer-order/{id}/detail', ['uses' => 'TMS\Warehouse\TransferOrderController@getDetail', 'as' => 'tms.warehouse.transfer-order.detail']);
-
-
-
-        //  3. Delivery Order   :: PAGE ::
-        Route::get('/warehouse/deliveryorder', ['uses' => 'TMS\Warehouse\DeliveryOrderController@index', 'as' => 'tms.warehouse.deliveryorder']);
-        Route::get('/warehouse/deliveryorder/datatables', ['uses' => 'TMS\Warehouse\DeliveryOrderController@getDatatablesDO', 'as' => 'tms.warehouse.deliveryorder.datatables']);
-        Route::get('/warehouse/deliveryorder/datatables_search/{by}/{value}', ['uses' => 'TMS\Warehouse\DeliveryOrderController@searchDatatablesDO', 'as' => 'tms.warehouse.deliveryorder.datatables.search']);
-        Route::get('/warehouse/deliveryorder/customer', ['uses' => 'TMS\Warehouse\DeliveryOrderController@getAllCustomer', 'as' => 'tms.warehouse.deliveryorder.customer']);
-        Route::get('/warehouse/deliveryorder/getssoheader', ['uses' => 'TMS\Warehouse\DeliveryOrderController@getDataSSOforDOHeader', 'as' => 'tms.warehouse.deliveryorder.ssoheader']);
-        Route::get('/warehouse/deliveryorder/getssodetail', ['uses' => 'TMS\Warehouse\DeliveryOrderController@getDataSSOforDODetail', 'as' => 'tms.warehouse.deliveryorder.ssodetail']);
-        Route::get('/warehouse/deliveryorder/getdatadodetail', ['uses' => 'TMS\Warehouse\DeliveryOrderController@getDataDeliveryOrder', 'as' => 'tms.warehouse.deliveryorder.dodetail']);
-        Route::post('/warehouse/deliveryorder/save', ['uses' => 'TMS\Warehouse\DeliveryOrderController@saveDataDeliveryOrder', 'as' => 'tms.warehouse.deliveryorder.save']);
-        Route::delete('/warehouse/deliveryorder/void/{do}', ['uses' => 'TMS\Warehouse\DeliveryOrderController@voidDataDeliveryOrder', 'as' => 'tms.warehouse.deliveryorder.void']);
-       
-       
-       
-       
-        /*
-        | +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        |   TMS - PROCUREMENT
-        | +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        |
-        |   1. PPB - - - - - - - - - - - - - - - -  :: PAGE ::
-        |       1.1. Get Datatables - - - - - - - - :: GET  :: JSON ::
-        |
-        |
-        tes ubag web
-        | +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        */
 
 
     });
