@@ -12,11 +12,14 @@ class AccCustomerController extends Controller
      * Create a new controller instance.
      *
      * @return void
-     */   
-    
+     */
+
     private $api_key;
     private $customer_invoice;
+    private $surat_jalan;
     private $api_url;
+    private $detail_customer;
+    private $add_customer_from_sj;
     public function __construct()
     {
         $this->middleware('auth');
@@ -25,6 +28,9 @@ class AccCustomerController extends Controller
         $this->api_key = str_replace('base64:', '', $value);
         $this->customer_invoice = \Config::get('rest.customer_invoice');
         $this->api_url = \Config::get('rest.api_url');
+        $this->surat_jalan = \Config::get('rest.surat_jalan');
+        $this->detail_customer = \Config::get('rest.detail_customer');
+        $this->add_customer_from_sj = \Config::get('rest.add_customer_from_sj');
     }
 
     /**
@@ -35,26 +41,52 @@ class AccCustomerController extends Controller
     public function index()
     {
         //print_r($this->api_key);exit;
-        $datas = Http::withHeaders([
+        $datasInvoices= Http::withHeaders([
             'Authorization' => $this->api_key,
         ])->get($this->api_url . $this->customer_invoice . 'list');
-        //print_r($datas['data']);exit;   
-        return view('tms.acc.customer_invoice')->with('datas', $datas['data']);
+
+        //print_r($datas['data']);exit;
+        $datasSuratJalan = Http::withHeaders([
+            'Authorization' => $this->api_key,
+        ])->get($this->api_url . $this->surat_jalan . 'list');
+        return view('tms.acc.customer_invoice')->with('datasInvoices', $datasInvoices['data'])->with('datasSuratJalan',$datasSuratJalan['data']);
     }
-    public function add(Request $request)
+    public function create(Request $request)
     {
 
         $datas = Http::withHeaders([
             'Authorization' => $this->api_key,
-        ])->asForm()->post($this->api_url . $this->customer_invoice . 'add', [
-            'invoice' => $request->input('invoice'), 
+        ])->asForm()->post($this->api_url . $this->customer_invoice . 'store', [
+            'invoice' => $request->input('invoice'),
             'inv_type' => $request->input('inv_type'),
             'ref_no' => $request->input('ref_no'),
             'period' => $request->input('atas_nama'),
             'company' => $request->input('company')
         ]);
 
-        return redirect()->route('ar_Index');
+        return redirect()->route('ar_Index')->with('datas',$datas['data']);
+    }
+    public function getCustomer(Request $request)
+    {
+        $datasCustomers = Http::withHeaders([
+            'Authorization' => $this->api_key,
+        ])->asJson()->get($this->api_url . $this->detail_customer . 'edit',[
+            'id'=>$request->input('id')
+        ]);
+        // $data = [
+        //     'datasCustomers'=>$datasCustomers['data']
+        // ];
+
+        return $datasCustomers['data'];
+    }
+    public function getSJ(Request $request)
+    {
+        $datasAddCustomers = Http::withHeaders([
+            'Authorization' => $this->api_key,
+        ])->asJson()->get($this->api_url . $this->add_customer_from_sj . 'list',[
+            'custcode'=>$request->input('cust_id')
+        ]);
+        return $datasAddCustomers['data'];
     }
 
 }

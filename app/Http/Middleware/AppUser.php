@@ -10,6 +10,7 @@ use App\Models\Ekanban_Usersetup as user;
 use App\Models\User_Role as userRole;
 use App\Models\Role_Permission As rolePermission;
 use App\Models\Permission as permission;
+use App\Models\Dbtbs\Vendor as vendor;
 
 class AppUser
 {

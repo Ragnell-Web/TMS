@@ -30,7 +30,6 @@ class ModuleController extends Controller
         $UserID     = Auth::user()->id;
         $UserRole   = UserRole::where('ekanban_user_id', $UserID)->first();
         $RoleID     = $UserRole->role_id;
-
         $AddAccess  = RolePermissionControl::CheckPermission($RoleID, 'add_modules');
         if($AddAccess){
             $ActionButton = ButtonBuilder::Build('MAIN-LINK', 'ADD', 'add-btn', 'ti-plus', 'Add New Module', route('admin.modules.add'));
@@ -170,14 +169,11 @@ class ModuleController extends Controller
     }
 
     static function getAll($select = null){
-        //if($select == null){
-          //  $module = module::select($select)->get();
-        //} else {
-          //  $module = module::select($select)->get();
-       // }
-       $module = module::where('id','=',2)
-       ->select('id','name')
-       ->get();
+        if($select == null){
+            $module = module::all();
+        } else {
+            $module = module::select($select)->get();
+        }
         return $module;
     }
 

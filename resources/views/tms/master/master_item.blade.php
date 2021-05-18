@@ -68,7 +68,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <h4 class="card-header-title">Products</h4>
+                        <h4 class="card-header-title">Coba Modul</h4>
                     </div>
                 </div>
                 <div class="card-body">
@@ -82,22 +82,20 @@
                                             <th>Item Code</th>
                                             <th>Part Number</th>
                                             <th>Description</th>
-                                            <th>Type</th>
-                                            <th>Cust</th>
-                                            <th>Group</th>
+                                            <th>Customer Code</th>
+                                            <th>Groups</th>
                                             <th>Type</th>
                                             <th>State</th>
-                                            <th>Track</th>
-                                            <th>BoM</th>
+                                            <th>Inventory</th>
+                                            <th>Formula</th>
                                             <th>Unit</th>
-                                            <th>Fac_Qty</th>
-                                            <th>Fac_Unit</th>
+                                            <th>Factor</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
 
                                     <tbody></tbody>
-
+                                    
                                 </table>
                             </div>
                         </div>
@@ -159,51 +157,11 @@
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
     $(document).ready(function() {
-        // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        // JS Function On Load
-        // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        populate_dtItem('#tms_MasterItem_Datatable');
-
-        // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        // JS Function On Other Function Changes
-        // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        $('#add_form').click(function() {
-            $('#form_addItem').toggle();
-        });
-
-        $('#post_Item').click(function() {
-            var email = $('#exampleInputEmail1').val();
-            if(email != ''){
-                post_entryItem(email);
-            } else {
-                alert('Fill all fields');
-            };
-        });
-
-        // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        // JS Nested Function
-        // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        function post_entryItem(email){
-            $.ajax({
-                type:'POST',
-                url:'post_entryItem', //Make sure your URL is correct
-                dataType: 'json', //Make sure your returning data type dffine as json
-                data:{
-                    _token: CSRF_TOKEN,
-                    email: email
-                },
-                success:function(response){
-                    if(response == 'success'){
-                        Swal.fire("Data posting successfully!", "", "success");
-                        $('#form_addItem').toggle();
-                        populate_dtItem('#tms_MasterItem_Datatable');
-                    } else {
-                        Swal.fire("Data posting failed!", "", "warning");
-                    }
-                }
-            });
-        };
+   
 
     } );
+
+
+  
 </script>
 @endpush

@@ -108,6 +108,11 @@
                         <li><a href="javascript:void(0)">Master Machine</a></li>
                     </ul>
                   </li>
+                  <li>
+                    <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-menu-v"></i>
+                      <span>Coba Modul</span>
+                    </a>
+                  </li>
               </ul>
           </nav>
       </div>

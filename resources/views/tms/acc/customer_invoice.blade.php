@@ -7,6 +7,15 @@
 <!-- DATATABLES -->
 <link rel="stylesheet" type="text/css" href="{{ asset('/vendor/Datatables/dataTables.bootstrap4.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('/vendor/Datatables/Responsive-2.2.5/css/responsive.dataTables.min.css') }}">
+<style>
+    .invoice{
+        cursor: pointer;
+    }
+    .goodScroll{
+        height: 65vh;
+        overflow: auto;
+    }
+</style>
 
 @endsection
 
@@ -24,7 +33,13 @@
 
 @section('content')
 
-    @include('tms.__layouts.tms-menuMaster-horizontal')
+    <div class="page-title-area">
+    <div class="row" >
+        <div class="#">
+            <a href="#" class="btn btn-primary btn-round" id="add_form" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                Add Item
+            </a>
+        </div>
     {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Launch demo modal
 </button> --}}
@@ -36,46 +51,7 @@
         </div>
     @endif
 
-    <div id="form_addItem" >
-        <!-- data table start -->
-        <div class="col-12 mt-5">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="header-title">Entry of Invoice Data</h4>
-                    <form action="/tms/acc/add" method="post" enctype="multipart/form-data">
-                        @csrf
-                        <div class="form-group">
-                            <label for="invoice">Invoice</label>
-                            <input type="text" name="invoice" class="form-control" id="invoice   " aria-describedby="emailHelp" placeholder="Enter No Invoice">
-                        </div>
-                        <div class="form-group">
-                            <label for="inv_type">Inv_Type</label>
-                            <input type="text" name="inv_type" class="form-control" id="inv_type   " aria-describedby="emailHelp" placeholder="Enter No Inv_Type">
-                        </div>
-                        <div class="form-group">
-                            <label for="ref_no">Ref_No</label>
-                            <input type="text" name="ref_no" class="form-control" id="ref_no   " aria-describedby="emailHelp" placeholder="Enter No Ref_No">
-                        </div>
-                        <div class="form-group">
-                            <label for="period">Period</label>
-                            <input type="text" name="period" class="form-control" id="period   " aria-describedby="emailHelp" placeholder="Enter No Period">
-                        </div>
-                        <div class="form-group">
-                            <label for="company">Company</label>
-                            <input type="text" name="company" class="form-control" id="company   " aria-describedby="emailHelp" placeholder="Enter No Company">
-                        </div>
-                        {{-- <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                        </div> --}}
-                        <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">
-                            Submit
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     <div class="row">
         <div class="col-12 mt-5">
@@ -86,6 +62,221 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    {{-- <div class="row mt-3">
+                        <div class="col">
+                            <div class="form-row">
+                                <div class="col-1 mb-2">
+                                    <label>Invoice No</label>
+                                </div>
+                                <div class="col-1 mb-2">
+                                    <input type="number" name="invoice" class="form-control form-control-sm" id="invoice" aria-describedby="" placeholder="No Invoice" disabled>
+                                </div>
+                                <div class="col-1 mb-2">
+                                    <input type="text" name="inv_type"  class="form-control form-control-sm" id="inv_type"  placeholder="SJ">
+                                </div>
+
+                                <div class="col-2 mb-2">
+                                    <input type="text" placeholder="HO"  id="source" name="source" class="form-control form-control-sm">
+                                </div>
+                                <div class="col-md-1 mb-2 align-center" >
+                                    <label>Customer Id</label>
+                                </div>
+                                <div class="col-md-1 mb-2">
+                                    <input type="text" name="custcode"  class="form-control form-control-sm" id="custcode"  placeholder="Cust Code">
+                                </div>
+                                <div class="col-md-1 mb-2">
+                                    <input type="text" name=""  class="form-control form-control-sm"   placeholder="">
+                                </div>
+                                <div class="col-md-1 mb-2">
+                                    <input type="number" name=""  class="form-control form-control-sm"   placeholder="0" disabled>
+                                </div>
+                                <div class="col-md-2 mb-2 align-right" >
+                                    <label>Staff</label>
+                                </div>
+                                <div class="col-1 mb-2">
+                                    <input class="form-control form-control-sm"  value="{{ Auth::user()->FullName }}"  name="staff" type="text" id="staff_create_stin" disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-1 mb-1">
+                                    <label>Per/Date</label>
+                                </div>
+                                <div class="col-2 mb-1">
+                                    <input type="text" name="periode" autocomplete="off"   class="form-control form-control-sm" id="periode"
+                                    placeholder="YYYY/MM">
+                                </div>
+                                <div class="col-2 mb-1">
+                                    <input type="text" name="written" autocomplete="off"   class="form-control form-control-sm" id="written"
+                                    placeholder="YYYY-MM-DD">
+                                </div>
+                                <div class="col-md-4 mb-1">
+                                    <input type="text" name="company" autocomplete="off"   class="form-control form-control-sm" id="company"
+                                    placeholder="Name of your pt" disabled>
+                                </div>
+                                <div class="col-md-1 mb-1 align-right" >
+                                    <label>Prn/Post</label>
+                                </div>
+                                <div class="col-1 mb-1">
+                                    <input class="form-control form-control-sm" name="" type="text"  disabled>
+                                </div>
+                                <div class="col-1 mb-1">
+                                    <input class="form-control form-control-sm" name="post" type="text" id="post" disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-1 mb-1">
+                                    <label>Refs.No</label>
+                                </div>
+                                <div class="col-4 mb-1">
+                                    <input type="text" name="ref_no" autocomplete="off"   class="form-control form-control-sm" id="reff_no"
+                                    placeholder="Ref No">
+                                </div>
+                                <div class="col-md-4 mb-1">
+                                    <input type="text" name="contact" autocomplete="off"   class="form-control form-control-sm" id="contact"
+                                    placeholder="Nama Orang di sana">
+                                </div>
+                                <div class="col-md-2 mb-1 align-right" >
+                                    <label>Voided</label>
+                                </div>
+                                <div class="col-1 mb-1">
+                                    <input class="form-control form-control-sm" name="voided" type="text" id="voided" disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-1 mb-1">
+                                    <label>VAT No</label>
+                                </div>
+                                <div class="col-1 mb-1">
+                                    <input type="text" name="" autocomplete="off"   class="form-control form-control-sm"
+                                    placeholder="">
+                                </div>
+                                <div class="col-2 mb-1">
+                                    <input type="text" name="" autocomplete="off"   class="form-control form-control-sm"
+                                    placeholder="">
+                                </div>
+                                <div class="col-1 mb-1">
+                                    <input type="text" name="taxrate" autocomplete="off"   class="form-control form-control-sm" id="taxrate"
+                                    placeholder="Tax Rate %">
+                                </div>
+                                <div class="col-md-4 mb-1">
+                                    <input type="text" name="do_addr2" autocomplete="off"   class="form-control form-control-sm" id="do_addr2"
+                                    placeholder="Address">
+                                </div>
+                                <div class="col-md-2 mb-1 align-right" >
+                                    <label>Sub Total</label>
+                                </div>
+                                <div class="col-1 mb-1">
+                                    <input class="form-control form-control-sm" name="" type="text"  disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-1 mb-1">
+                                    <label>Sales / PIC</label>
+                                </div>
+                                <div class="col-2 mb-1">
+                                    <input type="text" name="" autocomplete="off"   class="form-control form-control-sm"
+                                    placeholder="">
+                                </div>
+                                <div class="col-2 mb-1">
+                                    <input type="text" name="" autocomplete="off"   class="form-control form-control-sm"
+                                    placeholder="">
+                                </div>
+                                <div class="col-md-4 mb-1">
+                                    <input type="text" name="address3" autocomplete="off"   class="form-control form-control-sm" id="address3"
+                                    placeholder="Pos code">
+                                </div>
+                                <div class="col-md-2 mb-1 align-right" >
+                                    <label>CN / Disc</label>
+                                </div>
+                                <div class="col-1 mb-1">
+                                    <input class="form-control form-control-sm" name="" type="text"  disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-1 mb-1">
+                                    <label>Currency</label>
+                                </div>
+                                <div class="col-2 mb-1">
+                                    <input type="text" name="valas" autocomplete="off"   class="form-control form-control-sm" id="valas"
+                                    placeholder="IDR">
+                                </div>
+                                <div class="col-2 mb-1">
+                                    <input type="text" name="rate" autocomplete="off"   class="form-control form-control-sm" id="rate"
+                                    placeholder="1000">
+                                </div>
+                                <div class="col-md-4 mb-1">
+                                    <input type="text" name="" autocomplete="off"   class="form-control form-control-sm"
+                                    placeholder="">
+                                </div>
+                                <div class="col-md-2 mb-1 align-right" >
+                                    <label>V.A.T</label>
+                                </div>
+                                <div class="col-1 mb-1">
+                                    <input class="form-control form-control-sm" name="" type="text"  disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-1 mb-1">
+                                    <label>Terms</label>
+                                </div>
+                                <div class="col-4 mb-1">
+                                    <input type="text" name="" autocomplete="off"   class="form-control form-control-sm"
+                                    placeholder="0 Days">
+                                </div>
+                                <div class="col-md-4 mb-1">
+                                    <input type="text" name="" autocomplete="off"   class="form-control form-control-sm"
+                                    placeholder="">
+                                </div>
+                                <div class="col-md-2 mb-1 align-right" >
+                                    <label>Total</label>
+                                </div>
+                                <div class="col-1 mb-1">
+                                    <input class="form-control form-control-sm" name="" type="text"  disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-1 mb-1">
+                                    <label>Due Date</label>
+                                </div>
+                                <div class="col-4 mb-1">
+                                    <input type="text" name="due" autocomplete="off"   class="form-control form-control-sm" id="due"
+                                    placeholder="Date">
+                                </div>
+                                <div class="col-1 mb-2 align-center" >
+                                    <label>Gl Ar</label>
+                                </div>
+                                <div class="col-md-1 mb-1">
+                                    <input type="text" name="glar" autocomplete="off"   class="form-control form-control-sm" id="glar"
+                                    placeholder="Gl Ar">
+                                </div>
+                                <div class="col-md-2 mb-1">
+                                    <input type="text" name="" autocomplete="off"   class="form-control form-control-sm"
+                                    placeholder="Trade receiveables - Third Parties">
+                                </div>
+                                <div class="col-md-2 mb-1 align-right" >
+                                    <label>Payment</label>
+                                </div>
+                                <div class="col-1 mb-1">
+                                    <input class="form-control form-control-sm" name="" type="text"  disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-1 mb-1">
+                                    <label>Remark</label>
+                                </div>
+                                <div class="col-4 mb-1">
+                                    <input type="text" name="" autocomplete="off"   class="form-control form-control-sm" id="refs_no_create_stin"
+                                    placeholder="">
+                                </div>
+                                <div class="col-md-6 mb-1 align-right" >
+                                    <label>Balance</label>
+                                </div>
+                                <div class="col-1 mb-1">
+                                    <input class="form-control form-control-sm" name="" type="text" id="printed_create_stin" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div> --}}
                     <div class="row mt-3">
                         <div class="col">
                             <div class="data-tables datatable-dark">
@@ -94,11 +285,15 @@
                                     <thead class="text-center">
                                         <tr>
                                             <th>No</th>
-                                            <th>Invoice</th>
-                                            <th>Inv_Type</th>
-                                            <th>Ref_no</th>
-                                            <th>Period</th>
-                                            <th>Company</th>
+                                            <th>Part No</th>
+                                            <th>Item Code</th>
+                                            <th>Descript</th>
+                                            <th>Unit</th>
+                                            <th>Quantity</th>
+                                            <th>Price</th>
+                                            <th>Sub Total</th>
+                                            <th>DO No</th>
+                                            <th>SSO No</th>
                                         </tr>
                                     </thead>
 
@@ -106,18 +301,22 @@
                                         @php
                                             $i = 1;
                                         @endphp
-                                        @foreach($datas as $data)
+                                        @foreach($datasSuratJalan as $data)
                                         <tr>
                                             <td>{{$i++}}</td>
-                                            <td>{{$data['invoice']}}</td>
-                                            <td>{{$data['inv_type']}}</td>
-                                            <td>{{$data['ref_no']}}</td>
-                                            <td>{{$data['period']}}</td>
-                                            <td>{{$data['company']}}</td>
+                                            <td>{{$data['po_no']}}</td>
+                                            <td>{{$data['item_code']}}</td>
+                                            <td>{{$data['row_no']}}</td>
+                                            <td>{{$data['unit']}}</td>
+                                            <td>{{$data['quantity']}}</td>
+                                            <td>{{$data['so_no']}}</td>
+                                            <td>{{$data['dn_no']}}</td>
+                                            <td>{{$data['do_no']}}</td>
+                                            <td>{{$data['sso_no']}}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>
-                                    
+
                                 </table>
                             </div>
                         </div>
@@ -166,24 +365,700 @@
         <!-- data table end -->
     <!-- </div> -->
 </div>
+
 <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="MoviedetailmodalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-lg modal-fullscreen-md-down">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="MoviedetailmodalLabel">Keterangan</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div class="modal fade satu" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <div class="row">
+              <div class="col">
+                <h4 class="header-title">Entry of Invoice Data</h4>
+              </div>
           </div>
-          <div class="modal-body">
-            
+          <div class="row goodScroll">
+              <div class="col-12">
+                <table id="tms_MasterItem_Datatable" class="table table-striped" style="width:100%">
+                        {{ csrf_field() }}
+                            <thead class="text-center">
+                                <tr>
+                                    <th>No</th>
+                                    <th>Id</th>
+                                    <th>Company</th>
+                                    <th>Contact</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @php
+                                $i = 1;
+                                @endphp
+                                @foreach($datasInvoices as $data)
+                                <tr class="invoice" data-id="{{$data['id']}}" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                                    <td>{{$i++}}</td>
+                                    <td>{{$data['custcode']}}</td>
+                                    <td>{{$data['company']}}</td>
+                                    <td>{{$data['contact']}}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+              </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          </div>
-        </div>
+        <!-- data table start -->
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade dua" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- data table start -->
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                        <div class="col">
+                            <div class="form-row">
+                                <div class="col-1 mb-2">
+                                    <label>Invoice No</label>
+                                </div>
+                                <div class="col-1 mb-2">
+                                    <input type="text" name="noinvoice" class="form-control form-control-sm" id="noinvoice" aria-describedby="" value="1" placeholder="No Invoice" disabled>
+                                </div>
+                                <div class="col-1 mb-2">
+                                    <input type="text" name="inv_type"  class="form-control form-control-sm" id="inv_type"  placeholder="SJ">
+                                </div>
+
+                                <div class="col-2 mb-2">
+                                    <input type="text" placeholder="HO"  id="source" name="source" class="form-control form-control-sm">
+                                </div>
+                                <div class="col-md-1 mb-2 align-center" >
+                                    <label>Customer Id</label>
+                                </div>
+                                <div class="col-md-1 mb-2">
+                                    <input type="text" name="custcode"  class="form-control form-control-sm" id="custcode"  placeholder="Cust Code">
+                                </div>
+                                <div class="col-md-1 mb-2">
+                                    <input type="text" name=""  class="form-control form-control-sm"   placeholder="">
+                                </div>
+                                <div class="col-md-1 mb-2">
+                                    <input type="number" name=""  class="form-control form-control-sm"   placeholder="0" disabled>
+                                </div>
+                                <div class="col-md-2 mb-2 align-right" >
+                                    <label>Staff</label>
+                                </div>
+                                <div class="col-1 mb-2">
+                                    <input class="form-control form-control-sm"  value="{{ Auth::user()->FullName }}"  name="staff" type="text" id="staff_create_stin" disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-1 mb-1">
+                                    <label>Per/Date</label>
+                                </div>
+                                <div class="col-2 mb-1">
+                                    <input type="text" name="period" autocomplete="off"   class="form-control form-control-sm" id="period"
+                                    placeholder="YYYY/MM">
+                                </div>
+                                <div class="col-2 mb-1">
+                                    <input type="text" name="written" autocomplete="off"   class="form-control form-control-sm" id="written"
+                                    placeholder="YYYY-MM-DD">
+                                </div>
+                                <div class="col-md-4 mb-1">
+                                    <input type="text" name="company" autocomplete="off"   class="form-control form-control-sm" id="company"
+                                    placeholder="Name of your pt" disabled>
+                                </div>
+                                <div class="col-md-1 mb-1 align-right" >
+                                    <label>Prn/Post</label>
+                                </div>
+                                <div class="col-1 mb-1">
+                                    <input class="form-control form-control-sm" name="" type="text"  disabled>
+                                </div>
+                                <div class="col-1 mb-1">
+                                    <input class="form-control form-control-sm" name="post" type="text" id="post" disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-1 mb-1">
+                                    <label>Refs.No</label>
+                                </div>
+                                <div class="col-4 mb-1">
+                                    <input type="text" name="ref_no" autocomplete="off"   class="form-control form-control-sm" id="reff_no"
+                                    placeholder="Ref No">
+                                </div>
+                                <div class="col-md-4 mb-1">
+                                    <input type="text" name="contact" autocomplete="off"   class="form-control form-control-sm" id="contact"
+                                    placeholder="Nama Orang di sana">
+                                </div>
+                                <div class="col-md-2 mb-1 align-right" >
+                                    <label>Voided</label>
+                                </div>
+                                <div class="col-1 mb-1">
+                                    <input class="form-control form-control-sm" name="voided" type="text" id="voided" disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-1 mb-1">
+                                    <label>VAT No</label>
+                                </div>
+                                <div class="col-1 mb-1">
+                                    <input type="text" name="" autocomplete="off"   class="form-control form-control-sm"
+                                    placeholder="">
+                                </div>
+                                <div class="col-2 mb-1">
+                                    <input type="text" name="" autocomplete="off"   class="form-control form-control-sm"
+                                    placeholder="">
+                                </div>
+                                <div class="col-1 mb-1">
+                                    <input type="text" name="taxrate" autocomplete="off"   class="form-control form-control-sm" id="taxrate"
+                                    placeholder="Tax Rate %">
+                                </div>
+                                <div class="col-md-4 mb-1">
+                                    <input type="text" name="address1" autocomplete="off"   class="form-control form-control-sm" id="address1"
+                                    placeholder="Address">
+                                </div>
+                                <div class="col-md-2 mb-1 align-right" >
+                                    <label>Sub Total</label>
+                                </div>
+                                <div class="col-1 mb-1">
+                                    <input class="form-control form-control-sm" name="" type="text"  disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-1 mb-1">
+                                    <label>Sales / PIC</label>
+                                </div>
+                                <div class="col-2 mb-1">
+                                    <input type="text" name="" autocomplete="off"   class="form-control form-control-sm"
+                                    placeholder="">
+                                </div>
+                                <div class="col-2 mb-1">
+                                    <input type="text" name="" autocomplete="off"   class="form-control form-control-sm"
+                                    placeholder="">
+                                </div>
+                                <div class="col-md-4 mb-1">
+                                    <input type="text" name="address3" autocomplete="off"   class="form-control form-control-sm" id="address3"
+                                    placeholder="Pos code">
+                                </div>
+                                <div class="col-md-2 mb-1 align-right" >
+                                    <label>CN / Disc</label>
+                                </div>
+                                <div class="col-1 mb-1">
+                                    <input class="form-control form-control-sm" name="" type="text"  disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-1 mb-1">
+                                    <label>Currency</label>
+                                </div>
+                                <div class="col-2 mb-1">
+                                    <input type="text" name="valas" autocomplete="off"   class="form-control form-control-sm" id="valas"
+                                    placeholder="IDR">
+                                </div>
+                                <div class="col-2 mb-1">
+                                    <input type="text" name="rate" autocomplete="off"   class="form-control form-control-sm" id="rate"
+                                    placeholder="1000">
+                                </div>
+                                <div class="col-md-4 mb-1">
+                                    <input type="text" name="" autocomplete="off"   class="form-control form-control-sm"
+                                    placeholder="">
+                                </div>
+                                <div class="col-md-2 mb-1 align-right" >
+                                    <label>V.A.T</label>
+                                </div>
+                                <div class="col-1 mb-1">
+                                    <input class="form-control form-control-sm" name="" type="text"  disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-1 mb-1">
+                                    <label>Terms</label>
+                                </div>
+                                <div class="col-4 mb-1">
+                                    <input type="text" name="" autocomplete="off"   class="form-control form-control-sm"
+                                    placeholder="0 Days">
+                                </div>
+                                <div class="col-md-4 mb-1">
+                                    <input type="text" name="" autocomplete="off"   class="form-control form-control-sm"
+                                    placeholder="">
+                                </div>
+                                <div class="col-md-2 mb-1 align-right" >
+                                    <label>Total</label>
+                                </div>
+                                <div class="col-1 mb-1">
+                                    <input class="form-control form-control-sm" name="" type="text"  disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-1 mb-1">
+                                    <label>Due Date</label>
+                                </div>
+                                <div class="col-4 mb-1">
+                                    <input type="text" name="due" autocomplete="off"   class="form-control form-control-sm" id="due"
+                                    placeholder="Date">
+                                </div>
+                                <div class="col-1 mb-2 align-center" >
+                                    <label>Gl Ar</label>
+                                </div>
+                                <div class="col-md-1 mb-1">
+                                    <input type="text" name="glar" autocomplete="off"   class="form-control form-control-sm" id="glar"
+                                    placeholder="Gl Ar">
+                                </div>
+                                <div class="col-md-2 mb-1">
+                                    <input type="text" name="" autocomplete="off"   class="form-control form-control-sm"
+                                    placeholder="Trade receiveables - Third Parties" disabled>
+                                </div>
+                                <div class="col-md-2 mb-1 align-right" >
+                                    <label>Payment</label>
+                                </div>
+                                <div class="col-1 mb-1">
+                                    <input class="form-control form-control-sm" name="" type="text"  disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-1 mb-1">
+                                    <label>Remark</label>
+                                </div>
+                                <div class="col-4 mb-1">
+                                    <input type="text" name="" autocomplete="off"   class="form-control form-control-sm" id="refs_no_create_stin"
+                                    placeholder="">
+                                </div>
+                                <div class="col-md-6 mb-1 align-right" >
+                                    <label>Balance</label>
+                                </div>
+                                <div class="col-1 mb-1">
+                                    <input class="form-control form-control-sm" name="" type="text" id="printed_create_stin" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <form  id="form-stin" method="post" action="javascript:void(0)">
+                                    @csrf
+                                    @method('POST')
+                                    <input type="hidden" id="suratJalan" name="suratJalan">
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-12 mt-12">
+                                        <div class="datatable datatable-primary">
+                                        <div class="table-responsive">
+                                        <table id="tbl-detail-stin-create" class="table table-bordered table-striped">
+                                            {{-- style="background-color: #D3D3D3" --}}
+                                            <thead class="text-center">
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Part No</th>
+                                                    <th>Item Code</th>
+                                                    <th>Descript</th>
+                                                    <th>Unit</th>
+                                                    <th>Quantity</th>
+                                                    <th>Price</th>
+                                                    <th>Sub Total</th>
+                                                    <th>DO No</th>
+                                                    <th>SSO No</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="body">
+                                                <tr style="text-align:center">
+                                                    <td colspan="10">Silahkan Ditambahkan</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-toggle="tooltip"  data-placement="top" title="Add Item" class="btn btn-info" id="addRow" data-bs-toggle="modal" data-bs-target="#exampleModal3">Add Item</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button"  class="btn btn-info addStin" ><i class="ti-check"></i> Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade tiga " id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col">
+                <div class="form-row">
+                    <div class="col-1 mb-1">
+                        <label>Customer</label>
+                    </div>
+                    <div class="col-2 mb-1">
+                        <input type="text" disabled   name="custcode" class="form-control form-control-sm custcode" aria-describedby="" placeholder="" disabled>
+                    </div>
+                    <div class="col-4 mb-1">
+                        <input type="text"  value="HO" name="company"  class="form-control form-control-sm company" placeholder="" disabled>
+                    </div>
+
+                    <div class="col-md-2 mb-1 align-right" >
+                        <label>Invoice No</label>
+                    </div>
+                    <div class="col-2 mb-1">
+                        <input class="form-control form-control-sm invoiceNo"  value="{{ Auth::user()->FullName }}"  name="invoice" type="text" disabled>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row goodScroll">
+            <div class="col">
+                <form  id="form-stin" method="post" action="javascript:void(0)">
+                    @csrf
+                    @method('POST')
+                    <input type="hidden" id="custSuratJalan" name="custSuratJalan">
+                    <hr>
+                    <div class="row">
+                        <div class="col-12 mt-12">
+                            <div class="datatable datatable-primary">
+                                <div class="table-responsive">
+                                    <table id="tbl-detail-stin-create" class="table table-bordered table-striped">
+                                            {{-- style="background-color: #D3D3D3" --}}
+                                        <thead class="text-center">
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Cus Id</th>
+                                                <th>SJ No</th>
+                                                <th>DN No</th>
+                                                <th>PO No</th>
+                                                <th>Ref No</th>
+                                                <th>SSO No</th>
+                                                <th>Date</th>
+                                                <th>Amount</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="bodyCustomers">
+                                            <tr style="text-align:center">
+                                                <td colspan="10">Silahkan Ditambahkan</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="saveBtn" data-bs-toggle="modal" data-bs-target="#exampleModal2">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+{{-- <div class="modal fade empat" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- data table start -->
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                        <div class="col">
+                            <div class="form-row">
+                                <div class="col-1 mb-2">
+                                    <label>Invoice No</label>
+                                </div>
+                                <div class="col-1 mb-2">
+                                    <input type="text" name="noinvoice" class="form-control form-control-sm" id="noinvoice2" aria-describedby="" value="1" placeholder="No Invoice" disabled>
+                                </div>
+                                <div class="col-1 mb-2">
+                                    <input type="text" name="inv_type"  class="form-control form-control-sm" id="inv_type2"  placeholder="SJ">
+                                </div>
+
+                                <div class="col-2 mb-2">
+                                    <input type="text" placeholder="HO"  id="source2" name="source" class="form-control form-control-sm">
+                                </div>
+                                <div class="col-md-1 mb-2 align-center" >
+                                    <label>Customer Id</label>
+                                </div>
+                                <div class="col-md-1 mb-2">
+                                    <input type="text" name="custcode"  class="form-control form-control-sm" id="custcode2"  placeholder="Cust Code">
+                                </div>
+                                <div class="col-md-1 mb-2">
+                                    <input type="text" name=""  class="form-control form-control-sm"   placeholder="">
+                                </div>
+                                <div class="col-md-1 mb-2">
+                                    <input type="number" name=""  class="form-control form-control-sm"   placeholder="0" disabled>
+                                </div>
+                                <div class="col-md-2 mb-2 align-right" >
+                                    <label>Staff</label>
+                                </div>
+                                <div class="col-1 mb-2">
+                                    <input class="form-control form-control-sm"  value="{{ Auth::user()->FullName }}"  name="staff" type="text" id="staff_create_stin2" disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-1 mb-1">
+                                    <label>Per/Date</label>
+                                </div>
+                                <div class="col-2 mb-1">
+                                    <input type="text" name="period" autocomplete="off"   class="form-control form-control-sm" id="period2"
+                                    placeholder="YYYY/MM">
+                                </div>
+                                <div class="col-2 mb-1">
+                                    <input type="text" name="written" autocomplete="off"   class="form-control form-control-sm" id="written2"
+                                    placeholder="YYYY-MM-DD">
+                                </div>
+                                <div class="col-md-4 mb-1">
+                                    <input type="text" name="company" autocomplete="off"   class="form-control form-control-sm" id="company2"
+                                    placeholder="Name of your pt" disabled>
+                                </div>
+                                <div class="col-md-1 mb-1 align-right" >
+                                    <label>Prn/Post</label>
+                                </div>
+                                <div class="col-1 mb-1">
+                                    <input class="form-control form-control-sm" name="" type="text"  disabled>
+                                </div>
+                                <div class="col-1 mb-1">
+                                    <input class="form-control form-control-sm" name="post" type="text" id="post2" disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-1 mb-1">
+                                    <label>Refs.No</label>
+                                </div>
+                                <div class="col-4 mb-1">
+                                    <input type="text" name="ref_no" autocomplete="off"   class="form-control form-control-sm" id="reff_no2"
+                                    placeholder="Ref No">
+                                </div>
+                                <div class="col-md-4 mb-1">
+                                    <input type="text" name="contact" autocomplete="off"   class="form-control form-control-sm" id="contact2"
+                                    placeholder="Nama Orang di sana">
+                                </div>
+                                <div class="col-md-2 mb-1 align-right" >
+                                    <label>Voided</label>
+                                </div>
+                                <div class="col-1 mb-1">
+                                    <input class="form-control form-control-sm" name="voided" type="text" id="voided2" disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-1 mb-1">
+                                    <label>VAT No</label>
+                                </div>
+                                <div class="col-1 mb-1">
+                                    <input type="text" name="" autocomplete="off"   class="form-control form-control-sm"
+                                    placeholder="">
+                                </div>
+                                <div class="col-2 mb-1">
+                                    <input type="text" name="" autocomplete="off"   class="form-control form-control-sm"
+                                    placeholder="">
+                                </div>
+                                <div class="col-1 mb-1">
+                                    <input type="text" name="taxrate" autocomplete="off"   class="form-control form-control-sm" id="taxrate2"
+                                    placeholder="Tax Rate %">
+                                </div>
+                                <div class="col-md-4 mb-1">
+                                    <input type="text" name="address1" autocomplete="off"   class="form-control form-control-sm" id="address12"
+                                    placeholder="Address">
+                                </div>
+                                <div class="col-md-2 mb-1 align-right" >
+                                    <label>Sub Total</label>
+                                </div>
+                                <div class="col-1 mb-1">
+                                    <input class="form-control form-control-sm" name="" type="text"  disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-1 mb-1">
+                                    <label>Sales / PIC</label>
+                                </div>
+                                <div class="col-2 mb-1">
+                                    <input type="text" name="" autocomplete="off"   class="form-control form-control-sm"
+                                    placeholder="">
+                                </div>
+                                <div class="col-2 mb-1">
+                                    <input type="text" name="" autocomplete="off"   class="form-control form-control-sm"
+                                    placeholder="">
+                                </div>
+                                <div class="col-md-4 mb-1">
+                                    <input type="text" name="address3" autocomplete="off"   class="form-control form-control-sm" id="address32"
+                                    placeholder="Pos code">
+                                </div>
+                                <div class="col-md-2 mb-1 align-right" >
+                                    <label>CN / Disc</label>
+                                </div>
+                                <div class="col-1 mb-1">
+                                    <input class="form-control form-control-sm" name="" type="text"  disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-1 mb-1">
+                                    <label>Currency</label>
+                                </div>
+                                <div class="col-2 mb-1">
+                                    <input type="text" name="valas" autocomplete="off"   class="form-control form-control-sm" id="valas2"
+                                    placeholder="IDR">
+                                </div>
+                                <div class="col-2 mb-1">
+                                    <input type="text" name="rate" autocomplete="off"   class="form-control form-control-sm" id="rate2"
+                                    placeholder="1000">
+                                </div>
+                                <div class="col-md-4 mb-1">
+                                    <input type="text" name="" autocomplete="off"   class="form-control form-control-sm"
+                                    placeholder="">
+                                </div>
+                                <div class="col-md-2 mb-1 align-right" >
+                                    <label>V.A.T</label>
+                                </div>
+                                <div class="col-1 mb-1">
+                                    <input class="form-control form-control-sm" name="" type="text"  disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-1 mb-1">
+                                    <label>Terms</label>
+                                </div>
+                                <div class="col-4 mb-1">
+                                    <input type="text" name="" autocomplete="off"   class="form-control form-control-sm"
+                                    placeholder="0 Days">
+                                </div>
+                                <div class="col-md-4 mb-1">
+                                    <input type="text" name="" autocomplete="off"   class="form-control form-control-sm"
+                                    placeholder="">
+                                </div>
+                                <div class="col-md-2 mb-1 align-right" >
+                                    <label>Total</label>
+                                </div>
+                                <div class="col-1 mb-1">
+                                    <input class="form-control form-control-sm" name="" type="text"  disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-1 mb-1">
+                                    <label>Due Date</label>
+                                </div>
+                                <div class="col-4 mb-1">
+                                    <input type="text" name="due" autocomplete="off"   class="form-control form-control-sm" id="due2"
+                                    placeholder="Date">
+                                </div>
+                                <div class="col-1 mb-2 align-center" >
+                                    <label>Gl Ar</label>
+                                </div>
+                                <div class="col-md-1 mb-1">
+                                    <input type="text" name="glar" autocomplete="off"   class="form-control form-control-sm" id="glar2"
+                                    placeholder="Gl Ar">
+                                </div>
+                                <div class="col-md-2 mb-1">
+                                    <input type="text" name="" autocomplete="off"   class="form-control form-control-sm"
+                                    placeholder="Trade receiveables - Third Parties" disabled>
+                                </div>
+                                <div class="col-md-2 mb-1 align-right" >
+                                    <label>Payment</label>
+                                </div>
+                                <div class="col-1 mb-1">
+                                    <input class="form-control form-control-sm" name="" type="text"  disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-1 mb-1">
+                                    <label>Remark</label>
+                                </div>
+                                <div class="col-4 mb-1">
+                                    <input type="text" name="" autocomplete="off"   class="form-control form-control-sm" id="refs_no_create_stin2"
+                                    placeholder="">
+                                </div>
+                                <div class="col-md-6 mb-1 align-right" >
+                                    <label>Balance</label>
+                                </div>
+                                <div class="col-1 mb-1">
+                                    <input class="form-control form-control-sm" name="" type="text" id="printed_create_stin2" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <form method="post" action="javascript:void(0)">
+                                    @csrf
+                                    @method('POST')
+                                    <input type="hidden" id="suratJalan2" name="suratJalan">
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-12 mt-12">
+                                        <div class="datatable datatable-primary">
+                                        <div class="table-responsive">
+                                        <table id="tbl-detail-stin-create2" class="table table-bordered table-striped">
+                                            {{-- style="background-color: #D3D3D3" --}}
+                                            <thead class="text-center">
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Part No</th>
+                                                    <th>Item Code</th>
+                                                    <th>Descript</th>
+                                                    <th>Unit</th>
+                                                    <th>Quantity</th>
+                                                    <th>Price</th>
+                                                    <th>Sub Total</th>
+                                                    <th>DO No</th>
+                                                    <th>SSO No</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="body">
+                                                <tr style="text-align:center">
+                                                    <td colspan="10">Silahkan Ditambahkan</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-toggle="tooltip"  data-placement="top" title="Add Item" class="btn btn-info" id="addRow2" data-bs-toggle="modal" data-bs-target="#exampleModal3">Add Item</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button"  class="btn btn-info addStin" ><i class="ti-check"></i> Save</button>
+      </div>
+    </div>
+  </div>
+</div> --}}
 @endsection
 
 @push('js')
@@ -197,6 +1072,7 @@
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
     $(document).ready(function() {
+
         // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // JS Function On Load
         // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -241,7 +1117,25 @@
                 }
             });
         };
-
+        // const trS = document.querySelectorAll('.invoice');
+        // trS.forEach(tr=>tr.addEventListener('click',function (e) {
+        //     console.log(e.target);
+        //  }))
     } );
+    // const trS = document.querySelectorAll('.invoice');
+    //     trS.forEach(tr=>tr.addEventListener('click',function (e) {
+    //         console.log(e.target.dataset.id);
+    //         $.get('/tms/acc',{
+    //             id:e.target.dataset.id
+    //         },function (data) {
+    //             $("#tms_MasterItem_Datatable").html(data)
+    //          })
+        //  }))
+
+    // console.log(dataId);
+
+
+
 </script>
+<script src="{{asset('/js/scriptCustomerInvoice.js')}}"></script>
 @endpush
