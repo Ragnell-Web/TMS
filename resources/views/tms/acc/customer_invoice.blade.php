@@ -16,6 +16,7 @@
         overflow: auto;
     }
     .scrollGood{
+        height: 20vh;
         overflow: auto;
     }
 </style>
@@ -442,45 +443,35 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="row mt-3 ">
-                    <div class="col">
-                        <form id="form-stin" method="post" action="javascript:void(0)">
-                            @csrf
-                            @method('POST')
-                            <input type="hidden" id="suratJalan" name="suratJalan">
-                            <hr>
-                            <div class="row">
-                                <div class="col-12 mt-12">
-                                    <div class="datatable datatable-primary">
-                                        <div class="table-responsive scrollGood">
-                                            <table id="tbl-detail-stin-create"
-                                                class="table table-bordered table-striped">
-                                                {{-- style="background-color: #D3D3D3" --}}
-                                                <thead class="text-center">
-                                                    <tr>
-                                                        <th>No</th>
-                                                        <th>Part No</th>
-                                                        <th>Item Code</th>
-                                                        <th>Descript</th>
-                                                        <th>Unit</th>
-                                                        <th>Quantity</th>
-                                                        <th>Price</th>
-                                                        <th>Sub Total</th>
-                                                        <th>DO No</th>
-                                                        <th>SSO No</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="body">
-                                                    <tr style="text-align:center">
-                                                        <td colspan="10">Silahkan Ditambahkan</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
+                <hr>
+                <div class="row scrollGood">
+                    <div class="col-12 mt-12">
+                        <div class="datatable datatable-primary">
+                            <div class="table-responsive">
+                                <table id="tbl-detail-stin-create" class="table table-bordered table-striped">
+                                    {{-- style="background-color: #D3D3D3" --}}
+                                    <thead class="text-center">
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Part No</th>
+                                            <th>Item Code</th>
+                                            <th>Descript</th>
+                                            <th>Unit</th>
+                                            <th>Quantity</th>
+                                            <th>Price</th>
+                                            <th>Sub Total</th>
+                                            <th>DO No</th>
+                                            <th>SSO No</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="body">
+                                        <tr style="text-align:center">
+                                            <td colspan="10">Silahkan Ditambahkan</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
+                        </div>
                     </div>
                 </div>
             </div>

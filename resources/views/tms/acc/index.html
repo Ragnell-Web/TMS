@@ -1,58 +1,3 @@
-<div class="modal fade satu" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col">
-                        <h4 class="header-title">Entry of Invoice Data</h4>
-                    </div>
-                </div>
-                <div class="row goodScroll">
-                    <div class="col-12">
-                        <table id="tms_MasterItem_Datatable" class="table table-striped" style="width:100%">
-                            {{ csrf_field() }}
-                            <thead class="text-center">
-                                <tr>
-                                    <th>No</th>
-                                    <th>Id</th>
-                                    <th>Company</th>
-                                    <th>Contact</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                @php
-                                $i = 1;
-                                @endphp
-                                @foreach($datasInvoices as $data)
-                                <tr class="invoice" data-id="{{$data['id']}}" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal2" data-bs-dismiss="modal">
-                                    <td>{{$i++}}</td>
-                                    <td>{{$data['custcode']}}</td>
-                                    <td>{{$data['company']}}</td>
-                                    <td>{{$data['contact']}}</td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <!-- data table start -->
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal -->
 <div class="modal fade dua" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
@@ -286,141 +231,43 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="row mt-3">
-                    <div class="col">
-                        <form id="form-stin" method="post" action="javascript:void(0)">
-                            @csrf
-                            @method('POST')
-                            <input type="hidden" id="suratJalan" name="suratJalan">
-                            <hr>
-                            <div class="row">
-                                <div class="col-12 mt-12">
-                                    <div class="datatable datatable-primary">
-                                        <div class="table-responsive">
-                                            <table id="tbl-detail-stin-create"
-                                                class="table table-bordered table-striped">
-                                                {{-- style="background-color: #D3D3D3" --}}
-                                                <thead class="text-center">
-                                                    <tr>
-                                                        <th>No</th>
-                                                        <th>Part No</th>
-                                                        <th>Item Code</th>
-                                                        <th>Descript</th>
-                                                        <th>Unit</th>
-                                                        <th>Quantity</th>
-                                                        <th>Price</th>
-                                                        <th>Sub Total</th>
-                                                        <th>DO No</th>
-                                                        <th>SSO No</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="body">
-                                                    <tr style="text-align:center">
-                                                        <td colspan="10">Silahkan Ditambahkan</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" data-toggle="tooltip" data-placement="top" title="Add Item" class="btn btn-info"
-                id="addRow" data-bs-toggle="modal" data-bs-target="#exampleModal3" data-bs-dismiss="modal">Add
-                Item</button>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-info addStin"><i class="ti-check"></i> Save</button>
-        </div>
-    </div>
-</div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade tiga " id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
                 <div class="row">
-                    <div class="col">
-                        <div class="form-row">
-                            <div class="col-1 mb-1">
-                                <label>Customer</label>
+                    <div class="col-12 mt-12">
+                        <div class="datatable datatable-primary">
+                            <div class="table-responsive">
+                                <table id="tbl-detail-stin-create" class="table table-bordered table-striped">
+                                    {{-- style="background-color: #D3D3D3" --}}
+                                    <thead class="text-center">
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Part No</th>
+                                            <th>Item Code</th>
+                                            <th>Descript</th>
+                                            <th>Unit</th>
+                                            <th>Quantity</th>
+                                            <th>Price</th>
+                                            <th>Sub Total</th>
+                                            <th>DO No</th>
+                                            <th>SSO No</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="body">
+                                        <tr style="text-align:center">
+                                            <td colspan="10">Silahkan Ditambahkan</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
-                            <div class="col-2 mb-1">
-                                <input type="text" disabled name="custcode"
-                                    class="form-control form-control-sm custcode" aria-describedby="" placeholder=""
-                                    disabled>
-                            </div>
-                            <div class="col-4 mb-1">
-                                <input type="text" value="HO" name="company"
-                                    class="form-control form-control-sm company" placeholder="" disabled>
-                            </div>
-
-                            <div class="col-md-2 mb-1 align-right">
-                                <label>Invoice No</label>
-                            </div>
-                            <div class="col-2 mb-1">
-                                <input class="form-control form-control-sm invoiceNo"
-                                    value="{{ Auth::user()->FullName }}" name="invoice" type="text" disabled>
-                            </div>
-
                         </div>
-                    </div>
-                </div>
-                <div class="row goodScroll">
-                    <div class="col">
-                        <form id="form-stin" method="post" action="javascript:void(0)">
-                            @csrf
-                            @method('POST')
-                            <input type="hidden" id="custSuratJalan" name="custSuratJalan">
-                            <hr>
-                            <div class="row">
-                                <div class="col-12 mt-12">
-                                    <div class="datatable datatable-primary">
-                                        <div class="table-responsive">
-                                            <table id="tbl-detail-stin-create"
-                                                class="table table-bordered table-striped">
-                                                {{-- style="background-color: #D3D3D3" --}}
-                                                <thead class="text-center">
-                                                    <tr>
-                                                        <th>No</th>
-                                                        <th>Cus Id</th>
-                                                        <th>SJ No</th>
-                                                        <th>DN No</th>
-                                                        <th>PO No</th>
-                                                        <th>Ref No</th>
-                                                        <th>SSO No</th>
-                                                        <th>Date</th>
-                                                        <th>Amount</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="bodyCustomers">
-                                                    <tr style="text-align:center">
-                                                        <td colspan="10">Silahkan Ditambahkan</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
+                <button type="button" data-toggle="tooltip" data-placement="top" title="Add Item" class="btn btn-info"
+                    id="addRow" data-bs-toggle="modal" data-bs-target="#exampleModal3" data-bs-dismiss="modal">Add
+                    Item</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="saveBtn" data-bs-toggle="modal"
-                    data-bs-target="#exampleModal2" data-bs-dismiss="modal">Save changes</button>
+                <button type="button" class="btn btn-info addStin"><i class="ti-check"></i> Save</button>
             </div>
         </div>
     </div>
