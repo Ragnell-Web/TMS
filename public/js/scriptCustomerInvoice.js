@@ -116,7 +116,7 @@ saveBtn.addEventListener("click", function (e) {
                 let i = 1;
                 let datasDoDtl = data.map(dataDo => {
                     return /*html*/ `
-                        <tr style="text-align:center">
+                        <tr style="text-align:center;" >
                             <td>${i++}</td>
                             <td>${dataDo["part_no"]}</td>
                             <td>${dataDo["itemcode"]}</td>

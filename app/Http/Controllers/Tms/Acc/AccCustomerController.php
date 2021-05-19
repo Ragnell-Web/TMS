@@ -92,7 +92,7 @@ class AccCustomerController extends Controller
     }
     public function getDoDtl(Request $request)
     {
-        print_r($this->api_url . $this->add_do_dtl . 'list');exit;
+        // print_r($this->api_url . $this->add_do_dtl . 'list');exit;
         $dataAddDoDtl = Http::withHeaders([
             'Authorization' => $this->api_key,
         ])->asJson()->get($this->api_url . $this->add_do_dtl . 'list',[
