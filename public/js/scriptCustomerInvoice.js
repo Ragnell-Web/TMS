@@ -1,5 +1,9 @@
 $(".invoice").on("click", function (e) {
     let dataId = $(this).data("id");
+    // $("#exampleModal1").modal("hide");
+    // $("body").removeClass("modal-open");
+    // $("body").css('overflow','auto');
+    // $(".modal-backdrop").remove();;
     function showData(data) {
         $("input[name='noinvoice']").val(data[0]["invoice"]);
         $("input[name='inv_type']").val(data[0]["inv_type"]);
@@ -33,27 +37,26 @@ $(".invoice").on("click", function (e) {
         },
         function (data) {
             showData(data);
-            const addBtn = document.querySelectorAll(".btn.btn-info");
-            addBtn.forEach(btn => {
-                btn.addEventListener("click", function (e) {
-                    let dataInvoice = data[0]["invoice"];
-                    let company = data[0]["company"];
-                    let custcode = data[0]["custcode"];
-                    $('input[name="custcode"]').val(custcode);
-                    $('input[name="company"]').val(company);
-                    $('input[name="invoice"]').val(dataInvoice);
-                    $.ajaxSetup({
-                        headers: {
-                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                                "content"
-                            ),
-                        },
-                    });
-                    $.post("acc/sj", { cust_id: custcode }, function (dataSJ) {
-                        let i = 1;
-                        let datas = dataSJ
-                            .map((SJ) => {
-                                return /*html*/ `
+            const addBtn = document.querySelector("#addRow");
+            addBtn.addEventListener("click", function (e) {
+                let dataInvoice = data[0]["invoice"];
+                let company = data[0]["company"];
+                let custcode = data[0]["custcode"];
+                $('input[name="custcode"]').val(custcode);
+                $('input[name="company"]').val(company);
+                $('input[name="invoice"]').val(dataInvoice);
+                $.ajaxSetup({
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                            "content"
+                        ),
+                    },
+                });
+                $.post("acc/sj", { cust_id: custcode }, function (dataSJ) {
+                    let i = 1;
+                    let datas = dataSJ
+                        .map((SJ) => {
+                            return /*html*/ `
                       <tr style="text-align:center">
                         <td>${i++}</td>
                         <td>${SJ["custcode"]}</td>
@@ -76,29 +79,61 @@ $(".invoice").on("click", function (e) {
                         </td>
                       </tr>
                     `;
-                            })
-                            .join("");
-                        if (dataSJ == null) {
-                            let isiTabelKosong = /*html*/ `
+                        })
+                        .join("");
+                    if (dataSJ == null) {
+                        let isiTabelKosong = /*html*/ `
                             <tr style="text-align:center">
                                                 <td colspan="10">Silahkan Ditambahkan</td>
                                             </tr>
                         `;
-                            $("#bodyCustomers").html(isiTabelKosong);
-                        } else {
-                            $("#bodyCustomers").html(datas);
-                        }
-                        const saveBtn = document.querySelector('#saveBtn');
-                        saveBtn.addEventListener('click', function (e) {
-                            const checkBoxs = document.querySelectorAll(".form-check-input");
-                            checkBoxs.forEach(checkBox => {
-                                console.log(checkBox);
-                            })
-                         })
-                    });
+                        $("#bodyCustomers").html(isiTabelKosong);
+                    } else {
+                        $("#bodyCustomers").html(datas);
+                    }
+
                 });
-            })
+            });
 
         }
     );
+});
+const saveBtn = document.querySelector("#saveBtn");
+saveBtn.addEventListener("click", function (e) {
+    const checkBoxs = document.querySelectorAll(".form-check-input");
+    checkBoxs.forEach((checkBox) => {
+        if (checkBox.checked) {
+            console.log(checkBox.value);
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                },
+            });
+            $.post("acc/doDtl", { do_no: checkBox.value }, function (data) {
+                console.log(data);
+                let i = 1;
+                let datasDoDtl = data.map(dataDo => {
+                    return /*html*/ `
+                        <tr style="text-align:center">
+                            <td>${i++}</td>
+                            <td>${dataDo["part_no"]}</td>
+                            <td>${dataDo["itemcode"]}</td>
+                            <td>${dataDo["descript"]}</td>
+                            <td>${dataDo["unit"]}</td>
+                            <td>${dataDo["quantity"]}</td>
+                            <td>${dataDo["price"]}</td>
+                            <td>${dataDo["cost"]}</td>
+                            <td>${dataDo["do_no"]}</td>
+                            <td>${dataDo["sso_no"]}</td>
+                        </tr>
+                    `;
+
+                });
+                $("#body").html(datasDoDtl);
+             });
+        }
+    });
+
 });

@@ -399,7 +399,7 @@ Route::group([ 'middleware' => 'app.user'], function (){
             'as' => 'tms.warehouse.mto-entry_update_mto_entry'
         ]);
         Route::put('/warehouse/mto_entry/mto_entry_add_row_edit_page/{id}', [
-            'uses' => 'TMS\Warehouse\MtoEntryController@addRowEditPage', 
+            'uses' => 'TMS\Warehouse\MtoEntryController@addRowEditPage',
             'as' => 'tms.warehouse.mto_entry_add_row_edit_page'
         ]);
 
@@ -440,187 +440,187 @@ Route::group([ 'middleware' => 'app.user'], function (){
         ]);
 
         Route::delete('/warehouse/mto_entry/mto_entry_delete_page_detail_edit/{id}', [
-            'uses' => 'TMS\Warehouse\MtoEntryController@DestroyDeleteEditDetail', 
+            'uses' => 'TMS\Warehouse\MtoEntryController@DestroyDeleteEditDetail',
             'as' => 'tms.warehouse.mto_entry_delete_page_detail_edit'
         ]);
 
 
-        // 5. Stock Out Entry :: page :: 
+        // 5. Stock Out Entry :: page ::
         Route::get('/warehouse/stock_out_entry', [
-            'uses' => 'TMS\Warehouse\StockOutEntryController@indexStockOutEntry', 
+            'uses' => 'TMS\Warehouse\StockOutEntryController@indexStockOutEntry',
             'as' => 'tms.warehouse.stock_out_entry'
         ]);
-       
+
         Route::get('/warehouse/stock_out_entry/get_stock_out_datatables', [
-            'uses' => 'TMS\Warehouse\StockOutEntryController@GetStoutdatatablesDashboard', 
+            'uses' => 'TMS\Warehouse\StockOutEntryController@GetStoutdatatablesDashboard',
             'as' => 'tms.warehouse.get_stock_out_datatables'
         ]);
-        
+
 
         Route::get('/warehouse/stock_out_entry/get_choice_data_item_datatables', [
-            'uses' => 'TMS\Warehouse\StockOutEntryController@getChoiceDataItemDatatables', 
+            'uses' => 'TMS\Warehouse\StockOutEntryController@getChoiceDataItemDatatables',
             'as' => 'tms.warehouse.get_stock_out_get_choice_data_item_datatables'
         ]);
 
         Route::get('/warehouse/stock_out_entry/stock_out_select_warehouse', [
-            'uses' => 'TMS\Warehouse\StockOutEntryController@SysWarehouse', 
+            'uses' => 'TMS\Warehouse\StockOutEntryController@SysWarehouse',
             'as' => 'tms.warehouse.stock_out_entry.stock_out_select_warehouse'
         ]);
 
         Route::post('/warehouse/stock_out_entry/store_stout', [
-            'uses' => 'TMS\Warehouse\StockOutEntryController@storeStockOut', 
+            'uses' => 'TMS\Warehouse\StockOutEntryController@storeStockOut',
             'as' => 'tms.warehouse.stock_out_entry_storeStockOut'
         ]);
 
 
         Route::get('/warehouse/stock_out_entry/{id}/show_view_stock_out_entry', [
-            'uses' => 'TMS\Warehouse\StockOutEntryController@showViewStout', 
+            'uses' => 'TMS\Warehouse\StockOutEntryController@showViewStout',
             'as' => 'tms.warehouse.show_view_stock_out_entry'
         ]);
         Route::get('/warehouse/stock_out_entry/{id}/stock_out_entry_edit', [
-            'uses' => 'TMS\Warehouse\StockOutEntryController@editStoutEntry', 
+            'uses' => 'TMS\Warehouse\StockOutEntryController@editStoutEntry',
             'as' => 'tms.warehouse.stock_out_entry_edit'
         ]);
 
         Route::post('/warehouse/stock_out_entry/stock_out_entry_void/{param}', [
-            'uses' => 'TMS\Warehouse\StockOutEntryController@voidStoutEntry', 
+            'uses' => 'TMS\Warehouse\StockOutEntryController@voidStoutEntry',
             'as' => 'tms.warehouse.stock_out_entry_void'
         ]);
 
         Route::post('/warehouse/stock_out_entry/stock_out_entry_post/{param}', [
-            'uses' => 'TMS\Warehouse\StockOutEntryController@postStoutEntry', 
+            'uses' => 'TMS\Warehouse\StockOutEntryController@postStoutEntry',
             'as' => 'tms.warehouse.stock_out_entry_post'
         ]);
 
         Route::get('/warehouse/stock_out_entry/{id}/stock_out_entry_report', [
-            'uses' => 'TMS\Warehouse\StockOutEntryController@reportStoutEntry', 
+            'uses' => 'TMS\Warehouse\StockOutEntryController@reportStoutEntry',
             'as' => 'tms.warehouse.stock_out_entry_report'
         ]);
 
         Route::get('/warehouse/stock_out_entry/{id}/stock_out_entry_log', [
-            'uses' => 'TMS\Warehouse\StockOutEntryController@logStoutEntry', 
+            'uses' => 'TMS\Warehouse\StockOutEntryController@logStoutEntry',
             'as' => 'tms.warehouse.stock_out_entry_log'
         ]);
 
 
         Route::get('/warehouse/stock_out_entry/{id}/stock_out_entry_edit_detail_page', [
-            'uses' => 'TMS\Warehouse\StockOutEntryController@editDetail', 
+            'uses' => 'TMS\Warehouse\StockOutEntryController@editDetail',
             'as' => 'tms.warehouse.stock_out_entry_edit_detail_page'
         ]);
         Route::put('/warehouse/stock_out_entry/stock_out_entry_update_detail/{id}', [
-            'uses' => 'TMS\Warehouse\StockOutEntryController@updateDetailStout', 
+            'uses' => 'TMS\Warehouse\StockOutEntryController@updateDetailStout',
             'as' => 'tms.warehouse.stock_out_entry_update_detail'
         ]);
 
         Route::put('/warehouse/stock_out_entry/stock_out_entry_update/{id}', [
-            'uses' => 'TMS\Warehouse\StockOutEntryController@updateStout', 
+            'uses' => 'TMS\Warehouse\StockOutEntryController@updateStout',
             'as' => 'tms.warehouse.stock_out_entry_update'
         ]);
 
-       
+
 
         Route::put('/warehouse/stock_out_entry/stock_out_update_header/{id}', [
-            'uses' => 'TMS\Warehouse\StockOutEntryController@updateHeaderEditPageStout', 
+            'uses' => 'TMS\Warehouse\StockOutEntryController@updateHeaderEditPageStout',
             'as' => 'tms.warehouse.stock_out_update_header'
         ]);
 
         Route::delete('/warehouse/stock_out_entry/stock_out_delete_detail_page/{id}', [
-            'uses' => 'TMS\Warehouse\StockOutEntryController@deleteDetailPageStout', 
+            'uses' => 'TMS\Warehouse\StockOutEntryController@deleteDetailPageStout',
             'as' => 'tms.warehouse.stock_out_delete_detail_page'
         ]);
 
         Route::get('/warehouse/stock_out_entry/{id}/stock_out_dashboard_edit_detail', [
-            'uses' => 'TMS\Warehouse\StockOutEntryController@dashboardEditDetail', 
+            'uses' => 'TMS\Warehouse\StockOutEntryController@dashboardEditDetail',
             'as' => 'tms.warehouse.stock_out_dashboard_edit_detail'
         ]);
         Route::get('/warehouse/stock_out_entry/{id}/stock_out_validate_edit_detail_page', [
-            'uses' => 'TMS\Warehouse\StockOutEntryController@validateEditDetail', 
+            'uses' => 'TMS\Warehouse\StockOutEntryController@validateEditDetail',
             'as' => 'tms.warehouse.stock_out_validate_edit_detail_page'
         ]);
         Route::get('/warehouse/stock_out_entry/{id}/stock_out_check_stclose_', [
             'uses' => 'TMS\Warehouse\StockOutEntryController@checkStClose',
             'as' => 'tms.warehouse.stock_out_check_stclose_'
         ]);
-        
+
         Route::get('/warehouse/stock_out_entry/{id}/stock_out_view_restore_page', [
-            'uses' => 'TMS\Warehouse\StockOutEntryController@viewRestoreDelete', 
+            'uses' => 'TMS\Warehouse\StockOutEntryController@viewRestoreDelete',
             'as' => 'tms.warehouse.stock_out_stock_out_view_restore_page'
         ]);
         Route::get('/warehouse/stock_out_entry/stock_out_entry_restore_action/{id}', [
-            'uses' => 'TMS\Warehouse\StockOutEntryController@StoutRestore', 
+            'uses' => 'TMS\Warehouse\StockOutEntryController@StoutRestore',
             'as' => 'tms.warehouse.stock_out_entry_restore_action'
         ]);
 
 
-         // Stock In Entry :: page ::  
+         // Stock In Entry :: page ::
          Route::get('/warehouse/stock_in_entry', [
-            'uses' => 'TMS\Warehouse\StockInEntryController@indexStockInEntry', 
+            'uses' => 'TMS\Warehouse\StockInEntryController@indexStockInEntry',
             'as' => 'tms.warehouse.stock_in_entry'
-        ]); 
+        ]);
         Route::get('/warehouse/stock_in_entry/get_stock_in_datatables', [
-            'uses' => 'TMS\Warehouse\StockInEntryController@GetStindatatablesDashboard', 
+            'uses' => 'TMS\Warehouse\StockInEntryController@GetStindatatablesDashboard',
             'as' => 'tms.warehouse.get_stock_in_datatables'
         ]);
         Route::get('/warehouse/stock_in_entry/get_choice_data_item_datatables_stock_in', [
-            'uses' => 'TMS\Warehouse\StockInEntryController@getChoiceDataItemDatatablesStin', 
+            'uses' => 'TMS\Warehouse\StockInEntryController@getChoiceDataItemDatatablesStin',
             'as' => 'tms.warehouse.get_choice_data_item_datatables_stock_in'
         ]);
         Route::get('/warehouse/stock_in_entry/stock_in_select_warehouse', [
-            'uses' => 'TMS\Warehouse\StockInEntryController@SysWarehouseStin', 
+            'uses' => 'TMS\Warehouse\StockInEntryController@SysWarehouseStin',
             'as' => 'tms.warehouse.stock_in_entry.stock_in_select_warehouse'
         ]);
         Route::post('/warehouse/stock_in_entry/store_stin', [
-            'uses' => 'TMS\Warehouse\StockInEntryController@storeStockIn', 
+            'uses' => 'TMS\Warehouse\StockInEntryController@storeStockIn',
             'as' => 'tms.warehouse.stock_in_entry_storeStockIn'
         ]);
         Route::get('/warehouse/stock_in_entry/{id}/show_view_stock_in_entry', [
-            'uses' => 'TMS\Warehouse\StockInEntryController@showViewStin', 
+            'uses' => 'TMS\Warehouse\StockInEntryController@showViewStin',
             'as' => 'tms.warehouse.show_view_stock_in_entry'
         ]);
         Route::get('/warehouse/stock_in_entry/{id}/stock_in_entry_edit', [
-            'uses' => 'TMS\Warehouse\StockInEntryController@editStinEntry', 
+            'uses' => 'TMS\Warehouse\StockInEntryController@editStinEntry',
             'as' => 'tms.warehouse.stock_in_entry_edit'
         ]);
         Route::get('/warehouse/stock_in_entry/{id}/stock_in_dashboard_edit_detail', [
-            'uses' => 'TMS\Warehouse\StockInEntryController@dashboardEditDetailStin', 
+            'uses' => 'TMS\Warehouse\StockInEntryController@dashboardEditDetailStin',
             'as' => 'tms.warehouse.stock_in_dashboard_edit_detail'
         ]);
-        
+
         Route::put('/warehouse/stock_in_entry/stock_in_entry_update/{id}', [
-            'uses' => 'TMS\Warehouse\StockInEntryController@updateStin', 
+            'uses' => 'TMS\Warehouse\StockInEntryController@updateStin',
             'as' => 'tms.warehouse.stock_in_entry_update'
         ]);
         Route::put('/warehouse/stock_in_entry/stock_in_update_header/{id}', [
-            'uses' => 'TMS\Warehouse\StockInEntryController@updateHeaderEditPageStin', 
+            'uses' => 'TMS\Warehouse\StockInEntryController@updateHeaderEditPageStin',
             'as' => 'tms.warehouse.stock_in_update_header'
         ]);
 
         Route::get('/warehouse/stock_in_entry/{id}/stock_in_entry_edit_detail_page', [
-            'uses' => 'TMS\Warehouse\StockInEntryController@editDetail', 
+            'uses' => 'TMS\Warehouse\StockInEntryController@editDetail',
             'as' => 'tms.warehouse.stock_in_entry_edit_detail_page'
         ]);
         Route::put('/warehouse/stock_in_entry/stock_in_entry_update_detail/{id}', [
-            'uses' => 'TMS\Warehouse\StockInEntryController@updateDetailStin', 
+            'uses' => 'TMS\Warehouse\StockInEntryController@updateDetailStin',
             'as' => 'tms.warehouse.stock_in_entry_update_detail'
         ]);
         Route::delete('/warehouse/stock_in_entry/stock_in_delete_detail_page/{id}', [
-            'uses' => 'TMS\Warehouse\StockInEntryController@deleteDetailPageStin', 
+            'uses' => 'TMS\Warehouse\StockInEntryController@deleteDetailPageStin',
             'as' => 'tms.warehouse.stock_in_delete_detail_page'
         ]);
         Route::post('/warehouse/stock_in_entry/stock_in_entry_void/{param}', [
-            'uses' => 'TMS\Warehouse\StockInEntryController@voidStinEntry', 
+            'uses' => 'TMS\Warehouse\StockInEntryController@voidStinEntry',
             'as' => 'tms.warehouse.stock_in_entry_void'
         ]);
         Route::get('/warehouse/stock_in_entry/{id}/stock_in_entry_report', [
-            'uses' => 'TMS\Warehouse\StockInEntryController@reportStinEntry', 
+            'uses' => 'TMS\Warehouse\StockInEntryController@reportStinEntry',
             'as' => 'tms.warehouse.stock_in_entry_report'
         ]);
         Route::post('/warehouse/stock_in_entry/stock_in_entry_post/{param}', [
-            'uses' => 'TMS\Warehouse\StockInEntryController@postStinEntry', 
+            'uses' => 'TMS\Warehouse\StockInEntryController@postStinEntry',
             'as' => 'tms.warehouse.stock_in_entry_post'
         ]);
         Route::get('/warehouse/stock_in_entry/{id}/stock_in_entry_log', [
-            'uses' => 'TMS\Warehouse\StockInEntryController@logStinEntry', 
+            'uses' => 'TMS\Warehouse\StockInEntryController@logStinEntry',
             'as' => 'tms.warehouse.stock_in_entry_log'
         ]);
         Route::get('/warehouse/stock_in_entry/{id}/stock_in_check_stclose_', [
@@ -634,11 +634,11 @@ Route::group([ 'middleware' => 'app.user'], function (){
         |   MODUL MASTER VENDOR
         | +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         */
-        
+
         Route::get('/master/vendor', ['uses' => 'TMS\Master\MasterVendorController@index', 'as' => 'tms.master.vendor']); //return index
         Route::get('/master/vendor/datavendor', ['uses' => 'TMS\Master\MasterVendorController@datavendor', 'as' => 'tms.master.vendor.getdata']); //getdatatable
-        Route::post('/master/vendor/postdata', ['uses' => 'TMS\Master\MasterVendorController@postdata', 'as' => 'tms.master.vendor.postdata']); 
-        Route::post('/master/vendor/postdata_edit', ['uses' => 'TMS\Master\MasterVendorController@postdata_edit', 'as' => 'tms.master.vendor.postdata_edit']); 
+        Route::post('/master/vendor/postdata', ['uses' => 'TMS\Master\MasterVendorController@postdata', 'as' => 'tms.master.vendor.postdata']);
+        Route::post('/master/vendor/postdata_edit', ['uses' => 'TMS\Master\MasterVendorController@postdata_edit', 'as' => 'tms.master.vendor.postdata_edit']);
         Route::get('/master/vendor/{id}/editdata', ['uses' => 'TMS\Master\MasterVendorController@editdata', 'as' => 'tms.master.vendor.editdata']);
         Route::get('/master/vendor/getdata_ven', ['uses' => 'TMS\Master\MasterVendorController@getdata_ven', 'as' => 'tms.master.vendor.getdata_ven']);
         Route::delete('/master/vendor/delete/{id}', ['uses' => 'TMS\Master\MasterVendorController@deletedata', 'as' => 'tms.master.vendor.deletedata']);
@@ -811,36 +811,37 @@ Route::group([ 'middleware' => 'app.user'], function (){
             Route::post('/acc/add','Tms\Acc\AccCustomerController@create');
             Route::post('/acc/customer','Tms\Acc\AccCustomerController@getCustomer');
             Route::post('/acc/sj','Tms\Acc\AccCustomerController@getSJ');
+            Route::post('/acc/doDtl','Tms\Acc\AccCustomerController@getDoDtl');
         Route::get('/procurement/rg_entry', [
-            'uses' => 'TMS\Procurement\RG_EntryController@indexRG_Entry', 
+            'uses' => 'TMS\Procurement\RG_EntryController@indexRG_Entry',
             'as' => 'tms.procurement.rg_entry'
             ]);
         Route::get('/procurement/rg_entry/rg_data', [
-            'uses' => 'TMS\Procurement\RG_EntryController@getDataRG', 
+            'uses' => 'TMS\Procurement\RG_EntryController@getDataRG',
             'as' => 'tms.procurement.rg_data'
             ]);
         Route::get('/procurement/rg_entry/get_choice_dataitem', [
-            'uses' => 'TMS\Procurement\RG_EntryController@getChoiceDataItem', 
+            'uses' => 'TMS\Procurement\RG_EntryController@getChoiceDataItem',
             'as' => 'tms.procurement.choice_dataitem'
             ]);
         Route::get('/procurement/rg_entry/sys_warehouse', [
-            'uses' => 'TMS\Procurement\RG_EntryController@sysWarehouse', 
+            'uses' => 'TMS\Procurement\RG_EntryController@sysWarehouse',
             'as' => 'tms.procurement.sys_warehouse'
-            ]); 
+            ]);
         Route::get('/procurement/rg_entry/entry_rg', [
-            'uses' => 'TMS\Procurement\RG_EntryController@entryRG', 
+            'uses' => 'TMS\Procurement\RG_EntryController@entryRG',
             'as' => 'tms.procurement.entry_rg'
             ]);
         Route::get('/procurement/rg_entry/{id}/view_rg', [
-            'uses' => 'TMS\Procurement\RG_EntryController@showViewRG', 
+            'uses' => 'TMS\Procurement\RG_EntryController@showViewRG',
             'as' => 'tms.procurement.view_rg'
             ]);
         Route::get('/procurement/rg_entry/{id}/edit_rg', [
-            'uses' => 'TMS\Procurement\RG_EntryController@edit_RG', 
-            'as' => 'tms.procurement.edit_rg' 
+            'uses' => 'TMS\Procurement\RG_EntryController@edit_RG',
+            'as' => 'tms.procurement.edit_rg'
             ]);
         Route::get('/procurement/rg_entry/{id}/edit_detail_rg', [
-            'uses' => 'TMS\Procurement\RG_EntryController@edit_RGdetail', 
+            'uses' => 'TMS\Procurement\RG_EntryController@edit_RGdetail',
             'as' => 'tms.procurement.edit_rg-detail'
             ]);
         Route::post('/procurement/rg_entry/void_rg/{param}', [
@@ -863,13 +864,13 @@ Route::group([ 'middleware' => 'app.user'], function (){
             'uses' => 'TMS\Procurement\RG_EntryController@checkPO_rg',
             'as' => 'tms.procurement.check_ponum'
         ]);
-        
 
 
-       
+
+
     });
 
     //PREFIX:: AR
-    
+
 });
 

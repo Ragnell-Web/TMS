@@ -20,6 +20,7 @@ class AccCustomerController extends Controller
     private $api_url;
     private $detail_customer;
     private $add_customer_from_sj;
+    private $add_do_dtl;
     public function __construct()
     {
         $this->middleware('auth');
@@ -31,6 +32,7 @@ class AccCustomerController extends Controller
         $this->surat_jalan = \Config::get('rest.surat_jalan');
         $this->detail_customer = \Config::get('rest.detail_customer');
         $this->add_customer_from_sj = \Config::get('rest.add_customer_from_sj');
+        $this->add_do_dtl = \Config::get('rest.add_do_dtl');
     }
 
     /**
@@ -87,6 +89,17 @@ class AccCustomerController extends Controller
             'custcode'=>$request->input('cust_id')
         ]);
         return $datasAddCustomers['data'];
+    }
+    public function getDoDtl(Request $request)
+    {
+        print_r($this->api_url . $this->add_do_dtl . 'list');exit;
+        $dataAddDoDtl = Http::withHeaders([
+            'Authorization' => $this->api_key,
+        ])->asJson()->get($this->api_url . $this->add_do_dtl . 'list',[
+            'do_no'=>$request->input('do_no')
+        ]);
+        // print_r($this->add_do_dtl);exit;
+        return $dataAddDoDtl['data'];
     }
 
 }
