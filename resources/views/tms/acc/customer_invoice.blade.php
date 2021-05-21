@@ -39,11 +39,22 @@
 
     <div class="page-title-area">
     <div class="row" >
-        <div class="#">
-            <a href="#" class="btn btn-primary btn-round" id="add_form" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                Add Item
-            </a>
+        <div class="col-1">
+            <div class="#">
+                <a href="#" class="btn btn-primary btn-round" id="add_form" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                    Add Item
+                </a>
+            </div>
         </div>
+
+        <div class="col-1">
+            <div class="#">
+                <a href="#" class="btn btn-primary btn-round" id="edit_form" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                    Edit Item
+                </a>
+            </div>
+        </div>
+    </div>
     {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Launch demo modal
 </button> --}}
@@ -66,7 +77,10 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="row mt-3">
+                    <div class="row" id="isiInput">
+                        
+                    </div>
+                    <div class="row mt-3" style="height: 35vh;overflow: auto">
                         <div class="col">
                             <div class="data-tables datatable-dark">
                                 <table id="tms_MasterItem_Datatable" class="table table-striped" style="width:100%">
@@ -86,24 +100,10 @@
                                         </tr>
                                     </thead>
 
-                                    <tbody>
-                                        @php
-                                            $i = 1;
-                                        @endphp
-                                        @foreach($datasSuratJalan as $data)
-                                        <tr>
-                                            <td>{{$i++}}</td>
-                                            <td>{{$data['po_no']}}</td>
-                                            <td>{{$data['item_code']}}</td>
-                                            <td>{{$data['row_no']}}</td>
-                                            <td>{{$data['unit']}}</td>
-                                            <td>{{$data['quantity']}}</td>
-                                            <td>{{$data['so_no']}}</td>
-                                            <td>{{$data['dn_no']}}</td>
-                                            <td>{{$data['do_no']}}</td>
-                                            <td>{{$data['sso_no']}}</td>
-                                        </tr>
-                                        @endforeach
+                                    <tbody id="suratJalanBody">
+                                        <tr style="text-align:center">
+                                                <td colspan="10">Silahkan Ditambahkan</td>
+                                            </tr>
                                     </tbody>
 
                                 </table>
@@ -189,7 +189,7 @@
                                 @foreach($datasInvoices as $data)
                                 <tr class="invoice" data-id="{{$data['id']}}" data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-dismiss="modal">
                                     <td>{{$i++}}</td>
-                                    <td>{{$data['custcode']}}</td>
+                                    <td class="tdCustcode">{{$data['custcode']}}</td>
                                     <td>{{$data['company']}}</td>
                                     <td>{{$data['contact']}}</td>
                                 </tr>
@@ -203,7 +203,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
       </div>
     </div>
   </div>
@@ -242,7 +242,7 @@
                                 <label>Customer Id</label>
                             </div>
                             <div class="col-md-1 mb-2">
-                                <input type="text" name="custcode" class="form-control form-control-sm" id="custcode"
+                                <input type="text" name="custcode1" class="form-control form-control-sm" id="custcode"
                                     placeholder="Cust Code">
                             </div>
                             <div class="col-md-1 mb-2">
@@ -273,7 +273,7 @@
                                     class="form-control form-control-sm" id="written" placeholder="YYYY-MM-DD">
                             </div>
                             <div class="col-md-4 mb-1">
-                                <input type="text" name="company" autocomplete="off"
+                                <input type="text" name="company1" autocomplete="off"
                                     class="form-control form-control-sm" id="company" placeholder="Name of your pt"
                                     disabled>
                             </div>
@@ -479,8 +479,8 @@
                 <button type="button" data-toggle="tooltip" data-placement="top" title="Add Item" class="btn btn-info"
                     id="addRow" data-bs-toggle="modal" data-bs-target="#exampleModal3" data-bs-dismiss="modal">Add
                     Item</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-info addStin"><i class="ti-check"></i> Save</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#exampleModal1">Close</button>
+                <button type="button" class="btn btn-info addStin" id="saveRow" data-bs-dismiss="modal"><i class="ti-check"></i> Save</button>
             </div>
         </div>
     </div>
@@ -502,10 +502,10 @@
                         <label>Customer</label>
                     </div>
                     <div class="col-2 mb-1">
-                        <input type="text" disabled   name="custcode" class="form-control form-control-sm custcode" aria-describedby="" placeholder="" disabled>
+                        <input type="text" disabled   name="custcode2" class="form-control form-control-sm custcode" aria-describedby="" placeholder="" disabled>
                     </div>
                     <div class="col-4 mb-1">
-                        <input type="text"  value="HO" name="company"  class="form-control form-control-sm company" placeholder="" disabled>
+                        <input type="text"  value="HO" name="company2"  class="form-control form-control-sm company" placeholder="" disabled>
                     </div>
 
                     <div class="col-md-2 mb-1 align-right" >

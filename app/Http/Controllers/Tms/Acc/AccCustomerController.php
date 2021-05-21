@@ -21,6 +21,7 @@ class AccCustomerController extends Controller
     private $detail_customer;
     private $add_customer_from_sj;
     private $add_do_dtl;
+    private $detail_invoice;
     public function __construct()
     {
         $this->middleware('auth');
@@ -33,6 +34,7 @@ class AccCustomerController extends Controller
         $this->detail_customer = \Config::get('rest.detail_customer');
         $this->add_customer_from_sj = \Config::get('rest.add_customer_from_sj');
         $this->add_do_dtl = \Config::get('rest.add_do_dtl');
+        $this->detail_invoice = \Config::get('rest.detail_invoice');
     }
 
     /**
@@ -96,10 +98,42 @@ class AccCustomerController extends Controller
         $dataAddDoDtl = Http::withHeaders([
             'Authorization' => $this->api_key,
         ])->asJson()->get($this->api_url . $this->add_do_dtl . 'list',[
-            'do_no'=>$request->input('do_no')
+            'do_no'=>$request->input('do_no'),
+            'do_no2'=>$request->input('do_no2'),
+            'do_no3'=>$request->input('do_no3'),
+            'do_no4'=>$request->input('do_no4'),
+            'do_no5'=>$request->input('do_no5')
         ]);
         // print_r($this->add_do_dtl);exit;
         return $dataAddDoDtl['data'];
+    }
+    public function update(Request $request)
+    {
+        $updateDatasCustomer = Http::withHeaders([
+            'Authorization' => $this->api_key,
+        ])->asJson()->post($this->api_url . $this->detail_customer . 'update',[
+            'custcode'=>$request->input('cust_id'),
+            'contact'=>$request->input('contact'),
+            'source'=>$request->input('source'),
+            'company'=>$request->input('company'),
+            'taxrate'=>$request->input('taxrate')
+        ]);
+        $updateDatasInvoice = Http::withHeaders([
+            'Authorization' => $this->api_key,
+        ])->asJson()->post($this->api_url . $this->detail_invoice . 'update',[
+            'custcode'=>$request->input('cust_id'),
+            'period'=>$request->input('period'),
+            'written'=>$request->input('written'),
+            'ref_no'=>$request->input('ref_no'),
+            'address1'=>$request->input('address1'),
+            'address3'=>$request->input('address3'),
+            'valas'=>$request->input('valas'),
+            'rate'=>$request->input('rate'),
+            'due'=>$request->input('due'),
+            'glar'=>$request->input('glar')
+        ]);
+
+        return [$updateDatasCustomer['data'],$updateDatasInvoice['data']];
     }
 
 }
