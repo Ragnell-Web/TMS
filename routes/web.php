@@ -808,12 +808,13 @@ Route::group([ 'middleware' => 'app.user'], function (){
         */
         //Accounting
             Route::get('/acc', 'Tms\Acc\AccCustomerController@index')->name('ar_Index');
+            Route::post('/acc/delete','Tms\Acc\AccCustomerController@deleteSJ');
             Route::post('/acc','Tms\Acc\AccCustomerController@update');
             Route::post('/acc/add','Tms\Acc\AccCustomerController@create');
             Route::post('/acc/customer','Tms\Acc\AccCustomerController@getCustomer');
             Route::post('/acc/sj','Tms\Acc\AccCustomerController@getSJ');
             Route::post('/acc/doDtl','Tms\Acc\AccCustomerController@getDoDtl');
-            Route::get('/coba','TestController@index');
+
         Route::get('/procurement/rg_entry', [
             'uses' => 'TMS\Procurement\RG_EntryController@indexRG_Entry',
             'as' => 'tms.procurement.rg_entry'

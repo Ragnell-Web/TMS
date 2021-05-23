@@ -44,11 +44,11 @@ class AccCustomerController extends Controller
      */
     public function index()
     {
-        //print_r($this->api_key);exit;
+        // print_r($this->api_key);exit;
         $datasInvoices= Http::withHeaders([
             'Authorization' => $this->api_key,
         ])->get($this->api_url . $this->customer_invoice . 'list');
-
+        // print_r($datasInvoices['data']);exit;
         //print_r($datas['data']);exit;
         $datasSuratJalan = Http::withHeaders([
             'Authorization' => $this->api_key,
@@ -111,7 +111,7 @@ class AccCustomerController extends Controller
     {
         $updateDatasCustomer = Http::withHeaders([
             'Authorization' => $this->api_key,
-        ])->asJson()->post($this->api_url . $this->detail_customer . 'update',[
+        ])->asJson()->put($this->api_url . $this->detail_customer . 'update',[
             'custcode'=>$request->input('cust_id'),
             'contact'=>$request->input('contact'),
             'source'=>$request->input('source'),
@@ -120,7 +120,7 @@ class AccCustomerController extends Controller
         ]);
         $updateDatasInvoice = Http::withHeaders([
             'Authorization' => $this->api_key,
-        ])->asJson()->post($this->api_url . $this->detail_invoice . 'update',[
+        ])->asJson()->put($this->api_url . $this->detail_invoice . 'update',[
             'custcode'=>$request->input('cust_id'),
             'period'=>$request->input('period'),
             'written'=>$request->input('written'),
@@ -132,8 +132,20 @@ class AccCustomerController extends Controller
             'due'=>$request->input('due'),
             'glar'=>$request->input('glar')
         ]);
-
+            // print_r($updateDatasCustomer['data']);exit;
         return [$updateDatasCustomer['data'],$updateDatasInvoice['data']];
+    }
+    public function deleteSJ(Request $request)
+    {
+
+        $deleteSJ = Http::withHeaders([
+            'Authorization' => $this->api_key,
+        ])->asJson()->delete($this->api_url . $this->add_customer_from_sj . 'delete',[
+            'do_no'=>$request->input('do_no'),
+            'custcode'=>$request->input('custcode')
+        ]);
+        // print_r($this->api_url . $this->add_customer_from_sj . 'delete');exit;
+        return $deleteSJ['data'];
     }
 
 }

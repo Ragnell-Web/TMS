@@ -78,7 +78,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row" id="isiInput">
-                        
+
                     </div>
                     <div class="row mt-3" style="height: 35vh;overflow: auto">
                         <div class="col">
@@ -480,7 +480,7 @@
                     id="addRow" data-bs-toggle="modal" data-bs-target="#exampleModal3" data-bs-dismiss="modal">Add
                     Item</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#exampleModal1">Close</button>
-                <button type="button" class="btn btn-info addStin" id="saveRow" data-bs-dismiss="modal"><i class="ti-check"></i> Save</button>
+                <button type="button" class="btn btn-info addStin" id="saveRow"><i class="ti-check"></i> Save</button>
             </div>
         </div>
     </div>
@@ -560,6 +560,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" id="deleteBtn">Delete</button>
         <button type="button" class="btn btn-primary" id="saveBtn" data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-dismiss="modal">Save changes</button>
       </div>
     </div>
