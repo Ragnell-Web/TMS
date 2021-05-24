@@ -9,7 +9,8 @@ return [
   'detail_customer'=>env('DETAIL_CUSTOMER','NONE'),
   'add_customer_from_sj'=>env('ADD_CUSTOMER_FROM_SJ','NONE'),
   'add_do_dtl' => env('ADD_DO_DTL','NONE'),
-  'detail_invoice'=> env('DETAIL_INVOICE','NONE')
+  'detail_invoice'=> env('DETAIL_INVOICE','NONE'),
+  'ttf_arh'=>env('TTF_ARH','NONE')
 ];
 
 ?>

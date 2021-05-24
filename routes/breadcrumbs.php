@@ -64,7 +64,7 @@ Breadcrumbs::for('admin.modules.item.permission', function ($trail, $item) {
 |       2.1. - - - - - - Dashboard
 |       2.2. - - - - - - Master
 |           2.2.1. - - - - - Master Item
-            2.2.2. - - - - - Master Vendor 
+            2.2.2. - - - - - Master Vendor
 |       2.3. - - - - - - Manufacturing
 |           2.3.1. - - - - - Production Plan
 |               2.3.1.1. - - - - - Summary Loading Capacity per Month
@@ -93,7 +93,7 @@ Breadcrumbs::for('tms_Dashboard', function ($trail) {
     $trail->push('Dashboard', route('tms_Dashboard'));
 });
 
-//  2.2. Master 
+//  2.2. Master
     //2.2.1. Master Item
 Breadcrumbs::for('tms_MasterItem_Index', function ($trail) {
     $trail->push('Master', '#');
@@ -193,6 +193,12 @@ Breadcrumbs::for('ar_Index', function ($trail) {
     $trail->push('Accounting', '#');
     $trail->push('Customer Invoice', route('ar_Index'));
 });
+
+Breadcrumbs::for('ttf_Index', function ($trail) {
+    $trail->push('Accounting', '#');
+    $trail->push('TTF Entry', route('ttf_Index'));
+});
+
     // 2.4.3
 Breadcrumbs::for('tms.warehouse.mto-entry', function ($trail) {
     $trail->push('Warehouse', '#');

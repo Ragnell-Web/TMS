@@ -325,10 +325,8 @@ function addDoHdr(datas) {
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input isRadio" type="radio" name="delete" data-no="${i++}" value="${
-            SJ["do_no"]
-        }" id="delete">
-                                <label class="form-check-label" for="delete">
+                                <input class="form-check-input isRadio" type="radio" name="delete" data-no="${i}" value="${SJ['do_no']}" id="delete${i}">
+                                <label class="form-check-label" for="delete${i}">
                                     Delete
                                 </label>
                             </div>

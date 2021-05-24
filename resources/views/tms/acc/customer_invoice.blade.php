@@ -479,8 +479,11 @@
                 <button type="button" data-toggle="tooltip" data-placement="top" title="Add Item" class="btn btn-info"
                     id="addRow" data-bs-toggle="modal" data-bs-target="#exampleModal3" data-bs-dismiss="modal">Add
                     Item</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#exampleModal1">Close</button>
-                <button type="button" class="btn btn-info addStin" id="saveRow"><i class="ti-check"></i> Save</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal"
+                data-bs-target="#exampleModal1">Close</button>
+                <button type="button" class="btn btn-info addStin"
+                data-bs-dismiss="modal"
+                id="saveRow"><i class="ti-check"></i> Save</button>
             </div>
         </div>
     </div>

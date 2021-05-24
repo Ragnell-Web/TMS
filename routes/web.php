@@ -815,6 +815,8 @@ Route::group([ 'middleware' => 'app.user'], function (){
             Route::post('/acc/sj','Tms\Acc\AccCustomerController@getSJ');
             Route::post('/acc/doDtl','Tms\Acc\AccCustomerController@getDoDtl');
 
+            Route::get('/ttf_entry','TMS\Acc\TtfEntryController@index')->name('ttf_Index');;
+
         Route::get('/procurement/rg_entry', [
             'uses' => 'TMS\Procurement\RG_EntryController@indexRG_Entry',
             'as' => 'tms.procurement.rg_entry'
