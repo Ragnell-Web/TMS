@@ -19,6 +19,10 @@
         height: 20vh;
         overflow: auto;
     }
+
+    #tes {
+        margin-left: 13px;
+    }
 </style>
 
 @endsection
@@ -47,7 +51,7 @@
             </div>
         </div>
 
-        <div class="col-1">
+        <div class="col-1" id="tes">
             <div class="#">
                 <a href="#" class="btn btn-primary btn-round" id="edit_form" data-bs-toggle="modal" data-bs-target="#exampleModal2">
                     Edit Item

@@ -193,6 +193,12 @@ Breadcrumbs::for('ar_Index', function ($trail) {
     $trail->push('Accounting', '#');
     $trail->push('Customer Invoice', route('ar_Index'));
 });
+
+Breadcrumbs::for('ttf_Index', function ($trail) {
+    $trail->push('Accounting', '#');
+    $trail->push('TTF Entry', route('ttf_Index'));
+});
+
     // 2.4.3
 Breadcrumbs::for('tms.warehouse.mto-entry', function ($trail) {
     $trail->push('Warehouse', '#');

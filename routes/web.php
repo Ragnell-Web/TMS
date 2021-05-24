@@ -813,7 +813,16 @@ Route::group([ 'middleware' => 'app.user'], function (){
             Route::post('/acc/customer','Tms\Acc\AccCustomerController@getCustomer');
             Route::post('/acc/sj','Tms\Acc\AccCustomerController@getSJ');
             Route::post('/acc/doDtl','Tms\Acc\AccCustomerController@getDoDtl');
+
             Route::get('/coba','TestController@index');
+
+        // TTF Entry
+            Route::get('/ttf_entry', 'Tms\Acc\TtfEntryController@index')->name('ttf_Index');
+            Route::post('/ttf_entry/add','Tms\Acc\TtfEntryController@create');
+            Route::post('/ttf_entry/customer', 'Tms\Acc\TtfEntryController@getCustomer');
+            Route::post('ttf_entry/doDtl', 'Tms\Acc\TtfEntryController@getDoDtl');
+            Route::post('/ttf_entry/sj', 'Tms\Acc\TtfEntryController@getSJ');
+
         Route::get('/procurement/rg_entry', [
             'uses' => 'TMS\Procurement\RG_EntryController@indexRG_Entry',
             'as' => 'tms.procurement.rg_entry'
