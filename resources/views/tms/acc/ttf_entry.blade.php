@@ -304,15 +304,15 @@
                 <button type="button" data-toggle="tooltip" data-placement="top" title="Add Item" class="btn btn-success"
                     id="addBtn" data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-dismiss="modal">New Customer
                     </button>
-<<<<<<< Updated upstream
+
                 {{-- <button type="button" class="btn btn-info" id="addRow" data-bs-dismiss="modal">Add Row</button> --}}
                 {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal">Delete</button> --}}
                 <button type="button" class="btn btn-info addStin" id="saveBtn" data-bs-dismiss="modal"><i class="ti-check"></i> Add</button>
                 <button type="button" class="btn btn-info" id="editBtn" data-bs-dismiss="modal">Edit</button>
-=======
+
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#exampleModal1">Delete</button>
                 <button type="button" class="btn btn-info addStin" id="saveRow" data-bs-dismiss="modal"><i class="ti-check"></i> Ok</button>
->>>>>>> Stashed changes
+
             </div>
         </div>
     </div>

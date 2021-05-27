@@ -815,17 +815,14 @@ Route::group([ 'middleware' => 'app.user'], function (){
             Route::post('/acc/sj','Tms\Acc\AccCustomerController@getSJ');
             Route::post('/acc/doDtl','Tms\Acc\AccCustomerController@getDoDtl');
 
-<<<<<<< Updated upstream
             Route::get('/ttf_entry','TMS\Acc\TtfEntryController@index')->name('ttf_Index');
             Route::post('/ttf_entry','TMS\Acc\TtfEntryController@show');
             Route::post('/ttf_entry/customer','TMS\Acc\TtfEntryController@getCustomers');
             Route::post('ttf_entry/add','TMS\Acc\TtfEntryController@addTtfArl');
             Route::post('ttf_entry/update','TMS\Acc\TtfEntryController@updateTtfEntry');
 
-=======
         //Ttf Entry
             Route::get('/ttf_entry','TMS\Acc\TtfEntryController@index')->name('ttf_Index');
->>>>>>> Stashed changes
 
         //Customer File
             Route::get('/customer_file', 'TMS\Acc\CustomerFileController@index')->name('customer_Index');
