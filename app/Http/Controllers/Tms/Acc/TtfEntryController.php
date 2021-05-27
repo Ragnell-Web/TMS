@@ -19,6 +19,10 @@ class TtfEntryController extends Controller
     private $customer_invoice;
     private $api_url;
     private $ttf_arh;
+    private $ttf_arl;
+    private $ttf_entry;
+    private $detail_customer;
+    private $customer;
 
     public function __construct()
     {
@@ -29,19 +33,19 @@ class TtfEntryController extends Controller
         $this->customer_invoice = \Config::get('rest.customer_invoice');
         $this->api_url = \Config::get('rest.api_url');
         $this->ttf_arh = \Config::get('rest.ttf_arh');
+        $this->ttf_arl = \Config::get('rest.ttf_arl');
+        $this->ttf_entry = \Config::get('rest.ttf_entry');
+        $this->detail_customer = \Config::get('rest.detail_customer');
+        $this->customer = \Config::get('rest.customer');
     }
 
     public function index()
     {
-        $datasTtfArhLast = Http::withHeaders([
-            'Authorization' => $this->api_key,
-        ])->get($this->api_url . $this->ttf_arh . 'list');
-
         $datasInvoices= Http::withHeaders([
             'Authorization' => $this->api_key,
         ])->get($this->api_url . $this->customer_invoice . 'list');
             // print_r($datasTtfArhLast['data']);exit;
-        return view('tms.acc.ttf_entry')->with('datasInvoices', $datasInvoices['data'])->with('datasTtfArhLast',$datasTtfArhLast['data']);
+        return view('tms.acc.ttf_entry')->with('datasInvoices', $datasInvoices['data']);
     }
 
     /**
@@ -71,9 +75,13 @@ class TtfEntryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $datasTtfArhLast = Http::withHeaders([
+            'Authorization' => $this->api_key,
+        ])->get($this->api_url . $this->ttf_entry . 'list');
+
+        return $datasTtfArhLast['data'];
     }
 
     /**
@@ -108,5 +116,83 @@ class TtfEntryController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function getCustomers(Request $request)
+    {
+        $datasCustomers = Http::withHeaders([
+            'Authorization' => $this->api_key,
+        ])->asJson()->get($this->api_url . $this->customer . 'edit',[
+            'id'=>$request->input('id')
+        ]);
+        // $data = [
+        //     'datasCustomers'=>$datasCustomers['data']
+        // ];
+        return $datasCustomers['data'];
+    }
+    public function addTtfArl(Request $request)
+    {
+        // print_r($this->api_url . $this->ttf_arh . 'store');exit;
+        $addTtfArl = Http::withHeaders([
+            'Authorization' => $this->api_key,
+        ])->asJson()->post($this->api_url . $this->ttf_entry . 'store',[
+            'ttf_no'=>$request->input('ttf_no'),
+            'received'=>$request->input('received'),
+            'valas'=>$request->input('dollar'),
+            'invoice'=>$request->input('invoice'),
+            'ref_no'=>$request->input('ref_no'),
+            'tax_no'=>$request->input('tax_no'),
+            'kw_no'=>$request->input('kw_no'),
+            'inv_date'=>$request->input('inv_date'),
+            'inv_due'=>$request->input('inv_due'),
+            'amount_tot'=>$request->input('amount_tot'),
+            'custcode'=>$request->input('custcode')
+        ]);
+        $addTtfArh = Http::withHeaders([
+            'Authorization' => $this->api_key,
+        ])->asJson()->post($this->api_url . $this->ttf_arh . 'store',[
+            'ttf_no'=>$request->input('ttf_no'),
+            'ref_no'=>$request->input('ref_no'),
+            'written'=>$request->input('inv_date'),
+            'custcode'=>$request->input('custcode'),
+            'company'=>$request->input('company'),
+            'valas'=>$request->input('valas'),
+            'total_amt'=>$request->input('amount_tot'),
+            'remark'=>$request->input('remark'),
+            'operator'=>$request->input('operator')
+            // print_r($addTtfArl['data']);exit;
+        ]);
+// print_r($addTtfArh['data']);exit;
+         return [$addTtfArl['data'],$addTtfArh['data']];
+    }
+    public function updateTtfEntry(Request $request)
+    {
+        $updateTtfArh = Http::withHeaders([
+            'Authorization' => $this->api_key,
+        ])->asJson()->put($this->api_url . $this->ttf_arh . 'update',[
+            'ttf_no'=>$request->input('ttf_no'),
+            'ref_no'=>$request->input('ref_no'),
+            'written'=>$request->input('inv_date'),
+            'custcode'=>$request->input('custcode'),
+            'valas'=>$request->input('valas'),
+            'total_amt'=>$request->input('amount_tot'),
+            'remark'=>$request->input('remark')
+            // print_r($addTtfArl['data']);exit;
+        ]);
+        $updateTtfArl = Http::withHeaders([
+            'Authorization' => $this->api_key,
+        ])->asJson()->post($this->api_url . $this->ttf_arl . 'update',[
+            'ttf_no'=>$request->input('ttf_no'),
+            'received'=>$request->input('received'),
+            'valas'=>$request->input('dollar'),
+            'invoice'=>$request->input('invoice'),
+            'ref_no'=>$request->input('ref_no'),
+            'tax_no'=>$request->input('tax_no'),
+            'kw_no'=>$request->input('kw_no'),
+            'inv_date'=>$request->input('inv_date'),
+            'inv_due'=>$request->input('inv_due'),
+            'amount_tot'=>$request->input('amount_tot'),
+            'custcode'=>$request->input('custcode')
+        ]);
+
     }
 }

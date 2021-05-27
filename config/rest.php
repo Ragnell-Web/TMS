@@ -10,7 +10,10 @@ return [
   'add_customer_from_sj'=>env('ADD_CUSTOMER_FROM_SJ','NONE'),
   'add_do_dtl' => env('ADD_DO_DTL','NONE'),
   'detail_invoice'=> env('DETAIL_INVOICE','NONE'),
-  'ttf_arh'=>env('TTF_ARH','NONE')
+  'ttf_arh'=>env('TTF_ARH','NONE'),
+  'ttf_arl'=>env('TTF_ARL','NONE'),
+  'ttf_entry'=>env('TTF_ENTRY','NONE'),
+  'customer'=>env('CUSTOMER','NONE')
 ];
 
 ?>

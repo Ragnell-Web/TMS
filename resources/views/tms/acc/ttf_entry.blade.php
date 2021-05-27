@@ -43,15 +43,7 @@
         <div class="col-1">
             <div class="#">
                 <a href="#" class="btn btn-primary btn-round" id="add_form" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                    Add Item
-                </a>
-            </div>
-        </div>
-
-        <div class="col-1" id="tes">
-            <div class="#">
-                <a href="#" class="btn btn-primary btn-round" id="edit_form" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                    Edit Item
+                    Show Item
                 </a>
             </div>
         </div>
@@ -100,10 +92,11 @@
                                         </tr>
                                     </thead>
 
-                                    <tbody id="suratJalanBody">
-                                        <tr style="text-align:center">
+                                    <tbody id="ttfArlBody">
+                                        {{-- <tr style="text-align:center">
                                                 <td colspan="10">Silahkan Ditambahkan</td>
-                                            </tr>
+
+                                            </tr> --}}
                                     </tbody>
 
                                 </table>
@@ -175,8 +168,8 @@
                                 <label>TTF No</label>
                             </div>
                             <div class="col-1 mb-2">
-                                <input type="text" name="noinvoice" class="form-control form-control-sm" id="noinvoice"
-                                    aria-describedby="" value="{{($datasTtfArhLast[0]['ttf_no'] + 1)}}" placeholder="No Invoice" disabled>
+                                <input type="text" name="ttfNo" class="form-control form-control-sm" id="ttfNo"
+                                    aria-describedby="" placeholder="No ttf" disabled>
                             </div>
                             <div class="col-md-9 mb-2 align-right">
                                 <label>Operator</label>
@@ -196,7 +189,7 @@
                             </div>
                             <div class="col-6 mb-1">
                                 <input type="text" name="company" autocomplete="off"
-                                    class="form-control form-control-sm" id="company">
+                                    class="form-control form-control-sm" id="company" disabled>
                             </div>
                             <div class="col-md-2 mb-1 align-right">
                                 <label>Printed</label>
@@ -210,8 +203,8 @@
                                 <label>Date</label>
                             </div>
                             <div class="col-2 mb-1">
-                                <input type="text" name="written" autocomplete="off" class="form-control form-control-sm" value="<?php echo $tgl; ?>"
-                                    id="reff_no" placeholder="YYYY-MM-DD">
+                                <input type="text" name="date" autocomplete="off" class="form-control form-control-sm" value="<?php echo $tgl; ?>"
+                                    id="date" placeholder="YYYY-MM-DD">
                             </div>
                             <div class="col-md-8 mb-1 align-right">
                                 <label>Posted</label>
@@ -233,7 +226,7 @@
                                 <label>Valas</label>
                             </div>
                             <div class="col-2 mb-1">
-                                <input type="text" name="valas" autocomplete="off"
+                                <input type="text" name="valas" autocomplete="off" value="IDR"
                                     class="form-control form-control-sm" id="valas">
                             </div>
                             <div class="col-md-7 mb-1 align-right">
@@ -251,8 +244,8 @@
                                 <label>Remark</label>
                             </div>
                             <div class="col-4 mb-1">
-                                <input type="text" name="" autocomplete="off" class="form-control form-control-sm"
-                                    id="refs_no_create_stin" placeholder="">
+                                <input type="text" name="remark" autocomplete="off" class="form-control form-control-sm"
+                                    id="remark" placeholder="">
                             </div>
                             <div class="col-md-5 mb-1 align-right">
                                 <label>Total Amount</label>
@@ -284,9 +277,17 @@
                                             <th>Amount</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="body">
-                                        <tr style="text-align:center">
-                                            <td colspan="10">Silahkan Ditambahkan</td>
+                                    <tbody id="bodyTable">
+                                        <tr style="text-align:center" class="tableTtf">
+                                            <td><input type="text" style="width:50px;" class="form-control form-control-sm" disabled></td>
+                                            <td><input type="text" style="width:150px;" class="form-control form-control-sm" id="invNo"></td>
+                                            <td><input type="text" style="width:150px;" class="form-control form-control-sm" id="refNo"></td>
+                                            <td><input type="text" style="width:150px;" class="form-control form-control-sm" id="taxNo"></td>
+                                            <td><input type="text" style="width:200px;" class="form-control form-control-sm" id="kwNo"></td>
+                                            <td><input type="text" style="width:150px;" class="form-control form-control-sm" value="<?= $tgl; ?>"></td>
+                                            <td><input type="text" style="width:150px;" class="form-control form-control-sm" id="due"></td>
+                                            <td><input type="text" style="width:50px;" class="form-control form-control-sm" id="dollar" value="IDR"></td>
+                                            <td><input type="text" style="width:150px;" class="form-control form-control-sm" id="totAmount"></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -297,18 +298,19 @@
             </div>
             <div class="modal-footer">
                 <button type="button" data-toggle="tooltip" data-placement="top" title="Add Item" class="btn btn-success"
-                    id="addBtn" data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-dismiss="modal">New
+                    id="addBtn" data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-dismiss="modal">New Customer
                     </button>
-                <button type="button" class="btn btn-info" id="addRow">Add Row</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#exampleModal1">Delete</button>
-                <button type="button" class="btn btn-info addStin" id="saveRow" data-bs-dismiss="modal"><i class="ti-check"></i> Ok</button>
+                {{-- <button type="button" class="btn btn-info" id="addRow" data-bs-dismiss="modal">Add Row</button> --}}
+                {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal">Delete</button> --}}
+                <button type="button" class="btn btn-info addStin" id="saveBtn" data-bs-dismiss="modal"><i class="ti-check"></i> Add</button>
+                <button type="button" class="btn btn-info" id="editBtn" data-bs-dismiss="modal">Edit</button>
             </div>
         </div>
     </div>
 </div>
 
 <!-- Modal -->
-<div class="modal fade dua" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade dua" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" role="dialog">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
