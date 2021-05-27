@@ -22,6 +22,7 @@ class AccCustomerController extends Controller
     private $add_customer_from_sj;
     private $add_do_dtl;
     private $detail_invoice;
+    private $acc_customer_invoice;
     public function __construct()
     {
         $this->middleware('auth');
@@ -35,6 +36,7 @@ class AccCustomerController extends Controller
         $this->add_customer_from_sj = \Config::get('rest.add_customer_from_sj');
         $this->add_do_dtl = \Config::get('rest.add_do_dtl');
         $this->detail_invoice = \Config::get('rest.detail_invoice');
+        $this->acc_customer_invoice = \Config::get('rest.acc_customer_invoice');
     }
 
     /**
@@ -55,21 +57,31 @@ class AccCustomerController extends Controller
         ])->get($this->api_url . $this->surat_jalan . 'list');
         return view('tms.acc.customer_invoice')->with('datasInvoices', $datasInvoices['data'])->with('datasSuratJalan',$datasSuratJalan['data']);
     }
+
     public function create(Request $request)
     {
-
-        $datas = Http::withHeaders([
+        $updateDatasCustomer = Http::withHeaders([
             'Authorization' => $this->api_key,
-        ])->asForm()->post($this->api_url . $this->customer_invoice . 'store', [
-            'invoice' => $request->input('invoice'),
-            'inv_type' => $request->input('inv_type'),
-            'ref_no' => $request->input('ref_no'),
-            'period' => $request->input('atas_nama'),
-            'company' => $request->input('company')
+        ])->asJson()->put($this->api_url . $this->acc_customer_invoice . 'store',[
+            'custcode'=>$request->input('cust_id'),
+            'contact'=>$request->input('contact'),
+            'source'=>$request->input('source'),
+            'company'=>$request->input('company'),
+            'taxrate'=>$request->input('taxrate'),
+            'period'=>$request->input('period'),
+            'written'=>$request->input('written'),
+            'ref_no'=>$request->input('ref_no'),
+            'address1'=>$request->input('address1'),
+            'address3'=>$request->input('address3'),
+            'valas'=>$request->input('valas'),
+            'rate'=>$request->input('rate'),
+            'due'=>$request->input('due'),
+            'glar'=>$request->input('glar')
         ]);
-
-        return redirect()->route('ar_Index')->with('datas',$datas['data']);
+            // print_r($updateDatasCustomer['data']);exit;
+        return [$updateDatasCustomer['data']];   
     }
+
     public function getCustomer(Request $request)
     {
         $datasCustomers = Http::withHeaders([

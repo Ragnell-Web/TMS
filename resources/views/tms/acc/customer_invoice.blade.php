@@ -7,7 +7,7 @@
 
 use App\Models\Dbtbs\InvoiceNoGenerate;
 $stock = new InvoiceNoGenerate;
-
+$tgl = date('Y-m-d');
 ?>
 <!-- DATATABLES -->
 <link rel="stylesheet" type="text/css" href="{{ asset('/vendor/Datatables/dataTables.bootstrap4.min.css') }}">
@@ -412,7 +412,7 @@ $stock = new InvoiceNoGenerate;
                                 <label>Due Date</label>
                             </div>
                             <div class="col-4 mb-1">
-                                <input type="text" name="due" autocomplete="off" class="form-control form-control-sm"
+                                <input type="text" name="due" autocomplete="off" class="form-control form-control-sm" value="<?=$tgl; ?>" 
                                     id="due" placeholder="Date">
                             </div>
                             <div class="col-1 mb-2 align-center">

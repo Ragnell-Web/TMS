@@ -22,6 +22,14 @@
     #tes {
         margin-left: 12px;
     }
+
+    #biling {
+        margin-left: 350px;
+    }
+
+    #do {
+        margin-left: 50px;
+    }
 </style>
 
 @endsection
@@ -232,75 +240,51 @@
                                 <input type="text" name="custcode" class="form-control form-control-sm" id="custcode" disabled>
                             </div>
                             <div class="col-1 mb-2">
-                                <input type="text" name="id" class="form-control form-control-sm" id="id">
+                                <input type="text" name="id" class="form-control form-control-sm" id="id" disabled>
                             </div>
 
-                            <div class="col-2 mb-2">
-                                <input type="text"
-                                    class="form-control form-control-sm">
-                            </div>
-                            <div class="col-md-1 mb-2 align-center">
-                                <label>Customer Id</label>
-                            </div>
-                            <div class="col-md-1 mb-2">
-                                <input type="text" name="custcode1" class="form-control form-control-sm" id="custcode"
-                                    placeholder="Cust Code">
-                            </div>
-                            <div class="col-md-1 mb-2">
-                                <input type="text" name="" class="form-control form-control-sm" placeholder="">
-                            </div>
-                            <div class="col-md-1 mb-2">
-                                <input type="number" name="" class="form-control form-control-sm" placeholder="0"
-                                    disabled>
-                            </div>
-                            <div class="col-md-2 mb-2 align-right">
-                                <label>Staff</label>
-                            </div>
                             <div class="col-1 mb-2">
-                                <input class="form-control form-control-sm" value="{{ Auth::user()->FullName }}"
-                                    name="staff" type="text" id="staff_create_stin" disabled>
+                                <input type="text" class="form-control form-control-sm" disabled>
+                            </div>
+
+                            <div class="col-md-6 mb-1 align-right">
+                                <label>Branch/Wh Id</label>
+                            </div>
+                            <div class="col-md-1 mb-1">
+                                <input type="text" name="custcode1" class="form-control form-control-sm" id="custcode" disabled>
+                            </div>
+                            <div class="col-md-1 mb-1">
+                                <input type="text" name="" class="form-control form-control-sm" disabled="">
                             </div>
                         </div>
+                        <hr>
                         <div class="form-row">
                             <div class="col-1 mb-1">
-                                <label>Per/Date</label>
+                                <label>Company</label>
                             </div>
-                            <div class="col-2 mb-1">
+                            <div class="col-5 mb-1">
                                 <input type="text" name="period" autocomplete="off" class="form-control form-control-sm"
-                                    id="period" placeholder="YYYY/MM">
+                                    id="period" disabled>
+                            </div>
+                            <div class="col-md-1 mb-1">
+                                <input type="text" name="company1" autocomplete="off" class="form-control form-control-sm" id="company" disabled>
+                            </div>
+                            <div class="col-md-3 mb-1 align-right">
+                                <label> Entered </label>
                             </div>
                             <div class="col-2 mb-1">
-                                <input type="text" name="written" autocomplete="off"
-                                    class="form-control form-control-sm" id="written" placeholder="YYYY-MM-DD">
-                            </div>
-                            <div class="col-md-4 mb-1">
-                                <input type="text" name="company1" autocomplete="off"
-                                    class="form-control form-control-sm" id="company" placeholder="Name of your pt"
-                                    disabled>
-                            </div>
-                            <div class="col-md-1 mb-1 align-right">
-                                <label>Prn/Post</label>
-                            </div>
-                            <div class="col-1 mb-1">
                                 <input class="form-control form-control-sm" name="" type="text" disabled>
                             </div>
-                            <div class="col-1 mb-1">
-                                <input class="form-control form-control-sm" name="post" type="text" id="post" disabled>
-                            </div>
                         </div>
                         <div class="form-row">
                             <div class="col-1 mb-1">
-                                <label>Refs.No</label>
+                                <label>Contact</label>
                             </div>
-                            <div class="col-4 mb-1">
+                            <div class="col-5 mb-1">
                                 <input type="text" name="ref_no" autocomplete="off" class="form-control form-control-sm"
-                                    id="reff_no" placeholder="Ref No">
+                                    id="reff_no" disabled>
                             </div>
-                            <div class="col-md-4 mb-1">
-                                <input type="text" name="contact" autocomplete="off"
-                                    class="form-control form-control-sm" id="contact" placeholder="Nama Orang di sana">
-                            </div>
-                            <div class="col-md-2 mb-1 align-right">
+                            <div class="col-md-4 mb-1 align-right">
                                 <label>Voided</label>
                             </div>
                             <div class="col-1 mb-1">
@@ -309,172 +293,160 @@
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="col-1 mb-1">
-                                <label>VAT No</label>
+                            <div class="col-5 mb-1" id="biling">
+                                <label>Billing Address</label>
                             </div>
-                            <div class="col-1 mb-1">
-                                <input type="text" name="" autocomplete="off" class="form-control form-control-sm"
-                                    placeholder="">
-                            </div>
-                            <div class="col-2 mb-1">
-                                <input type="text" name="" autocomplete="off" class="form-control form-control-sm"
-                                    placeholder="">
-                            </div>
-                            <div class="col-1 mb-1">
-                                <input type="text" name="taxrate" autocomplete="off"
-                                    class="form-control form-control-sm" id="taxrate" placeholder="Tax Rate %">
-                            </div>
-                            <div class="col-md-4 mb-1">
-                                <input type="text" name="address1" autocomplete="off"
-                                    class="form-control form-control-sm" id="address1" placeholder="Address">
-                            </div>
-                            <div class="col-md-2 mb-1 align-right">
-                                <label>Sub Total</label>
-                            </div>
-                            <div class="col-1 mb-1">
-                                <input class="form-control form-control-sm" name="" type="text" disabled>
+                            <div class="col-1 mb-1" id="do">
+                                <label>DO Address</label>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col-1 mb-1">
-                                <label>Sales / PIC</label>
+                                <label>Address</label>
                             </div>
-                            <div class="col-2 mb-1">
+                            <div class="col-5 mb-1">
                                 <input type="text" name="" autocomplete="off" class="form-control form-control-sm"
-                                    placeholder="">
+                                    disabled>
                             </div>
-                            <div class="col-2 mb-1">
+                            <div class="col-6 mb-1">
                                 <input type="text" name="" autocomplete="off" class="form-control form-control-sm"
-                                    placeholder="">
-                            </div>
-                            <div class="col-md-4 mb-1">
-                                <input type="text" name="address3" autocomplete="off"
-                                    class="form-control form-control-sm" id="address3" placeholder="Pos code">
-                            </div>
-                            <div class="col-md-2 mb-1 align-right">
-                                <label>CN / Disc</label>
-                            </div>
-                            <div class="col-1 mb-1">
-                                <input class="form-control form-control-sm" name="" type="text" disabled>
+                                    disabled>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col-1 mb-1">
-                                <label>Currency</label>
+                                <label></label>
                             </div>
-                            <div class="col-2 mb-1">
+                            <div class="col-5 mb-1">
                                 <input type="text" name="valas" autocomplete="off" class="form-control form-control-sm"
-                                    id="valas" placeholder="IDR">
+                                    id="valas" disabled>
+                            </div>
+                            <div class="col-6 mb-1">
+                                <input type="text" name="valas" autocomplete="off" class="form-control form-control-sm"
+                                    id="valas" disabled>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-1 mb-1">
+                                <label></label>
+                            </div>
+                            <div class="col-5 mb-1">
+                                <input type="text" name="valas" autocomplete="off" class="form-control form-control-sm"
+                                    id="valas" disabled>
+                            </div>
+                            <div class="col-6 mb-1">
+                                <input type="text" name="valas" autocomplete="off" class="form-control form-control-sm"
+                                    id="valas" disabled>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-1 mb-1">
+                                <label></label>
+                            </div>
+                            <div class="col-5 mb-1">
+                                <input type="text" name="valas" autocomplete="off" class="form-control form-control-sm"
+                                    id="valas" disabled>
+                            </div>
+                            <div class="col-6 mb-1">
+                                <input type="text" name="valas" autocomplete="off" class="form-control form-control-sm"
+                                    id="valas" disabled>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-1 mb-1">
+                                <label>Phone</label>
                             </div>
                             <div class="col-2 mb-1">
-                                <input type="text" name="rate" autocomplete="off" class="form-control form-control-sm"
-                                    id="rate" placeholder="1000">
-                            </div>
-                            <div class="col-md-4 mb-1">
                                 <input type="text" name="" autocomplete="off" class="form-control form-control-sm"
-                                    placeholder="">
+                                    disabled>
                             </div>
-                            <div class="col-md-2 mb-1 align-right">
-                                <label>V.A.T</label>
-                            </div>
-                            <div class="col-1 mb-1">
-                                <input class="form-control form-control-sm" name="" type="text" disabled>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-1 mb-1">
-                                <label>Terms</label>
-                            </div>
-                            <div class="col-4 mb-1">
-                                <input type="text" name="" autocomplete="off" class="form-control form-control-sm"
-                                    placeholder="0 Days">
-                            </div>
-                            <div class="col-md-4 mb-1">
-                                <input type="text" name="" autocomplete="off" class="form-control form-control-sm"
-                                    placeholder="">
-                            </div>
-                            <div class="col-md-2 mb-1 align-right">
-                                <label>Total</label>
-                            </div>
-                            <div class="col-1 mb-1">
-                                <input class="form-control form-control-sm" name="" type="text" disabled>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-1 mb-1">
-                                <label>Due Date</label>
-                            </div>
-                            <div class="col-4 mb-1">
-                                <input type="text" name="due" autocomplete="off" class="form-control form-control-sm"
-                                    id="due" placeholder="Date">
-                            </div>
-                            <div class="col-1 mb-2 align-center">
-                                <label>Gl Ar</label>
+                            <div class="col-3 mb-1 align-right">
+                                <label>Salesman</label>
                             </div>
                             <div class="col-md-1 mb-1">
-                                <input type="text" name="glar" autocomplete="off" class="form-control form-control-sm"
-                                    id="glar" placeholder="Gl Ar">
-                            </div>
-                            <div class="col-md-2 mb-1">
                                 <input type="text" name="" autocomplete="off" class="form-control form-control-sm"
-                                    placeholder="Trade receiveables - Third Parties" disabled>
+                                    disabled>
                             </div>
-                            <div class="col-md-2 mb-1 align-right">
-                                <label>Payment</label>
-                            </div>
-                            <div class="col-1 mb-1">
-                                <input class="form-control form-control-sm" name="" type="text" disabled>
+                            <div class="col-md-5 mb-1">
+                                <input type="text" name="" autocomplete="off" class="form-control form-control-sm"
+                                    disabled>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col-1 mb-1">
-                                <label>Remark</label>
+                                <label>Fax</label>
                             </div>
-                            <div class="col-4 mb-1">
+                            <div class="col-2 mb-1">
+                                <input type="text" name="due" autocomplete="off" class="form-control form-control-sm"
+                                    id="due" disabled>
+                            </div>
+                            <div class="col-3 mb-2 align-right">
+                                <label>GLAR</label>
+                            </div>
+                            <div class="col-md-2 mb-1">
+                                <input type="text" name="glar" autocomplete="off" class="form-control form-control-sm"
+                                    id="glar" disabled>
+                            </div>
+                            <div class="col-md-4 mb-1">
                                 <input type="text" name="" autocomplete="off" class="form-control form-control-sm"
-                                    id="refs_no_create_stin" placeholder="">
+                                    disabled>
                             </div>
-                            <div class="col-md-6 mb-1 align-right">
-                                <label>Balance</label>
-                            </div>
+                        </div>
+                        <div class="form-row">
                             <div class="col-1 mb-1">
+                                <label>H.P.</label>
+                            </div>
+                            <div class="col-2 mb-1">
+                                <input type="text" name="" autocomplete="off" class="form-control form-control-sm"
+                                    id="refs_no_create_stin" disabled>
+                            </div>
+                            <div class="col-3 mb-2 align-right">
+                                <label>NPWP</label>
+                            </div>
+                            <div class="col-md-3 mb-1">
+                                <input class="form-control form-control-sm" name="" type="text" id="printed_create_stin"
+                                    disabled>
+                            </div>
+                            <div class="col-1 mb-2 align-right">
+                                <label>Price By</label>
+                            </div>
+                            <div class="col-md-2 mb-1">
                                 <input class="form-control form-control-sm" name="" type="text" id="printed_create_stin"
                                     disabled>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="row scrollGood">
-                    <div class="col-12 mt-12">
-                        <div class="datatable datatable-primary">
-                            <div class="table-responsive">
-                                <table id="tbl-detail-stin-create" class="table table-bordered table-striped">
-                                    {{-- style="background-color: #D3D3D3" --}}
-                                    <thead class="text-center">
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Part No</th>
-                                            <th>Item Code</th>
-                                            <th>Descript</th>
-                                            <th>Unit</th>
-                                            <th>Quantity</th>
-                                            <th>Price</th>
-                                            <th>Sub Total</th>
-                                            <th>DO No</th>
-                                            <th>SSO No</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="body">
-                                        <tr style="text-align:center">
-                                            <td colspan="10">Silahkan Ditambahkan</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                        <div class="form-row">
+                            <div class="col-1 mb-1">
+                                <label>E-mail</label>
+                            </div>
+                            <div class="col-2 mb-1">
+                                <input type="text" name="" autocomplete="off" class="form-control form-control-sm"
+                                    id="refs_no_create_stin" disabled>
+                            </div>
+                            <div class="col-3 mb-2 align-right">
+                                <label>Term of Pay</label>
+                            </div>
+                            <div class="col-md-1 mb-1">
+                                <input class="form-control form-control-sm" name="" type="text" id="printed_create_stin"
+                                    disabled>
+                            </div>
+                            <div class="col-1 mb-2">
+                                <label>days</label>
+                            </div>
+                            <div class="col-2 mb-2 align-right">
+                                <label>DN Term</label>
+                            </div>
+                            <div class="col-md-1 mb-1">
+                                <input class="form-control form-control-sm" name="" type="text" id="printed_create_stin"
+                                    disabled>
+                            </div>
+                            <div class="col-1 mb-2">
+                                <label>days</label>
                             </div>
                         </div>
                     </div>
                 </div>
+                
             </div>
             <div class="modal-footer">
                 <button type="button" data-toggle="tooltip" data-placement="top" title="Add Item" class="btn btn-info"
