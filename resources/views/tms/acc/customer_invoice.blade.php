@@ -7,6 +7,7 @@
 
 use App\Models\Dbtbs\InvoiceNoGenerate;
 $stock = new InvoiceNoGenerate;
+$tgl = date('d-m-Y');
 
 ?>
 <!-- DATATABLES -->
@@ -413,7 +414,7 @@ $stock = new InvoiceNoGenerate;
                             </div>
                             <div class="col-4 mb-1">
                                 <input type="text" name="due" autocomplete="off" class="form-control form-control-sm"
-                                    id="due" placeholder="Date">
+                                    id="due" value="<?=$tgl; ?>" placeholder="Date">
                             </div>
                             <div class="col-1 mb-2 align-center">
                                 <label>Gl Ar</label>
@@ -571,7 +572,6 @@ $stock = new InvoiceNoGenerate;
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger" id="deleteBtn">Delete</button>
         <button type="button" class="btn btn-primary" id="saveBtn" data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-dismiss="modal">Save changes</button>
       </div>
     </div>

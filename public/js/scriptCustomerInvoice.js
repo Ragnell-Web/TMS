@@ -18,7 +18,7 @@ $(".invoice").on("click", function (e) {
         $("input[name='address3']").val(data[0]["address3"]);
         $("input[name='valas']").val(data[0]["valas"]);
         $("input[name='rate']").val(data[0]["rate"]);
-        $("input[name='due']").val(data[0]["due"]);
+        // $("input[name='due']").val(data[0]["due"]);
         $("input[name='glar']").val(data[0]["glar"]);
     }
     // $(".modal.fade.satu").remove();
@@ -324,12 +324,6 @@ function addDoHdr(datas) {
                                     Yes
                                 </label>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input isRadio" type="radio" name="delete" data-no="${i}" value="${SJ['do_no']}" id="delete${i}">
-                                <label class="form-check-label" for="delete${i}">
-                                    Delete
-                                </label>
-                            </div>
                         </td>
                       </tr>
                     `;
@@ -392,18 +386,18 @@ function showCheckBoxChecked() {
     return checkListArray;
 }
 
-function showRadioChecked() {
-    const deleteRadio = [...document.querySelectorAll(".isRadio")];
-    let radioList = deleteRadio
-        .map((dltRdio) => {
-            if (dltRdio.checked) {
-                return [dltRdio.value,dltRdio.dataset.no];
-            }
-        })
-        .filter((checkFill) => checkFill > "21020000")
-    console.log(radioList);
-    return radioList;
-}
+// function showRadioChecked() {
+//     const deleteRadio = [...document.querySelectorAll(".isRadio")];
+//     let radioList = deleteRadio
+//         .map((dltRdio) => {
+//             if (dltRdio.checked) {
+//                 return [dltRdio.value,dltRdio.dataset.no];
+//             }
+//         })
+//         .filter((checkFill) => checkFill > "21020000")
+//     console.log(radioList);
+//     return radioList;
+// }
 
 const items = JSON.parse(localStorage.getItem("items")) || [];
 
@@ -481,34 +475,34 @@ saveBtnRow.addEventListener("click", function (e) {
     getDoDtl(showCheckBoxChecked());
 });
 
-const delBtnRow = document.querySelector('#deleteBtn');
-delBtnRow.addEventListener('click', function (e) {
-    showRadioChecked()
-    let do_no = showRadioChecked()[0][0];
-    let custcode = $("input[name='custcode1']").val();
-    let dataNo = showRadioChecked()[0][1]
-    console.log(dataNo);
-    $.ajaxSetup({
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-    });
-    $.post("/tms/acc/delete", { do_no, custcode }, function (dataSJ) {
-        let i = 1;
-        let datas = addDoHdr(dataSJ);
-        datas.splice(dataNo, 1);
-        if (dataSJ.length < 1) {
-            let isiTabelKosong = /*html*/ `
-                            <tr style="text-align:center">
-                                                <td colspan="10">Silahkan Ditambahkan</td>
-                                            </tr>
-                        `;
-            $("#bodyCustomers").html(isiTabelKosong);
-        } else {
-            $("#bodyCustomers").html(datas);
-        }
-    });
-});
+// const delBtnRow = document.querySelector('#deleteBtn');
+// delBtnRow.addEventListener('click', function (e) {
+//     showRadioChecked()
+//     let do_no = showRadioChecked()[0][0];
+//     let custcode = $("input[name='custcode1']").val();
+//     let dataNo = showRadioChecked()[0][1]
+//     console.log(dataNo);
+//     $.ajaxSetup({
+//         headers: {
+//             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+//         },
+//     });
+//     $.post("/tms/acc/delete", { do_no, custcode }, function (dataSJ) {
+//         let i = 1;
+//         let datas = addDoHdr(dataSJ);
+//         datas.splice(dataNo, 1);
+//         if (dataSJ.length < 1) {
+//             let isiTabelKosong = /*html*/ `
+//                             <tr style="text-align:center">
+//                                                 <td colspan="10">Silahkan Ditambahkan</td>
+//                                             </tr>
+//                         `;
+//             $("#bodyCustomers").html(isiTabelKosong);
+//         } else {
+//             $("#bodyCustomers").html(datas);
+//         }
+//     });
+// });
 
 window.addEventListener('load', function (e) {
     let lastItems = items.pop();
