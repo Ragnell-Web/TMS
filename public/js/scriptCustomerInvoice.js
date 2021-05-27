@@ -2,7 +2,7 @@ $(".invoice").on("click", function (e) {
     // console.log(e.target.innerHTML);
     let dataId = $(this).data("id");
     function showData(data) {
-        $("input[name='noinvoice']").val(data[0]["invoice"]);
+        // $("input[name='noinvoice']").val(data[0]["invoice"]);
         $("input[name='inv_type']").val(data[0]["inv_type"]);
         $("input[name='source']").val(data[0]["source"]);
         $("input[name='custcode1']").val(data[0]["custcode"]);

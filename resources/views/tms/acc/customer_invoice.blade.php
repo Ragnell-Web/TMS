@@ -3,7 +3,12 @@
 @section('title', 'TMS | Customer Invoice')
 
 @section('css')
+<?php
 
+use App\Models\Dbtbs\InvoiceNoGenerate;
+$stock = new InvoiceNoGenerate;
+
+?>
 <!-- DATATABLES -->
 <link rel="stylesheet" type="text/css" href="{{ asset('/vendor/Datatables/dataTables.bootstrap4.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('/vendor/Datatables/Responsive-2.2.5/css/responsive.dataTables.min.css') }}">
@@ -227,7 +232,7 @@
                             </div>
                             <div class="col-1 mb-2">
                                 <input type="text" name="noinvoice" class="form-control form-control-sm" id="noinvoice"
-                                    aria-describedby="" value="1" placeholder="No Invoice" disabled>
+                                    aria-describedby="" value="<?=$stock->getStinNo() ?>" placeholder="No Invoice" disabled>
                             </div>
                             <div class="col-1 mb-2">
                                 <input type="text" name="inv_type" class="form-control form-control-sm" id="inv_type"
