@@ -199,6 +199,18 @@ Breadcrumbs::for('ttf_Index', function ($trail) {
     $trail->push('TTF Entry', route('ttf_Index'));
 });
 
+Breadcrumbs::for('customer_Index', function ($trail) {
+    $trail->push('Accounting', '#');
+    $trail->push('Customer File', route('customer_Index'));
+});
+
+Breadcrumbs::for('print_Index', function ($trail) {
+    $trail->push('Accounting', '#');
+    $trail->push('Print Customer Invoice', route('print_Index'));
+});
+
+
+
     // 2.4.3
 Breadcrumbs::for('tms.warehouse.mto-entry', function ($trail) {
     $trail->push('Warehouse', '#');

@@ -1,14 +1,9 @@
 @extends('master')
 
-@section('title', 'TMS | Customer Invoice')
+@section('title', 'TMS | Customer File')
 
 @section('css')
-<?php
 
-use App\Models\Dbtbs\InvoiceNoGenerate;
-$stock = new InvoiceNoGenerate;
-
-?>
 <!-- DATATABLES -->
 <link rel="stylesheet" type="text/css" href="{{ asset('/vendor/Datatables/dataTables.bootstrap4.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('/vendor/Datatables/Responsive-2.2.5/css/responsive.dataTables.min.css') }}">
@@ -231,19 +226,17 @@ $stock = new InvoiceNoGenerate;
                     <div class="col">
                         <div class="form-row">
                             <div class="col-1 mb-2">
-                                <label>Invoice No</label>
+                                <label>Code/Id</label>
                             </div>
                             <div class="col-1 mb-2">
-                                <input type="text" name="noinvoice" class="form-control form-control-sm" id="noinvoice"
-                                    aria-describedby="" value="<?=$stock->getStinNo() ?>" placeholder="No Invoice" disabled>
+                                <input type="text" name="custcode" class="form-control form-control-sm" id="custcode" disabled>
                             </div>
                             <div class="col-1 mb-2">
-                                <input type="text" name="inv_type" class="form-control form-control-sm" id="inv_type"
-                                    placeholder="SJ">
+                                <input type="text" name="id" class="form-control form-control-sm" id="id">
                             </div>
 
                             <div class="col-2 mb-2">
-                                <input type="text" placeholder="HO" id="source" name="source"
+                                <input type="text"
                                     class="form-control form-control-sm">
                             </div>
                             <div class="col-md-1 mb-2 align-center">
@@ -657,5 +650,5 @@ $stock = new InvoiceNoGenerate;
 
 
 </script>
-<script src="{{asset('/js/scriptCustomerInvoice.js')}}"></script>
+<script src="{{asset('/js/scriptCustomerFile.js')}}"></script>
 @endpush
