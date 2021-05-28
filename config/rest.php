@@ -13,7 +13,7 @@ return [
   'ttf_arh'=>env('TTF_ARH','NONE'),
   'ttf_arl'=>env('TTF_ARL','NONE'),
   'ttf_entry'=>env('TTF_ENTRY','NONE'),
-  'customer'=>env('CUSTOMER','NONE')
+  'customer'=>env('CUSTOMER','NONE'),
 ];
 
 ?>

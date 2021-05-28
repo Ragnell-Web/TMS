@@ -7,7 +7,8 @@
 
 use App\Models\Dbtbs\InvoiceNoGenerate;
 $stock = new InvoiceNoGenerate;
-$tgl = date('d-m-Y');
+$tgl = date('Y-m-d');
+$period = date('Y-m');
 
 ?>
 <!-- DATATABLES -->
@@ -274,12 +275,12 @@ $tgl = date('d-m-Y');
                                 <label>Per/Date</label>
                             </div>
                             <div class="col-2 mb-1">
-                                <input type="text" name="period" autocomplete="off" class="form-control form-control-sm"
+                                <input type="text" name="period" autocomplete="off" class="form-control form-control-sm" value="<?=$period; ?>"
                                     id="period" placeholder="YYYY/MM">
                             </div>
                             <div class="col-2 mb-1">
                                 <input type="text" name="written" autocomplete="off"
-                                    class="form-control form-control-sm" id="written" placeholder="YYYY-MM-DD">
+                                    class="form-control form-control-sm" value="<?=$tgl; ?>" id="written" placeholder="YYYY-MM-DD">
                             </div>
                             <div class="col-md-4 mb-1">
                                 <input type="text" name="company1" autocomplete="off"
@@ -324,13 +325,16 @@ $tgl = date('d-m-Y');
                                 <input type="text" name="" autocomplete="off" class="form-control form-control-sm"
                                     placeholder="">
                             </div>
-                            <div class="col-2 mb-1">
+                            <div class="col-1 mb-1">
                                 <input type="text" name="" autocomplete="off" class="form-control form-control-sm"
                                     placeholder="">
                             </div>
                             <div class="col-1 mb-1">
                                 <input type="text" name="taxrate" autocomplete="off"
-                                    class="form-control form-control-sm" id="taxrate" placeholder="Tax Rate %">
+                                    class="form-control form-control-sm" value="0.00" id="taxrate" placeholder="Tax Rate %" disabled>
+                            </div>
+                            <div class="col-1 mb-1">
+                                <label>%</label>
                             </div>
                             <div class="col-md-4 mb-1">
                                 <input type="text" name="address1" autocomplete="off"

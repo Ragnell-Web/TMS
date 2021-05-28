@@ -46,7 +46,7 @@ class InvoiceNoGenerate extends Model
         $reference = Sys_Number::select(DB::raw('concat(right(year(NOW()),2),DATE_FORMAT(NOW(),"%m")) as ref'))
         ->limit('1')
         ->get();
-        $stin_sysno = Sys_number::where('label','STOCK IN NUMBER')
+        $stin_sysno = Sys_number::where('label','INVOICE NUMBER')
         ->select('contents')
         ->get();
         $a = substr($stin_sysno[0]->contents,0,4); //4 digit do no dari sys number ex: 2007 | 20 : 2 Digit Terakhir dari Tahun 2020 | 07 " 2 digit dari Bulan pada tahun tersebut

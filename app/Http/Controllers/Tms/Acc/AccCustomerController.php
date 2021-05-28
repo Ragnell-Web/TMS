@@ -55,21 +55,33 @@ class AccCustomerController extends Controller
         ])->get($this->api_url . $this->surat_jalan . 'list');
         return view('tms.acc.customer_invoice')->with('datasInvoices', $datasInvoices['data'])->with('datasSuratJalan',$datasSuratJalan['data']);
     }
+
     public function create(Request $request)
     {
-
-        $datas = Http::withHeaders([
+        $addCustomerInvoice = Http::withHeaders([
             'Authorization' => $this->api_key,
-        ])->asForm()->post($this->api_url . $this->customer_invoice . 'store', [
-            'invoice' => $request->input('invoice'),
-            'inv_type' => $request->input('inv_type'),
-            'ref_no' => $request->input('ref_no'),
-            'period' => $request->input('atas_nama'),
-            'company' => $request->input('company')
+        ])->asJson()->post($this->api_url . $this->customer_invoice . 'store',[
+            'invoice'=>$request->input('invoice'),
+            'custcode'=>$request->input('cust_id'),
+            'contact'=>$request->input('contact'),
+            'source'=>$request->input('source'),
+            'company'=>$request->input('company'),
+            'taxrate'=>$request->input('taxrate'),
+            'period'=>$request->input('period'),
+            'written'=>$request->input('written'),
+            'ref_no'=>$request->input('ref_no'),
+            'address1'=>$request->input('address1'),
+            'address3'=>$request->input('address3'),
+            'valas'=>$request->input('valas'),
+            'rate'=>$request->input('rate'),
+            'due'=>$request->input('due'),
+            'glar'=>$request->input('glar'),
+            'inv_type'=>$request->input('inv_type')
         ]);
-
-        return redirect()->route('ar_Index')->with('datas',$datas['data']);
+            // print_r($addCustomerInvoice['data']);exit;
+        return $addCustomerInvoice['data'];
     }
+
     public function getCustomer(Request $request)
     {
         $datasCustomers = Http::withHeaders([
@@ -88,9 +100,14 @@ class AccCustomerController extends Controller
         $datasAddCustomers = Http::withHeaders([
             'Authorization' => $this->api_key,
         ])->asJson()->get($this->api_url . $this->add_customer_from_sj . 'list',[
+            'cust_id'=>$request->input('cust_id')
+        ]);
+        $showInvoice = Http::withHeaders([
+            'Authorization' => $this->api_key,
+        ])->asJson()->get($this->api_url . $this->customer_invoice . 'filter',[
             'custcode'=>$request->input('cust_id')
         ]);
-        return $datasAddCustomers['data'];
+        return [$datasAddCustomers['data'],$showInvoice['data']];
     }
     public function getDoDtl(Request $request)
     {

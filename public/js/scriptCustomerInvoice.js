@@ -6,19 +6,12 @@ $(".invoice").on("click", function (e) {
         $("input[name='inv_type']").val(data[0]["inv_type"]);
         $("input[name='source']").val(data[0]["source"]);
         $("input[name='custcode1']").val(data[0]["custcode"]);
-
-        $("input[name='period']").val(data[0]["period"]);
-        $("input[name='written']").val(data[0]["written"]);
         $("input[name='company1']").val(data[0]["company"]);
-
-        $("input[name='ref_no']").val(data[0]["ref_no"]);
         $("input[name='contact']").val(data[0]["contact"]);
-        $("input[name='taxrate']").val(data[0]["taxrate"]);
         $("input[name='address1']").val(data[0]["address1"]);
         $("input[name='address3']").val(data[0]["address3"]);
         $("input[name='valas']").val(data[0]["valas"]);
         $("input[name='rate']").val(data[0]["rate"]);
-        // $("input[name='due']").val(data[0]["due"]);
         $("input[name='glar']").val(data[0]["glar"]);
     }
     // $(".modal.fade.satu").remove();
@@ -39,7 +32,6 @@ $(".invoice").on("click", function (e) {
 });
 
 function addSaveRow() {
-    let dataInvoice = $("input[name='noinvoice']").val();
     let company = $("input[name='company1']").val();
     let custcode = $("input[name='custcode1']").val();
     let contact = $("input[name='contact']").val();
@@ -73,262 +65,11 @@ function addSaveRow() {
             glar,
         },
         function (datas) {
-            // const isiInput = /*html*/ `
-            //     <div class="col">
-            //             <div class="form-row">
-            //                 <div class="col-1 mb-2">
-            //                     <label>Invoice No</label>
-            //                 </div>
-            //                 <div class="col-1 mb-2">
-            //                     <input type="text" name="noinvoice" class="form-control form-control-sm" id="noinvoice"
-            //                         aria-describedby="" value="${datas[1]['invoice']}" placeholder="No Invoice" disabled>
-            //                 </div>
-            //                 <div class="col-1 mb-2">
-            //                     <input type="text" name="inv_type" class="form-control form-control-sm" id="inv_type"
-            //                         placeholder="SJ" disabled>
-            //                 </div>
 
-            //                 <div class="col-2 mb-2">
-            //                     <input type="text" placeholder="HO" id="source" name="source" value="${datas[1]['source']}"
-            //                         class="form-control form-control-sm" disabled>
-            //                 </div>
-            //                 <div class="col-md-1 mb-2 align-center">
-            //                     <label>Customer Id</label>
-            //                 </div>
-            //                 <div class="col-md-1 mb-2">
-            //                     <input type="text" name="custcode1" class="form-control form-control-sm" id="custcode" value="${datas[0]['custcode']}"
-            //                         placeholder="Cust Code" disabled>
-            //                 </div>
-            //                 <div class="col-md-1 mb-2">
-            //                     <input type="text" name="" class="form-control form-control-sm" placeholder="" disabled>
-            //                 </div>
-            //                 <div class="col-md-1 mb-2">
-            //                     <input type="number" name="" class="form-control form-control-sm" placeholder="0"
-            //                         disabled>
-            //                 </div>
-            //                 <div class="col-md-2 mb-2 align-right">
-            //                     <label>Staff</label>
-            //                 </div>
-            //                 <div class="col-1 mb-2">
-            //                     <input class="form-control form-control-sm" value="GALIH"
-            //                         name="staff" type="text" id="staff_create_stin" disabled>
-            //                 </div>
-            //             </div>
-            //             <div class="form-row">
-            //                 <div class="col-1 mb-1">
-            //                     <label>Per/Date</label>
-            //                 </div>
-            //                 <div class="col-2 mb-1">
-            //                     <input type="text" name="period" autocomplete="off" class="form-control form-control-sm" value="${datas[1]['period']}"
-            //                         id="period" placeholder="YYYY/MM" disabled>
-            //                 </div>
-            //                 <div class="col-2 mb-1">
-            //                     <input type="text" name="written" autocomplete="off"
-            //                         class="form-control form-control-sm" id="written" value="${datas[1]['written']}" placeholder="YYYY-MM-DD" disabled>
-            //                 </div>
-            //                 <div class="col-md-4 mb-1">
-            //                     <input type="text" name="company1" autocomplete="off"
-            //                         class="form-control form-control-sm" id="company" value="${datas[0]['company']}" placeholder="Name of your pt"
-            //                         disabled>
-            //                 </div>
-            //                 <div class="col-md-1 mb-1 align-right">
-            //                     <label>Prn/Post</label>
-            //                 </div>
-            //                 <div class="col-1 mb-1">
-            //                     <input class="form-control form-control-sm" name="" type="text" disabled>
-            //                 </div>
-            //                 <div class="col-1 mb-1">
-            //                     <input class="form-control form-control-sm" name="post" type="text" id="post" disabled>
-            //                 </div>
-            //             </div>
-            //             <div class="form-row">
-            //                 <div class="col-1 mb-1">
-            //                     <label>Refs.No</label>
-            //                 </div>
-            //                 <div class="col-4 mb-1">
-            //                     <input type="text" name="ref_no" autocomplete="off" class="form-control form-control-sm"
-            //                         id="ref_no" value="${datas[1]['ref_no']}" placeholder="Ref No" disabled>
-            //                 </div>
-            //                 <div class="col-md-4 mb-1">
-            //                     <input type="text" name="contact" autocomplete="off"
-            //                         class="form-control form-control-sm" id="contact" value="${datas[0]['contact']}" placeholder="Nama Orang di sana" disabled>
-            //                 </div>
-            //                 <div class="col-md-2 mb-1 align-right">
-            //                     <label>Voided</label>
-            //                 </div>
-            //                 <div class="col-1 mb-1">
-            //                     <input class="form-control form-control-sm" name="voided" type="text" id="voided"
-            //                         disabled>
-            //                 </div>
-            //             </div>
-            //             <div class="form-row">
-            //                 <div class="col-1 mb-1">
-            //                     <label>VAT No</label>
-            //                 </div>
-            //                 <div class="col-1 mb-1">
-            //                     <input type="text" name="" autocomplete="off" class="form-control form-control-sm"
-            //                         placeholder="" disabled>
-            //                 </div>
-            //                 <div class="col-2 mb-1">
-            //                     <input type="text" name="" autocomplete="off" class="form-control form-control-sm"
-            //                         placeholder="" disabled>
-            //                 </div>
-            //                 <div class="col-1 mb-1">
-            //                     <input type="text" name="taxrate" autocomplete="off"
-            //                         class="form-control form-control-sm" id="taxrate" value="${datas[0]['taxrate']} %" placeholder="Tax Rate %" disabled>
-            //                 </div>
-            //                 <div class="col-md-4 mb-1">
-            //                     <input type="text" name="address1" autocomplete="off"
-            //                         class="form-control form-control-sm" id="address1" value="${datas[1]['address1']}" placeholder="Address" disabled>
-            //                 </div>
-            //                 <div class="col-md-2 mb-1 align-right">
-            //                     <label>Sub Total</label>
-            //                 </div>
-            //                 <div class="col-1 mb-1">
-            //                     <input class="form-control form-control-sm" name="" type="text" disabled>
-            //                 </div>
-            //             </div>
-            //             <div class="form-row">
-            //                 <div class="col-1 mb-1">
-            //                     <label>Sales / PIC</label>
-            //                 </div>
-            //                 <div class="col-2 mb-1">
-            //                     <input type="text" name="" autocomplete="off" class="form-control form-control-sm"
-            //                         placeholder="" disabled>
-            //                 </div>
-            //                 <div class="col-2 mb-1">
-            //                     <input type="text" name="" autocomplete="off" class="form-control form-control-sm"
-            //                         placeholder="" disabled>
-            //                 </div>
-            //                 <div class="col-md-4 mb-1">
-            //                     <input type="text" name="address3" autocomplete="off"
-            //                         class="form-control form-control-sm" id="address3" value="${datas[1]['address3']}" placeholder="Pos code" disabled>
-            //                 </div>
-            //                 <div class="col-md-2 mb-1 align-right">
-            //                     <label>CN / Disc</label>
-            //                 </div>
-            //                 <div class="col-1 mb-1">
-            //                     <input class="form-control form-control-sm" name="" type="text" disabled>
-            //                 </div>
-            //             </div>
-            //             <div class="form-row">
-            //                 <div class="col-1 mb-1">
-            //                     <label>Currency</label>
-            //                 </div>
-            //                 <div class="col-2 mb-1">
-            //                     <input type="text" name="valas" autocomplete="off" class="form-control form-control-sm"
-            //                         id="valas" value="${datas[1]['valas']}" placeholder="IDR" disabled>
-            //                 </div>
-            //                 <div class="col-2 mb-1">
-            //                     <input type="text" name="rate" autocomplete="off" class="form-control form-control-sm"
-            //                         id="rate" value="${datas[1]['rate']}" placeholder="1000" disabled>
-            //                 </div>
-            //                 <div class="col-md-4 mb-1">
-            //                     <input type="text" name="" autocomplete="off" class="form-control form-control-sm"
-            //                         placeholder="" disabled>
-            //                 </div>
-            //                 <div class="col-md-2 mb-1 align-right">
-            //                     <label>V.A.T</label>
-            //                 </div>
-            //                 <div class="col-1 mb-1">
-            //                     <input class="form-control form-control-sm" name="" type="text" disabled>
-            //                 </div>
-            //             </div>
-            //             <div class="form-row">
-            //                 <div class="col-1 mb-1">
-            //                     <label>Terms</label>
-            //                 </div>
-            //                 <div class="col-4 mb-1">
-            //                     <input type="text" name="" autocomplete="off" class="form-control form-control-sm"
-            //                         placeholder="0 Days" disabled>
-            //                 </div>
-            //                 <div class="col-md-4 mb-1">
-            //                     <input type="text" name="" autocomplete="off" class="form-control form-control-sm"
-            //                         placeholder="" disabled>
-            //                 </div>
-            //                 <div class="col-md-2 mb-1 align-right">
-            //                     <label>Total</label>
-            //                 </div>
-            //                 <div class="col-1 mb-1">
-            //                     <input class="form-control form-control-sm" name="" type="text" disabled>
-            //                 </div>
-            //             </div>
-            //             <div class="form-row">
-            //                 <div class="col-1 mb-1">
-            //                     <label>Due Date</label>
-            //                 </div>
-            //                 <div class="col-4 mb-1">
-            //                     <input type="text" name="due" autocomplete="off" class="form-control form-control-sm" value="${datas[1]['due']}"
-            //                         id="due" placeholder="Date" disabled>
-            //                 </div>
-            //                 <div class="col-1 mb-2 align-center">
-            //                     <label>Gl Ar</label>
-            //                 </div>
-            //                 <div class="col-md-1 mb-1">
-            //                     <input type="text" name="glar" autocomplete="off" class="form-control form-control-sm" value="${datas[1]['glar']}"
-            //                         id="glar" placeholder="Gl Ar" disabled>
-            //                 </div>
-            //                 <div class="col-md-2 mb-1">
-            //                     <input type="text" name="" autocomplete="off" class="form-control form-control-sm"
-            //                         placeholder="Trade receiveables - Third Parties" disabled>
-            //                 </div>
-            //                 <div class="col-md-2 mb-1 align-right">
-            //                     <label>Payment</label>
-            //                 </div>
-            //                 <div class="col-1 mb-1">
-            //                     <input class="form-control form-control-sm" name="" type="text" disabled>
-            //                 </div>
-            //             </div>
-            //             <div class="form-row">
-            //                 <div class="col-1 mb-1">
-            //                     <label>Remark</label>
-            //                 </div>
-            //                 <div class="col-4 mb-1">
-            //                     <input type="text" name="" autocomplete="off" class="form-control form-control-sm"
-            //                         id="refs_no_create_stin" placeholder="" disabled>
-            //                 </div>
-            //                 <div class="col-md-6 mb-1 align-right">
-            //                     <label>Balance</label>
-            //                 </div>
-            //                 <div class="col-1 mb-1">
-            //                     <input class="form-control form-control-sm" name="" type="text" id="printed_create_stin"
-            //                         disabled>
-            //                 </div>
-            //             </div>
-            //         </div>
-            // `;
-            // $('#isiInput').html(isiInput);
         }
     );
 }
 
-function addDoHdr(datas) {
-    return datas.map((SJ,i) => {
-        return /*html*/ `
-                      <tr style="text-align:center">
-                        <td>${i+1}</td>
-                        <td>${SJ["custcode"]}</td>
-                        <td>${SJ["do_no"]}</td>
-                        <td>${SJ["dn_no"]}</td>
-                        <td>${SJ["po_no"]}</td>
-                        <td>${SJ["ref_no"]}</td>
-                        <td>${SJ["sso_no"]}</td>
-                        <td>${SJ["written"]}</td>
-                        <td>${SJ["tot_amt"]}</td>
-                        <td>
-                            <div class="form-check">
-                                <input class="form-check-input isCheck" type="checkbox" value="${
-                                    SJ["do_no"]
-                                }" id="yesorno${i}">
-                                <label class="form-check-label" for="yesorno${i}">
-                                    Yes
-                                </label>
-                            </div>
-                        </td>
-                      </tr>
-                    `;
-    });
-}
 
 const addBtn = document.querySelector("#addRow");
 addBtn.addEventListener("click", function (e) {
@@ -346,7 +87,35 @@ addBtn.addEventListener("click", function (e) {
     });
     $.post("acc/sj", { cust_id: custcode }, function (dataSJ) {
         let i = 1;
-        let datas = addDoHdr(dataSJ).join('');
+        // let coba = dataSJ.map(dats => {
+        //     return dats.filter(dat=>dat['do_no'] != dat['invoice'])
+        // });
+        // console.log(coba);
+        let datas = dataSJ[0].map((SJ,i) => {
+        return /*html*/ `
+                      <tr style="text-align:center">
+                        <td>${i+1}</td>
+                        <td>${SJ["cust_id"]}</td>
+                        <td>${SJ["do_no"]}</td>
+                        <td>${SJ["dn_no"]}</td>
+                        <td>${SJ["po_no"]}</td>
+                        <td>${SJ["ref_no"]}</td>
+                        <td>${SJ["sso_no"]}</td>
+                        <td>${SJ["delivery_date"]}</td>
+                        <td>${SJ["price"]}</td>
+                        <td>
+                            <div class="form-check">
+                                <input class="form-check-input isCheck" type="checkbox" value="${
+                                    SJ["do_no"]
+                                }" id="yesorno${i}">
+                                <label class="form-check-label" for="yesorno${i}">
+                                    Yes
+                                </label>
+                            </div>
+                        </td>
+                      </tr>
+                    `;
+    }).join('');
         if (dataSJ.length < 1) {
             let isiTabelKosong = /*html*/ `
                             <tr style="text-align:center">
@@ -368,6 +137,47 @@ saveBtn.addEventListener('click', function (e) {
         },
     });
     addSaveRow();
+    let dataInvoice = $("input[name='noinvoice']").val();
+    let company = $("input[name='company1']").val();
+    let custcode = $("input[name='custcode1']").val();
+    let contact = $("input[name='contact']").val();
+    let source = $("input[name='source']").val();
+    let taxrate = $("input[name='taxrate']").val();
+    let period = $("input[name='period']").val();
+    let written = $("input[name='written']").val();
+    let ref_no = $("input[name='ref_no']").val();
+    let address1 = $("input[name='address1']").val();
+    let address3 = $("input[name='address3']").val();
+    let valas = $("input[name='valas']").val();
+    let rate = $("input[name='rate']").val();
+    let due = $("input[name='due']").val();
+    let glar = $("input[name='glar']").val();
+    let inv_type = $("#inv_type").val();
+    $("input[name='noinvoice']").val(Number(dataInvoice)+1)
+    $.post(
+        "acc/add",
+        {
+            invoice : dataInvoice,
+            cust_id: custcode,
+            company,
+            contact,
+            source,
+            taxrate,
+            period,
+            written,
+            ref_no,
+            address1,
+            address3,
+            valas,
+            rate,
+            due,
+            glar,
+            inv_type
+        },
+        function (datas) {
+
+        }
+    );
 })
 
 function showCheckBoxChecked() {
