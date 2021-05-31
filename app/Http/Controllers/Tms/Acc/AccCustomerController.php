@@ -107,6 +107,7 @@ class AccCustomerController extends Controller
         ])->asJson()->get($this->api_url . $this->customer_invoice . 'filter',[
             'custcode'=>$request->input('cust_id')
         ]);
+        
         return [$datasAddCustomers['data'],$showInvoice['data']];
     }
     public function getDoDtl(Request $request)

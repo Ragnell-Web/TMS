@@ -87,10 +87,7 @@ addBtn.addEventListener("click", function (e) {
     });
     $.post("acc/sj", { cust_id: custcode }, function (dataSJ) {
         let i = 1;
-        // let coba = dataSJ.map(dats => {
-        //     return dats.filter(dat=>dat['do_no'] != dat['invoice'])
-        // });
-        // console.log(coba);
+
         let datas = dataSJ[0].map((SJ,i) => {
         return /*html*/ `
                       <tr style="text-align:center">
@@ -115,7 +112,7 @@ addBtn.addEventListener("click", function (e) {
                         </td>
                       </tr>
                     `;
-    }).join('');
+        }).join('');
         if (dataSJ.length < 1) {
             let isiTabelKosong = /*html*/ `
                             <tr style="text-align:center">
