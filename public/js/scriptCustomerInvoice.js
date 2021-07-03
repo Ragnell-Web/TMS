@@ -9,7 +9,7 @@ $(".invoice").on("click", function (e) {
         $("input[name='company1']").val(data[0]["company"]);
         $("input[name='contact']").val(data[0]["contact"]);
         $("input[name='address1']").val(data[0]["address1"]);
-        $("input[name='address3']").val(data[0]["address3"]);
+        $("input[name='address2']").val(data[0]["address2"]);
         $("input[name='valas']").val(data[0]["valas"]);
         $("input[name='rate']").val(data[0]["rate"]);
         $("input[name='glar']").val(data[0]["glar"]);
@@ -32,6 +32,7 @@ $(".invoice").on("click", function (e) {
 });
 
 function addSaveRow() {
+    let dataInvoice = $("input[name='noinvoice']").val();
     let company = $("input[name='company1']").val();
     let custcode = $("input[name='custcode1']").val();
     let contact = $("input[name='contact']").val();
@@ -41,14 +42,18 @@ function addSaveRow() {
     let written = $("input[name='written']").val();
     let ref_no = $("input[name='ref_no']").val();
     let address1 = $("input[name='address1']").val();
-    let address3 = $("input[name='address3']").val();
+    let address2 = $("input[name='address2']").val();
     let valas = $("input[name='valas']").val();
     let rate = $("input[name='rate']").val();
     let due = $("input[name='due']").val();
     let glar = $("input[name='glar']").val();
+    let inv_type = $("#inv_type").val();
+    let operator = $("input[name='staff']").val();
+    let remark = $("#remark").val();
     return $.post(
         "acc",
         {
+            invoice: dataInvoice,
             cust_id: custcode,
             company,
             contact,
@@ -58,15 +63,16 @@ function addSaveRow() {
             written,
             ref_no,
             address1,
-            address3,
+            address2,
             valas,
             rate,
             due,
             glar,
+            inv_type,
+            operator,
+            remark,
         },
-        function (datas) {
-
-        }
+        function (datas) {}
     );
 }
 
@@ -99,7 +105,7 @@ addBtn.addEventListener("click", function (e) {
                         <td>${SJ["ref_no"]}</td>
                         <td>${SJ["sso_no"]}</td>
                         <td>${SJ["delivery_date"]}</td>
-                        <td>${SJ["price"]}</td>
+                        <td>${SJ["PRICE"]}</td>
                         <td>
                             <div class="form-check">
                                 <input class="form-check-input isCheck" type="checkbox" value="${
@@ -144,12 +150,14 @@ saveBtn.addEventListener('click', function (e) {
     let written = $("input[name='written']").val();
     let ref_no = $("input[name='ref_no']").val();
     let address1 = $("input[name='address1']").val();
-    let address3 = $("input[name='address3']").val();
+    let address2 = $("input[name='address2']").val();
     let valas = $("input[name='valas']").val();
     let rate = $("input[name='rate']").val();
     let due = $("input[name='due']").val();
     let glar = $("input[name='glar']").val();
     let inv_type = $("#inv_type").val();
+    let operator = $("input[name='staff']").val();
+    let remark = $("#remark").val();
     $("input[name='noinvoice']").val(Number(dataInvoice)+1)
     $.post(
         "acc/add",
@@ -164,12 +172,14 @@ saveBtn.addEventListener('click', function (e) {
             written,
             ref_no,
             address1,
-            address3,
+            address2,
             valas,
             rate,
             due,
             glar,
-            inv_type
+            inv_type,
+            operator,
+            remark
         },
         function (datas) {
 
@@ -186,25 +196,12 @@ function showCheckBoxChecked() {
                 return checkBox.value;
             }
         })
-        .filter((checkFill) => checkFill > "21020000")
+        .filter((checkFill) => checkFill > "11111111")
         .join(" ");
     let checkListArray = checklist.split(" ");
 
     return checkListArray;
 }
-
-// function showRadioChecked() {
-//     const deleteRadio = [...document.querySelectorAll(".isRadio")];
-//     let radioList = deleteRadio
-//         .map((dltRdio) => {
-//             if (dltRdio.checked) {
-//                 return [dltRdio.value,dltRdio.dataset.no];
-//             }
-//         })
-//         .filter((checkFill) => checkFill > "21020000")
-//     console.log(radioList);
-//     return radioList;
-// }
 
 const items = JSON.parse(localStorage.getItem("items")) || [];
 
@@ -227,18 +224,17 @@ function getDoDtl(arrayOfPost = []) {
         },
         function (data) {
             let i = 1;
-            let dats;
             function showHtml(dataDo) {
                 return /*html*/ `
                 <tr style="text-align:center;" >
                     <td>${i++}</td>
-                    <td>${dataDo["part_no"]}</td>
-                    <td>${dataDo["itemcode"]}</td>
-                    <td>${dataDo["descript"]}</td>
+                    <td>${dataDo["PART_NO"]}</td>
+                    <td>${dataDo["item_code"]}</td>
+                    <td>${dataDo["DESCRIPT"]}</td>
                     <td>${dataDo["unit"]}</td>
                     <td>${dataDo["quantity"]}</td>
-                    <td>${dataDo["price"]}</td>
-                    <td>${dataDo["cost"]}</td>
+                    <td>${dataDo["PRICE"]}</td>
+                    <td>${dataDo["COST"]}</td>
                     <td>${dataDo["do_no"]}</td>
                     <td>${dataDo["sso_no"]}</td>
                 </tr>
@@ -246,11 +242,8 @@ function getDoDtl(arrayOfPost = []) {
             }
             let datasDoDtl = data.map((dataDo) => {
                 return showHtml(dataDo);
-            });
+            }).join('');
 
-            datasDoDtl.forEach((dataDo) => {
-                dats += dataDo;
-            });
             if (data.length < 1) {
                 let isiTabelKosong = /*html*/ `
                             <tr style="text-align:center">
@@ -260,8 +253,8 @@ function getDoDtl(arrayOfPost = []) {
                 $("#body").html(isiTabelKosong);
                 $("#suratJalanBody").html(isiTabelKosong);
             } else {
-                $("#body").html(dats);
-                $("#suratJalanBody").html(dats);
+                $("#body").html(datasDoDtl);
+                $("#suratJalanBody").html(datasDoDtl);
             }
         }
     );
@@ -270,7 +263,6 @@ function getDoDtl(arrayOfPost = []) {
 const saveBtnRow = document.querySelector("#saveBtn");
 saveBtnRow.addEventListener("click", function (e) {
     saveToLocalStorage();
-
     console.log(showCheckBoxChecked());
     $.ajaxSetup({
         headers: {
@@ -279,6 +271,7 @@ saveBtnRow.addEventListener("click", function (e) {
             ),
         },
     });
+
     getDoDtl(showCheckBoxChecked());
 });
 
@@ -311,13 +304,13 @@ saveBtnRow.addEventListener("click", function (e) {
 //     });
 // });
 
-window.addEventListener('load', function (e) {
-    let lastItems = items.pop();
-    console.log(lastItems);
-    $.ajaxSetup({
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-    });
-    getDoDtl(lastItems);
- })
+// window.addEventListener('load', function (e) {
+//     let lastItems = items.pop();
+//     console.log(lastItems);
+//     $.ajaxSetup({
+//         headers: {
+//             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+//         },
+//     });
+//     getDoDtl(lastItems);
+//  })

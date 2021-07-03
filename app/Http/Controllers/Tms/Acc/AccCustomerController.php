@@ -71,12 +71,14 @@ class AccCustomerController extends Controller
             'written'=>$request->input('written'),
             'ref_no'=>$request->input('ref_no'),
             'address1'=>$request->input('address1'),
-            'address3'=>$request->input('address3'),
+            'address2'=>$request->input('address2'),
             'valas'=>$request->input('valas'),
             'rate'=>$request->input('rate'),
             'due'=>$request->input('due'),
             'glar'=>$request->input('glar'),
-            'inv_type'=>$request->input('inv_type')
+            'inv_type'=>$request->input('inv_type'),
+            'operator'=>$request->input('operator'),
+            'remark'=>$request->input('remark')
         ]);
             // print_r($addCustomerInvoice['data']);exit;
         return $addCustomerInvoice['data'];
@@ -107,7 +109,7 @@ class AccCustomerController extends Controller
         ])->asJson()->get($this->api_url . $this->customer_invoice . 'filter',[
             'custcode'=>$request->input('cust_id')
         ]);
-        
+
         return [$datasAddCustomers['data'],$showInvoice['data']];
     }
     public function getDoDtl(Request $request)
@@ -127,31 +129,30 @@ class AccCustomerController extends Controller
     }
     public function update(Request $request)
     {
-        $updateDatasCustomer = Http::withHeaders([
+        $updateDatasInvoice = Http::withHeaders([
             'Authorization' => $this->api_key,
-        ])->asJson()->put($this->api_url . $this->detail_customer . 'update',[
+        ])->asJson()->put($this->api_url . $this->detail_invoice . 'update',[
+            'invoice'=>$request->input('invoice'),
             'custcode'=>$request->input('cust_id'),
             'contact'=>$request->input('contact'),
             'source'=>$request->input('source'),
             'company'=>$request->input('company'),
-            'taxrate'=>$request->input('taxrate')
-        ]);
-        $updateDatasInvoice = Http::withHeaders([
-            'Authorization' => $this->api_key,
-        ])->asJson()->put($this->api_url . $this->detail_invoice . 'update',[
-            'custcode'=>$request->input('cust_id'),
+            'taxrate'=>$request->input('taxrate'),
             'period'=>$request->input('period'),
             'written'=>$request->input('written'),
             'ref_no'=>$request->input('ref_no'),
             'address1'=>$request->input('address1'),
-            'address3'=>$request->input('address3'),
+            'address2'=>$request->input('address2'),
             'valas'=>$request->input('valas'),
             'rate'=>$request->input('rate'),
             'due'=>$request->input('due'),
-            'glar'=>$request->input('glar')
+            'glar'=>$request->input('glar'),
+            'inv_type'=>$request->input('inv_type'),
+            'operator'=>$request->input('operator'),
+            'remark'=>$request->input('remark')
         ]);
             // print_r($updateDatasCustomer['data']);exit;
-        return [$updateDatasCustomer['data'],$updateDatasInvoice['data']];
+        return $updateDatasInvoice['data'];
     }
     public function deleteSJ(Request $request)
     {

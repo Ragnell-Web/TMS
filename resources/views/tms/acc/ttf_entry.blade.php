@@ -3,12 +3,17 @@
 @section('title', 'TMS | TTF ENTRY')
 
 @section('css')
-
+                @php
+                use App\Models\Dbtbs\TtfNoGenerate;
+                $stock = new TtfNoGenerate;
+                $tgl=date('Y-m-d');
+                @endphp
 <!-- DATATABLES -->
 <link rel="stylesheet" type="text/css" href="{{ asset('/vendor/Datatables/dataTables.bootstrap4.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('/vendor/Datatables/Responsive-2.2.5/css/responsive.dataTables.min.css') }}">
 <style>
-    .invoice{
+    .invoice,
+    .invoice-for-ttf{
         cursor: pointer;
     }
     .goodScroll{
@@ -162,9 +167,7 @@
             </div>
             <div class="modal-body">
                 <!-- data table start -->
-                @php
-                $tgl=date('d-m-Y');
-                @endphp
+
                 <div class="row">
                     <div class="col">
                         <div class="form-row">
@@ -172,8 +175,7 @@
                                 <label>TTF No</label>
                             </div>
                             <div class="col-1 mb-2">
-                                <input type="text" name="ttfNo" class="form-control form-control-sm" id="ttfNo"
-                                    aria-describedby="" placeholder="No ttf" disabled>
+                                <input type="text" name="ttfNo1" class="form-control form-control-sm" id="ttfNo1" value="<?=$stock->getStinNo() ?>" aria-describedby="" placeholder="No ttf" disabled>
                             </div>
                             <div class="col-md-9 mb-2 align-right">
                                 <label>Operator</label>
@@ -214,7 +216,7 @@
                                 <label>Posted</label>
                             </div>
                             <div class="col-1 mb-1">
-                                <input class="form-control form-control-sm" name="posted" type="text" id="voided"
+                                <input class="form-control form-control-sm" name="posted" type="text" id="posted"
                                     disabled>
                             </div>
                             <div class="col-md-11 mb-1 align-right">
@@ -237,7 +239,7 @@
                                 <label>No. of Inv</label>
                             </div>
                             <div class="col-1 mb-1">
-                                <input class="form-control form-control-sm" name="" type="text" value="0" disabled>
+                                <input class="form-control form-control-sm" name="noOfInvoice" type="text" value="0" disabled>
                             </div>
                             <div class="col-md-1">
                                 <label>pcs</label>
@@ -255,7 +257,7 @@
                                 <label>Total Amount</label>
                             </div>
                             <div class="col-2 mb-1">
-                                <input class="form-control form-control-sm" name="" type="text" id="printed_create_stin"
+                                <input class="form-control form-control-sm" name="" type="text" id="amountTotal"
                                    value="0.00"  disabled>
                             </div>
                         </div>
@@ -282,16 +284,16 @@
                                         </tr>
                                     </thead>
                                     <tbody id="bodyTable">
-                                        <tr style="text-align:center" class="tableTtf">
-                                            <td><input type="text" style="width:50px;" class="form-control form-control-sm" disabled></td>
-                                            <td><input type="text" style="width:150px;" class="form-control form-control-sm" id="invNo"></td>
-                                            <td><input type="text" style="width:150px;" class="form-control form-control-sm" id="refNo"></td>
-                                            <td><input type="text" style="width:150px;" class="form-control form-control-sm" id="taxNo"></td>
-                                            <td><input type="text" style="width:200px;" class="form-control form-control-sm" id="kwNo"></td>
-                                            <td><input type="text" style="width:150px;" class="form-control form-control-sm" value="<?= $tgl; ?>"></td>
-                                            <td><input type="text" style="width:150px;" class="form-control form-control-sm" id="due"></td>
-                                            <td><input type="text" style="width:50px;" class="form-control form-control-sm" id="dollar" value="IDR"></td>
-                                            <td><input type="text" style="width:150px;" class="form-control form-control-sm" id="totAmount"></td>
+                                        <tr class="tableTtf">
+                                            <td><input type="text" value="001" id="noUrut" name="001" style="width:50px;" class="form-control form-control-sm noUrut" disabled></td>
+                                            <td><input type="text" style="width:150px;" class="form-control form-control-sm invNo"></td>
+                                            <td><input type="text" style="width:150px;" class="form-control form-control-sm refNo"></td>
+                                            <td><input type="text" style="width:150px;" class="form-control form-control-sm taxNo"></td>
+                                            <td><input type="text" style="width:200px;" class="form-control form-control-sm kwNo"></td>
+                                            <td><input type="text" style="width:150px;" class="form-control form-control-sm dateModal" value="<?= $tgl; ?>"></td>
+                                            <td><input type="text" style="width:150px;" class="form-control form-control-sm due"></td>
+                                            <td><input type="text" style="width:50px;" class="form-control form-control-sm dollar" value="IDR"></td>
+                                            <td><input type="text" style="width:150px;" class="form-control form-control-sm totAmount" ></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -302,16 +304,16 @@
             </div>
             <div class="modal-footer">
                 <button type="button" data-toggle="tooltip" data-placement="top" title="Add Item" class="btn btn-success"
-                    id="addBtn" data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-dismiss="modal">New Customer
+                     data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-dismiss="modal">New Customer
                     </button>
 
                 {{-- <button type="button" class="btn btn-info" id="addRow" data-bs-dismiss="modal">Add Row</button> --}}
                 {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal">Delete</button> --}}
-                <button type="button" class="btn btn-info addStin" id="saveBtn" data-bs-dismiss="modal"><i class="ti-check"></i> Add</button>
+                <button type="button" class="btn btn-info addStin" id="addBtn">Add</button>
                 <button type="button" class="btn btn-info" id="editBtn" data-bs-dismiss="modal">Edit</button>
 
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#exampleModal1">Delete</button>
-                <button type="button" class="btn btn-info addStin" id="saveRow" data-bs-dismiss="modal"><i class="ti-check"></i> Ok</button>
+                <button type="button" class="btn btn-warning" id="addRow" data-bs-toggle="modal"><i class="ti-plus">Row</i></button>
+                <button type="button" class="btn btn-info addStin" id="saveRow"><i class="ti-check"></i> Ok</button>
 
             </div>
         </div>
@@ -358,7 +360,7 @@
                                 </tr>
                                 @endforeach
                             </tbody>
-                        </table>
+                </table>
               </div>
           </div>
         <!-- data table start -->
@@ -371,6 +373,69 @@
     </div>
   </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade tiga" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <div class="row">
+              <div class="col">
+                <h4 class="header-title">Entry of Invoice Data</h4>
+              </div>
+          </div>
+          <div class="row goodScroll">
+              <div class="col-12">
+                <table class="table table-striped" style="width:100%">
+                        {{ csrf_field() }}
+                    <thead class="text-center">
+                                <tr>
+                                    <th>No</th>
+                                    <th>Invoice</th>
+                                    <th>PPn No.</th>
+                                    <th>Ref. No.</th>
+                                    <th>OR No.</th>
+                                    <th>Date</th>
+                                    <th>Company</th>
+                                    <th>ID</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @php
+                                $i = 1;
+                                @endphp
+                                @foreach($getAccCustomerInvoice as $data)
+                                <tr class="invoice-for-ttf" data-id="{{$data['id']}}" data-custcode="{{$data['custcode']}}" data-invoice="{{$data['invoice']}}">
+                                    <td>{{$i++}}</td>
+                                    <td>{{$data['invoice']}}</td>
+                                    <td>{{$data['tax_no']}}</td>
+                                    <td>{{$data['ref_no']}}</td>
+                                    <td>{{$data['remark']}}</td>
+                                    <td>{{$data['written']}}</td>
+                                    <td>{{$data['company']}}</td>
+                                    <td>{{$data['custcode']}}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                </table>
+              </div>
+          </div>
+        <!-- data table start -->
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+      </div>
+    </div>
+  </div>
+</div>
+
 
 @endsection
 

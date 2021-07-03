@@ -199,9 +199,9 @@ Breadcrumbs::for('ttf_Index', function ($trail) {
     $trail->push('TTF Entry', route('ttf_Index'));
 });
 
-Breadcrumbs::for('customer_Index', function ($trail) {
+Breadcrumbs::for('customer_file', function ($trail) {
     $trail->push('Accounting', '#');
-    $trail->push('Customer File', route('customer_Index'));
+    $trail->push('Customer File', route('customer_file'));
 });
 
 Breadcrumbs::for('print_Index', function ($trail) {
@@ -209,7 +209,176 @@ Breadcrumbs::for('print_Index', function ($trail) {
     $trail->push('Print Customer Invoice', route('print_Index'));
 });
 
+Breadcrumbs::for('customer_status', function ($trail) {
+    $trail->push('Accounting', '#');
+    $trail->push('Customer Status', route('customer_status'));
+});
 
+Breadcrumbs::for('maintain', function ($trail) {
+    $trail->push('Accounting', '#');
+    $trail->push('Maintain E-Faktur', route('maintain'));
+});
+
+Breadcrumbs::for('list_standart', function ($trail) {
+    $trail->push('Accounting', '#');
+    $trail->push('AR Reports', '#');
+    $trail->push('List Of Invoices (Standart)', route('list_standart'));
+});
+
+Breadcrumbs::for('list_due', function ($trail) {
+    $trail->push('Accounting', '#');
+    $trail->push('AR Reports', '#');
+    $trail->push('List Of Invoices (Due)', route('list_due'));
+});
+
+Breadcrumbs::for('list_item_standart', function ($trail) {
+    $trail->push('Accounting', '#');
+    $trail->push('AR Reports', '#');
+    $trail->push('List Of Item Sold (Standart)', route('list_item_standart'));
+});
+
+Breadcrumbs::for('list_item_hartana', function ($trail) {
+    $trail->push('Accounting', '#');
+    $trail->push('AR Reports', '#');
+    $trail->push('List Of Item Sold (Hartana)', url('tms/list_item_hartana'));
+});
+
+Breadcrumbs::for('list_dn', function ($trail) {
+    $trail->push('Accounting', '#');
+    $trail->push('AR Reports', '#');
+    $trail->push('List Of DN Per Invoice', url('tms/list_dn'));
+});
+
+Breadcrumbs::for('aged_receivables', function ($trail) {
+    $trail->push('Accounting', '#');
+    $trail->push('AR Reports', '#');
+    $trail->push('Aged Receivables', url('tms/aged_receivables'));
+});
+
+Breadcrumbs::for('ar_statements', function ($trail) {
+    $trail->push('Accounting', '#');
+    $trail->push('AR Reports', '#');
+    $trail->push('AR Statements', url('tms/ar_statements'));
+});
+
+Breadcrumbs::for('ar_statements_ii', function ($trail) {
+    $trail->push('Accounting', '#');
+    $trail->push('AR Reports', '#');
+    $trail->push('AR Statements II', url('tms/ar_statements_ii'));
+});
+
+Breadcrumbs::for('ags_customer_interest', function ($trail) {
+    $trail->push('Accounting', '#');
+    $trail->push('AR Reports', '#');
+    $trail->push('Aging per Sales - Customer Interest', url('tms/ags_customer_interest'));
+});
+
+Breadcrumbs::for('ags_sales_interest', function ($trail) {
+    $trail->push('Accounting', '#');
+    $trail->push('AR Reports', '#');
+    $trail->push('Aging per Sales - Sales Interest', url('tms/ags_sales_interest'));
+});
+
+Breadcrumbs::for('ags_last_payment', function ($trail) {
+    $trail->push('Accounting', '#');
+    $trail->push('AR Reports', '#');
+    $trail->push('Aging per Sales - Last Payment', url('tms/ags_last_payment'));
+});
+
+Breadcrumbs::for('customer_ledger_total', function ($trail) {
+    $trail->push('Accounting', '#');
+    $trail->push('AR Reports', '#');
+    $trail->push('Customer Ledger Total', url('tms/customer_ledger_total'));
+});
+
+Breadcrumbs::for('customer_ledger_date', function ($trail) {
+    $trail->push('Accounting', '#');
+    $trail->push('AR Reports', '#');
+    $trail->push('Customer Ledger per Date', url('tms/customer_ledger_date'));
+});
+
+Breadcrumbs::for('customer_ledger_customer', function ($trail) {
+    $trail->push('Accounting', '#');
+    $trail->push('AR Reports', '#');
+    $trail->push('Customer Ledger per Customer', url('tms/customer_ledger_customer'));
+});
+
+Breadcrumbs::for('best_products', function ($trail) {
+    $trail->push('Accounting', '#');
+    $trail->push('AR Reports', '#');
+    $trail->push('Best Products', url('tms/best_products'));
+});
+
+Breadcrumbs::for('best_customer', function ($trail) {
+    $trail->push('Accounting', '#');
+    $trail->push('AR Reports', '#');
+    $trail->push('Best Customer', url('tms/best_customer'));
+});
+
+Breadcrumbs::for('invoice_do_item', function ($trail) {
+    $trail->push('Accounting', '#');
+    $trail->push('AR Reports', '#');
+    $trail->push('Invoice vs DO Item', url('tms/invoice_do_item'));
+});
+
+Breadcrumbs::for('rekapitulasi_i', function ($trail) {
+    $trail->push('Accounting', '#');
+    $trail->push('SJ Reports', '#');
+    $trail->push('Rekapitulasi Penjualan I', url('tms/rekapitulasi_i'));
+});
+
+Breadcrumbs::for('rekapitulasi_ii', function ($trail) {
+    $trail->push('Accounting', '#');
+    $trail->push('SJ Reports', '#');
+    $trail->push('Rekapitulasi Penjualan II', url('tms/rekapitulasi_ii'));
+});
+
+Breadcrumbs::for('financial', function ($trail) {
+    $trail->push('Accounting', '#');
+    $trail->push('SJ Reports', '#');
+    $trail->push('Financial Highlights', url('tms/financial'));
+});
+
+Breadcrumbs::for('umur_sj', function ($trail) {
+    $trail->push('Accounting', '#');
+    $trail->push('SJ Reports', '#');
+    $trail->push('Umur Surat Jalan', url('tms/umur_sj'));
+});
+
+Breadcrumbs::for('penjualan', function ($trail) {
+    $trail->push('Accounting', '#');
+    $trail->push('SJ Reports', '#');
+    $trail->push('Penjualan per Type', url('tms/penjualan'));
+});
+
+Breadcrumbs::for('list_delivered_hartana', function ($trail) {
+    $trail->push('Accounting', '#');
+    $trail->push('SJ Reports', '#');
+    $trail->push('List Of Item Delivered (Hartana)', url('tms/list_delivered_hartana'));
+});
+
+Breadcrumbs::for('setup_ar', function ($trail) {
+    $trail->push('Accounting', '#');
+    $trail->push('Supervisor Menu', '#');
+    $trail->push('Setup AR Period', url('tms/setup_ar'));
+});
+
+Breadcrumbs::for('modify_po', function ($trail) {
+    $trail->push('Accounting', '#');
+    $trail->push('Supervisor Menu', '#');
+    $trail->push('Modify PO No', url('tms/modify_po'));
+});
+
+Breadcrumbs::for('modify_dn', function ($trail) {
+    $trail->push('Accounting', '#');
+    $trail->push('Supervisor Menu', '#');
+    $trail->push('Modify DN No', url('tms/modify_dn'));
+});
+
+// Breadcrumbs::for('tms.manufacturing.production-plan.detailLoadingCapacityPerMachine', function ($trail) {
+//     $trail->parent('tms.manufacturing.production-plan.index');
+//     $trail->push('Detail Loading Capacity per Machine', route('tms.manufacturing.production-plan.detailLoadingCapacityPerMachine'));
+// });
 
     // 2.4.3
 Breadcrumbs::for('tms.warehouse.mto-entry', function ($trail) {

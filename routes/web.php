@@ -815,21 +815,153 @@ Route::group([ 'middleware' => 'app.user'], function (){
             Route::post('/acc/sj','Tms\Acc\AccCustomerController@getSJ');
             Route::post('/acc/doDtl','Tms\Acc\AccCustomerController@getDoDtl');
 
+            //Ttf Entry
             Route::get('/ttf_entry','TMS\Acc\TtfEntryController@index')->name('ttf_Index');
             Route::post('/ttf_entry','TMS\Acc\TtfEntryController@show');
             Route::post('/ttf_entry/customer','TMS\Acc\TtfEntryController@getCustomers');
-            Route::post('ttf_entry/add','TMS\Acc\TtfEntryController@addTtfArl');
+            Route::post('ttf_entry/getInvoice','TMS\Acc\TtfEntryController@getInvoice');
+            Route::post('ttf_entry/getEntryTtfTbl','TMS\Acc\TtfEntryController@getEntryTtfTbl');
+            Route::post('ttf_entry/getTtfWhereNo','TMS\Acc\TtfEntryController@getTtfWhereNo');
+            Route::post('ttf_entry/add','TMS\Acc\TtfEntryController@create');
+            Route::post('ttf_entry/addTtfEntry','TMS\Acc\TtfEntryController@addTtfEntry');
+            Route::post('ttf_entry/editTtfEntry','TMS\Acc\TtfEntryController@editTtfEntry');
             Route::post('ttf_entry/update','TMS\Acc\TtfEntryController@updateTtfEntry');
 
-        //Ttf Entry
-            Route::get('/ttf_entry','TMS\Acc\TtfEntryController@index')->name('ttf_Index');
+            //Customer File
+            Route::get('/customer_file', 'TMS\Acc\CustomerFileController@index')->name('customer_file');
+            Route::post('/customer_file/getCustomer','TMS\Acc\CustomerFileController@getCustomer');
+            Route::post('/customer_file/getCustomerWhereCustcode','TMS\Acc\CustomerFileController@getCustomerWhereCustcode');
+            Route::post('/customer_file/create','TMS\Acc\CustomerFileController@create');
+            Route::post('/customer_file/update','TMS\Acc\CustomerFileController@update');
+            Route::post('/customer_file/delete','TMS\Acc\CustomerFileController@delete');
 
-        //Customer File
-            Route::get('/customer_file', 'TMS\Acc\CustomerFileController@index')->name('customer_Index');
+            //Print Customer Invoice
+            Route::get('/print','TMS\Acc\PrintCustomerInvoiceController@index')->name('print_Index');
 
-        //Print Customer Invoice
-            Route::get('/print_customer_invoice','TMS\Acc\PrintCustomerInvoiceController@index')->name('print_Index');            
-            
+            //Customer Status
+            Route::get('/customer_status','TMS\Acc\CustomerStatusController@index')->name('customer_status');
+            Route::post('/customer_status/update','TMS\Acc\CustomerStatusController@updateAr');
+
+            //Maintain E-Faktur
+            Route::get('/maintain','TMS\Acc\MaintainController@index')->name('maintain');
+            Route::post('/maintain/getInvoice','TMS\Acc\MaintainController@getInvoice');
+            Route::post('/maintain/getEf_noWhere','TMS\Acc\MaintainController@getEf_noWhere');
+            Route::post('/maintain/getInvoiceWhere','TMS\Acc\MaintainController@getInvoiceWhere');
+            Route::post('/maintain/addInvoice','TMS\Acc\MaintainController@addInvoice');
+            Route::post('/maintain/updateEfPrint','TMS\Acc\MaintainController@updateEfPrint');
+            Route::post('/maintain/deleteEfPrint','TMS\Acc\MaintainController@deleteEfPrint');
+
+            //List Of Invoices (Standart)
+            Route::get('/list_standart','TMS\Acc\ListStandartController@index')->name('list_standart');
+            Route::post('/list_standart/getInvoice','TMS\Acc\ListStandartController@getInvoice');
+            Route::post('/list_standart/getCustomer','TMS\Acc\ListStandartController@getCustomer');
+            Route::get('/list_standart/print','TMS\Acc\ListStandartController@print');
+
+            //List Of Invoices (Due)
+            Route::get('/list_due','TMS\Acc\ListDueController@index')->name('list_due');
+            Route::post('/list_due/getCustomer','TMS\Acc\ListDueController@getCustomer');
+
+            //List Of Item Sold (Standart)
+            Route::get('/list_item_standart','TMS\Acc\ListItemStandartController@index')->name('list_item_standart');
+            Route::post('/list_item_standart/getItem','TMS\Acc\ListItemStandartController@getItem');
+            Route::post('/list_item_standart/getCustomer','TMS\Acc\ListItemStandartController@getCustomer');
+
+            //List Of Item Sold (Hartana)
+            Route::get('/list_item_hartana','TMS\Acc\ListItemHartanaController@index')->name('list_item_hartana');
+            Route::post('/list_item_hartana/getItem','TMS\Acc\ListItemHartanaController@getItem');
+
+            //List of DN
+            Route::get('/list_dn','TMS\Acc\ListDNController@index')->name('list_dn');
+            Route::post('/list_dn/getCustomer','TMS\Acc\ListDNController@getCustomer');
+
+            //Aged Receivables
+            Route::get('/aged_receivables','TMS\Acc\AgedReceivablesController@index')->name('aged_receivables');
+            Route::post('/aged_receivables/getCustomer','TMS\Acc\AgedReceivablesController@getCustomer');
+
+            //Ar Statements
+            Route::get('/ar_statements','TMS\Acc\ArStatementsController@index')->name('ar_statements');
+            Route::post('/ar_statements/getCustomer','TMS\Acc\ArStatementsController@getCustomer');
+
+            //Ar Statements II
+            Route::get('/ar_statements_ii','TMS\Acc\ArStatementsIIController@index')->name('ar_statements_ii');
+            Route::post('/ar_statements_ii/getCustomer','TMS\Acc\ArStatementsIIController@getCustomer');
+
+            //Aging per Sales - Customer Interest
+            Route::get('/ags_customer_interest','TMS\Acc\AgsCustomerInterestController@index')->name('ags_customer_interest');
+            Route::post('/ags_customer_interest/getCustomer','TMS\Acc\AgsCustomerInterestController@getCustomer');
+
+            //Aging per Sales - Sales Interest
+            Route::get('/ags_sales_interest','TMS\Acc\AgsSalesInterestController@index')->name('ags_sales_interest');
+            Route::post('/ags_sales_interest/getCustomer','TMS\Acc\AgsSalesInterestController@getCustomer');
+
+            //Aging per Sales - Last Payment
+            Route::get('/ags_last_payment','TMS\Acc\AgsLastPaymentController@index')->name('ags_last_payment');
+            Route::post('/ags_last_payment/getCustomer','TMS\Acc\AgsLastPaymentController@getCustomer');
+
+            //Customer Ledger Total
+            Route::get('/customer_ledger_total','TMS\Acc\CLTotalController@index')->name('customer_ledger_total');
+            Route::post('/customer_ledger_total/getCustomer','TMS\Acc\CLTotalController@getCustomer');
+
+            //Customer Ledger per Date
+            Route::get('/customer_ledger_date','TMS\Acc\CLDateController@index')->name('customer_ledger_date');
+            Route::post('/customer_ledger_date/getCustomer','TMS\Acc\CLDateController@getCustomer');
+
+            //Customer Ledger per Customer
+            Route::get('/customer_ledger_customer','TMS\Acc\CLCustomerController@index')->name('customer_ledger_customer');
+            Route::post('/customer_ledger_customer/getCustomer','TMS\Acc\CLCustomerController@getCustomer');
+
+            //Best Products
+            Route::get('/best_products','TMS\Acc\BestProductsController@index')->name('best_products');
+
+            //Best Customer
+            Route::get('/best_customer','TMS\Acc\BestCustomerController@index')->name('best_customer');
+
+            //Best Customer
+            Route::get('/invoice_do_item','TMS\Acc\InvoiceDOController@index')->name('invoice_do_item');
+
+            //Rekapitulasi Penjualan I
+            Route::get('/rekapitulasi_i','TMS\Acc\RekapitulasiIController@index')->name('rekapitulasi_i');
+            Route::post('/rekapitulasi_i/getCustomer','TMS\Acc\RekapitulasiIController@getCustomer');
+            Route::post('/rekapitulasi_i/getPartNo','TMS\Acc\RekapitulasiIController@getPartNo');
+            Route::post('/rekapitulasi_i/getSJ','TMS\Acc\RekapitulasiIController@getSJ');
+
+            //Rekapitulasi Penjualan II
+            Route::get('/rekapitulasi_ii','TMS\Acc\RekapitulasiIIController@index')->name('rekapitulasi_ii');
+            Route::post('/rekapitulasi_ii/getCustomer','TMS\Acc\RekapitulasiIIController@getCustomer');
+            Route::post('/rekapitulasi_ii/getPartNo','TMS\Acc\RekapitulasiIIController@getPartNo');
+            Route::post('/rekapitulasi_ii/getSJ','TMS\Acc\RekapitulasiIIController@getSJ');
+
+            //Financial Highlights
+            Route::get('/financial','TMS\Acc\FinancialController@index')->name('financial');
+            Route::post('/financial/getCustomer','TMS\Acc\FinancialController@getCustomer');
+
+            //Umur Surat Jalan
+            Route::get('/umur_sj','TMS\Acc\UmurSJController@index')->name('umur_sj');
+            Route::post('/umur_sj/getCustomer','TMS\Acc\UmurSJController@getCustomer');
+
+            //Penjualan per Type
+            Route::get('/penjualan','TMS\Acc\PenjualanController@index')->name('penjualan');
+            Route::post('/penjualan/getCustomer','TMS\Acc\PenjualanController@getCustomer');
+
+            //List Of Item Delivered (hartana)
+            Route::get('/list_delivered_hartana','TMS\Acc\ListDeliveredController@index')->name('list_delivered_hartana');
+            Route::post('/list_delivered_hartana/getItem','TMS\Acc\ListDeliveredController@getItem');
+
+            //Setup AR Period
+            Route::get('/setup_ar','TMS\Acc\SetupARController@index')->name('setup_ar');
+
+            //Modify PO No
+            Route::get('/modify_po','TMS\Acc\ModifyPOController@index')->name('modify_po');
+            Route::get('/modify_po/getPO','TMS\Acc\ModifyPOController@getPO');
+            Route::post('/modify_po','TMS\Acc\ModifyPOController@postPO');
+            Route::post('/modify_po/updatePO','TMS\Acc\ModifyPOController@updatePO');
+
+            //Modify DN No
+            Route::get('/modify_dn','TMS\Acc\ModifyDNController@index')->name('modify_dn');
+            Route::get('/modify_dn/getDN','TMS\Acc\ModifyDNController@getDN');
+            Route::post('/modify_dn','TMS\Acc\ModifyDNController@postDN');
+            Route::post('/modify_dn/updateDN','TMS\Acc\ModifyDNController@updateDN');
+
         Route::get('/procurement/rg_entry', [
             'uses' => 'TMS\Procurement\RG_EntryController@indexRG_Entry',
             'as' => 'tms.procurement.rg_entry'

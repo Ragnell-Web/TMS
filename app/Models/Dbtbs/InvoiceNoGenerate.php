@@ -84,8 +84,8 @@ class InvoiceNoGenerate extends Model
             }else{
                 do{
                     $cek_stinno++;
-                    $cek_stouttbl = DB::connection('db_tbs')->table('entry_stock_in_tbl')->where('in_no',$cek_stinno)
-                    ->select(['in_no'])
+                    $cek_stouttbl = DB::connection('db_tbs')->table('acc_customer_invoice')->where('invoice',$cek_stinno)
+                    ->select(['invoice'])
                     ->get();
                 }while (!$cek_stouttbl->isEmpty());
                 $in_no = $cek_stinno;

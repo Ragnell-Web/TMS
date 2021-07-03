@@ -18,10 +18,8 @@ class CustomerFileController extends Controller
     private $customer_invoice;
     private $surat_jalan;
     private $api_url;
-    private $detail_customer;
-    private $add_customer_from_sj;
-    private $add_do_dtl;
     private $detail_invoice;
+    private $customer_file;
     public function __construct()
     {
         $this->middleware('auth');
@@ -31,10 +29,8 @@ class CustomerFileController extends Controller
         $this->customer_invoice = \Config::get('rest.customer_invoice');
         $this->api_url = \Config::get('rest.api_url');
         $this->surat_jalan = \Config::get('rest.surat_jalan');
-        $this->detail_customer = \Config::get('rest.detail_customer');
-        $this->add_customer_from_sj = \Config::get('rest.add_customer_from_sj');
-        $this->add_do_dtl = \Config::get('rest.add_do_dtl');
         $this->detail_invoice = \Config::get('rest.detail_invoice');
+        $this->customer_file = \Config::get('rest.customer_file');
     }
 
     /**
@@ -44,47 +40,62 @@ class CustomerFileController extends Controller
      */
     public function index()
     {
-        // print_r($this->api_key);exit;
-        $datasInvoices= Http::withHeaders([
+        $getCustomer = Http::withHeaders([
             'Authorization' => $this->api_key,
-        ])->get($this->api_url . $this->customer_invoice . 'list');
-        // print_r($datasInvoices['data']);exit;
-        //print_r($datas['data']);exit;
-        $datasSuratJalan = Http::withHeaders([
-            'Authorization' => $this->api_key,
-        ])->get($this->api_url . $this->surat_jalan . 'list');
+        ])->get($this->api_url . $this->customer_file . 'list');
 
-        
-
-        return view('tms.acc.customer_file')->with('datasInvoices', $datasInvoices['data'])->with('datasSuratJalan',$datasSuratJalan['data']);
+        return view('tms.acc.customer_file')->with('getCustomer',$getCustomer['data']);
     }
     public function create(Request $request)
     {
-
-        $datas = Http::withHeaders([
+        $addCustomer = Http::withHeaders([
             'Authorization' => $this->api_key,
-        ])->asForm()->post($this->api_url . $this->customer_invoice . 'store', [
-            'invoice' => $request->input('invoice'),
-            'inv_type' => $request->input('inv_type'),
-            'ref_no' => $request->input('ref_no'),
-            'period' => $request->input('atas_nama'),
-            'company' => $request->input('company')
+        ])->asJson()->post($this->api_url . $this->customer_file . 'create',[
+            'custcode'=>$request->input('custcode'),
+            'cus_group'=>$request->input('cus_group'),
+            'branch'=>$request->input('branch'),
+            'warehouse'=>$request->input('warehouse'),
+            'company'=>$request->input('company'),
+            'industry'=>$request->input('pt'),
+            'entered'=>$request->input('entered'),
+            'contact'=>$request->input('contact'),
+            'address1'=>$request->input('address1'),
+            'do_addr1'=>$request->input('do_addr1'),
+            'address2'=>$request->input('address2'),
+            'do_addr2'=>$request->input('do_addr2'),
+            'address3'=>$request->input('address3'),
+            'do_addr3'=>$request->input('do_addr3'),
+            'address4'=>$request->input('address4'),
+            'do_addr4'=>$request->input('do_addr4'),
+            'phone'=>$request->input('phone'),
+            'fax'=>$request->input('fax'),
+            'glar'=>$request->input('glar'),
+            'hp'=>$request->input('hp'),
+            'npwp'=>$request->input('npwp'),
+            'pl_by'=>$request->input('pl_by'),
+            'email'=>$request->input('email'),
+            'termofpay'=>$request->input('termofpay'),
+            'term_dn'=>$request->input('term_dn'),
         ]);
-
-        return redirect()->route('customer_Index')->with('datas',$datas['data']);
+        return $addCustomer['data'];
     }
     public function getCustomer(Request $request)
     {
         $datasCustomers = Http::withHeaders([
             'Authorization' => $this->api_key,
-        ])->asJson()->get($this->api_url . $this->detail_customer . 'edit',[
-            'id'=>$request->input('id')
-        ]);
-        // $data = [
-        //     'datasCustomers'=>$datasCustomers['data']
-        // ];
+        ])->get($this->api_url . $this->customer_file . 'getCustomer');
 
         return $datasCustomers['data'];
+    }
+    public function getCustomerWhereCustcode(Request $request)
+    {
+        $getCustomerWhereCustcode = Http::withHeaders([
+            'Authorization' => $this->api_key,
+        ])->asJson()->get($this->api_url . $this->customer_file . 'getCustomerWhereCustcode',[
+            "custcode"=>$request->input('custcode')
+        ]);
+
+        return $getCustomerWhereCustcode['data'];
     }
     public function getSJ(Request $request)
     {
@@ -112,43 +123,47 @@ class CustomerFileController extends Controller
     }
     public function update(Request $request)
     {
-        $updateDatasCustomer = Http::withHeaders([
+        $editCustomer = Http::withHeaders([
             'Authorization' => $this->api_key,
-        ])->asJson()->put($this->api_url . $this->detail_customer . 'update',[
-            'custcode'=>$request->input('cust_id'),
-            'contact'=>$request->input('contact'),
-            'source'=>$request->input('source'),
+        ])->asJson()->put($this->api_url . $this->customer_file . 'update',[
+            'custcode'=>$request->input('custcode'),
+            'cus_group'=>$request->input('cus_group'),
+            'branch'=>$request->input('branch'),
+            'warehouse'=>$request->input('warehouse'),
             'company'=>$request->input('company'),
-            'taxrate'=>$request->input('taxrate')
-        ]);
-        $updateDatasInvoice = Http::withHeaders([
-            'Authorization' => $this->api_key,
-        ])->asJson()->put($this->api_url . $this->detail_invoice . 'update',[
-            'custcode'=>$request->input('cust_id'),
-            'period'=>$request->input('period'),
-            'written'=>$request->input('written'),
-            'ref_no'=>$request->input('ref_no'),
+            'industry'=>$request->input('pt'),
+            'entered'=>$request->input('entered'),
+            'contact'=>$request->input('contact'),
             'address1'=>$request->input('address1'),
+            'do_addr1'=>$request->input('do_addr1'),
+            'address2'=>$request->input('address2'),
+            'do_addr2'=>$request->input('do_addr2'),
             'address3'=>$request->input('address3'),
-            'valas'=>$request->input('valas'),
-            'rate'=>$request->input('rate'),
-            'due'=>$request->input('due'),
-            'glar'=>$request->input('glar')
+            'do_addr3'=>$request->input('do_addr3'),
+            'address4'=>$request->input('address4'),
+            'do_addr4'=>$request->input('do_addr4'),
+            'phone'=>$request->input('phone'),
+            'fax'=>$request->input('fax'),
+            'glar'=>$request->input('glar'),
+            'hp'=>$request->input('hp'),
+            'npwp'=>$request->input('npwp'),
+            'pl_by'=>$request->input('pl_by'),
+            'email'=>$request->input('email'),
+            'termofpay'=>$request->input('termofpay'),
+            'term_dn'=>$request->input('term_dn'),
         ]);
-            // print_r($updateDatasCustomer['data']);exit;
-        return [$updateDatasCustomer['data'],$updateDatasInvoice['data']];
+        return $editCustomer['data'];
     }
-    public function deleteSJ(Request $request)
+    public function delete(Request $request)
     {
 
-        $deleteSJ = Http::withHeaders([
+        $deleteCustomer = Http::withHeaders([
             'Authorization' => $this->api_key,
-        ])->asJson()->delete($this->api_url . $this->add_customer_from_sj . 'delete',[
-            'do_no'=>$request->input('do_no'),
+        ])->asJson()->delete($this->api_url . $this->customer_file. 'delete',[
             'custcode'=>$request->input('custcode')
         ]);
         // print_r($this->api_url . $this->add_customer_from_sj . 'delete');exit;
-        return $deleteSJ['data'];
+        return $deleteCustomer['data'];
     }
 
 }

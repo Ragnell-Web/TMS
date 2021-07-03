@@ -32,6 +32,148 @@
     </button>
 </div>
 
+    <div class="main-content-inner">
+        @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+        @endif
+
+
+
+        <div class="row">
+            <div class="col-12 mt-5">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <h4 class="card-header-title">Print</h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="form-row">
+                                    <div class="col-md-3 ">
+                                        <label> Report Form </label>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <select class="form-select" aria-label="Default select example">
+                                            <option value="invoice" selected>Invoice</option>
+                                            <option value="kwitansi">Kwitansi</option>
+                                            <option value="vat">Vat</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-3">
+                                        <label>Cut Off Line</label>
+                                    </div>
+                                    <div class="col-2 mb-1">
+                                        <input type="text" name="custcode" autocomplete="off"
+                                            class="form-control form-control-sm" id="custcode">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-3">
+                                        <label>Start/End with Inv no</label>
+                                    </div>
+                                    <div class="col-3 mb-1">
+                                        <input class="form-control form-control-sm" name="posted" type="text" id="voided">
+                                    </div>
+                                    <div class="col-3 mb-1">
+                                        <input class="form-control form-control-sm" name="voided" type="text" id="voided">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-3">
+                                        <label>Start/End with Vat no</label>
+                                    </div>
+                                    <div class="col-3 mb-1">
+                                        <input class="form-control form-control-sm" name="posted" type="text" id="voided" disabled="">
+                                    </div>
+                                    <div class="col-3 mb-1">
+                                        <input class="form-control form-control-sm" name="voided" type="text" id="voided" disabled="">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-3">
+                                        <label>Start/End with OR no</label>
+                                    </div>
+                                    <div class="col-3 mb-1">
+                                        <input class="form-control form-control-sm" name="posted" type="text" id="voided" disabled="">
+                                    </div>
+                                    <div class="col-3 mb-1">
+                                        <input class="form-control form-control-sm" name="voided" type="text" id="voided" disabled="">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-3">
+                                        <label>Start with date</label>
+                                    </div>
+                                    <div class="col-3 mb-1">
+                                        <input class="form-control form-control-sm" name="posted" type="text" id="voided">
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-md-3">
+                                        <label>Data Selection</label>
+                                    </div>
+                                    <div class="col-3 mb-1">
+                                        <input type="radio" aria-label="Radio button for following text input">
+                                        <label>Un-printed</label>
+                                    </div>
+                                    <div class="col-3 mb-1">
+                                        <input type="radio" aria-label="Radio button for following text input">
+                                        <label>Printed</label>
+                                    </div>
+                                    <div class="col-3 mb-1">
+                                        <input type="radio" aria-label="Radio button for following text input">
+                                        <label>All</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-md-3">
+                                        <label>PIC</label>
+                                    </div>
+                                    <div class="col-6 mb-1">
+                                        <input class="form-control form-control-sm" name="posted" type="text" id="voided">
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-md-3">
+                                        <label>Title</label>
+                                    </div>
+                                    <div class="col-6 mb-1">
+                                        <input class="form-control form-control-sm" name="posted" type="text" id="voided">
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-md-3">
+                                        <label>Print to</label>
+                                    </div>
+                                    <div class="col-md-3-1">
+                                        <select class="form-select" aria-label="Default select example">
+                                            <option value="printer" selected>Printer</option>
+                                            <option value="prompt">Prompt</option>
+                                            <option value="preview">Preview</option>
+                                            <option value="cancel">Cancel</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -45,117 +187,7 @@
       </div>
       <div class="modal-body">
         <!-- data table start -->
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="form-row">
-                            <div class="col-md-3 ">
-                                <label> Report Form </label>
-                            </div>
 
-                            <div class="col-md-3">
-                                <input type="text" name="custcode" autocomplete="off"
-                                    class="form-control form-control-sm" id="custcode">
-                            </div>
-
-                        </div>
-                        <div class="form-row">
-                            <div class="col-md-3">
-                                <label>Cut Off Line</label>
-                            </div>
-                            <div class="col-2 mb-1">
-                                <input type="text" name="custcode" autocomplete="off"
-                                    class="form-control form-control-sm" id="custcode">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-md-3">
-                                <label>Start/End with Inv no</label>
-                            </div>
-                            <div class="col-3 mb-1">
-                                <input class="form-control form-control-sm" name="posted" type="text" id="voided">
-                            </div>
-                            <div class="col-3 mb-1">
-                                <input class="form-control form-control-sm" name="voided" type="text" id="voided">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-md-3">
-                                <label>Start/End with Vat no</label>
-                            </div>
-                            <div class="col-3 mb-1">
-                                <input class="form-control form-control-sm" name="posted" type="text" id="voided" disabled="">
-                            </div>
-                            <div class="col-3 mb-1">
-                                <input class="form-control form-control-sm" name="voided" type="text" id="voided" disabled="">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-md-3">
-                                <label>Start/End with OR no</label>
-                            </div>
-                            <div class="col-3 mb-1">
-                                <input class="form-control form-control-sm" name="posted" type="text" id="voided" disabled="">
-                            </div>
-                            <div class="col-3 mb-1">
-                                <input class="form-control form-control-sm" name="voided" type="text" id="voided" disabled="">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-md-3">
-                                <label>Start with date</label>
-                            </div>
-                            <div class="col-3 mb-1">
-                                <input class="form-control form-control-sm" name="posted" type="text" id="voided">
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="col-md-3">
-                                <label>Data Selection</label>
-                            </div>
-                            <div class="col-3 mb-1">
-                                <input type="radio" aria-label="Radio button for following text input">
-                                <label>Un-printed</label>
-                            </div>
-                            <div class="col-3 mb-1">
-                                <input type="radio" aria-label="Radio button for following text input">
-                                <label>Printed</label>
-                            </div>
-                            <div class="col-3 mb-1">
-                                <input type="radio" aria-label="Radio button for following text input">
-                                <label>All</label>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="col-md-3">
-                                <label>PIC</label>
-                            </div>
-                            <div class="col-6 mb-1">
-                                <input class="form-control form-control-sm" name="posted" type="text" id="voided">
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="col-md-3">
-                                <label>Title</label>
-                            </div>
-                            <div class="col-6 mb-1">
-                                <input class="form-control form-control-sm" name="posted" type="text" id="voided">
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="col-md-3">
-                                <label>Print to</label>
-                            </div>
-                            <div class="col-md-3-1">
-                                <input class="form-control form-control-sm" name="posted" type="text" id="voided">
-                            </div>
-                        </div>
-
-                    </div>
-                </div> 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary">Print</button>

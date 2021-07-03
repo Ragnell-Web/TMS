@@ -1,68 +1,36 @@
 @extends('master')
 
-@section('title', 'TMS | Customer Invoice')
-
-@section('css')
-<?php
-
-use App\Models\Dbtbs\InvoiceNoGenerate;
-$stock = new InvoiceNoGenerate;
-$tgl = date('Y-m-d');
-?>
-<!-- DATATABLES -->
-<link rel="stylesheet" type="text/css" href="{{ asset('/vendor/Datatables/dataTables.bootstrap4.min.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('/vendor/Datatables/Responsive-2.2.5/css/responsive.dataTables.min.css') }}">
-<style>
-    .invoice{
-        cursor: pointer;
-    }
-    .goodScroll{
-        height: 65vh;
-        overflow: auto;
-    }
-    .scrollGood{
-        height: 20vh;
-        overflow: auto;
-    }
-
-
-
-</style>
-
-@endsection
+@section('title', 'TMS | Customer Status')
 
 @section('content')
 
+<div class="main-content-inner">
+    @if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+    @endif
+</div>
 <div class="page-title-area">
-    <div class="row" >
+    <div class="row">
         <div class="col-1">
             <div class="#">
-                <a href="#" class="btn btn-primary btn-round" id="add_form" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                <a href="#" class="btn btn-primary btn-round" id="recalcItem">
                     Recalc
                 </a>
             </div>
         </div>
 
-        <div class="col-1" id="tes">
+        <div class="col-1">
             <div class="#">
-                <a href="#" class="btn btn-primary btn-round" id="edit_form" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                <a href="#" class="btn btn-primary btn-round" id="updateItem">
                     Update
                 </a>
             </div>
         </div>
     </div>
-    {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button> --}}
 
-    <div class="main-content-inner">
-    @if (session('status'))
-        <div class="alert alert-success">
-            {{ session('status') }}
-        </div>
-    @endif
-
-      <div class="row">
+    <div class="row">
         <div class="col-12 mt-5">
             <div class="card">
                 <div class="card-header">
@@ -71,121 +39,57 @@ $tgl = date('Y-m-d');
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="row" id="isiInput">
-
-                    </div>
-                    <div class="row mt-3" style="height: 35vh;overflow: auto">
+                    <div class="row mt-3">
                         <div class="col">
-                            <div class="data-tables datatable-dark">
-                                <table id="tms_MasterItem_Datatable" class="table table-striped" style="width:100%">
-                                    {{ csrf_field() }}
-                                
-                                    <thead class="text-center">
-                                        <tr>
-                                            <th>id</th>
-                                            <th>Company</th>
-                                            <th>Balance</th>
-                                            <th> < 8 hari</th>
-                                            <th>8 - 14 hari</th>
-                                            <th>15 - 45 hari</th>
-                                            <th> > 45 hari </th>
-                                            <th> ST </th>
-                                            <th> New </th>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody id="suratJalanBody">
-                                        <tr style="text-align:center">
-                                                <td colspan="10">Silahkan Ditambahkan</td>
-                                            </tr>
-                                    </tbody>
-
-                                </table>
+                            <div class="row mb-3">
+                                <div class="col-2">
+                                    <label for="ar_update">As of Date : </label>
+                                </div>
+                                <div class="col-2">
+                                    <input type="date" id="ar_update" name="ar_update" placeholder="dd/mm/yyyy"
+                                        class="form-control form-control-sm">
+                                </div>
                             </div>
+                            <div class="row" style="height: 35vh;overflow: auto;">
+                                <div class="col-12">
+                                    <table class="table table-striped table-dark" style="width: 100%;">
+                                        <thead>
+                                            <tr>
+                                                <th>Company</th>
+                                                <th>Balance</th>
+                                                <th>
+                                                    < 8 Hari</th> <th>8 - 14 Hari
+                                                </th>
+                                                <th>15 - 45 Hari</th>
+                                                <th>> 45 Hari</th>
+                                                <th>ST</th>
+                                                <th>New</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tBodyCustomer">
+                                            @foreach ($customerList as $data)
+                                            <tr>
+                                                <td>{{$data['company']}}</td>
+                                                <td>{{$data['balance']}}</td>
+                                                <td>{{$data['ar_00']}}</td>
+                                                <td>{{$data['ar_01']}}</td>
+                                                <td>{{$data['ar_02']}}</td>
+                                                <td>{{$data['ar_03']}}</td>
+                                                <td>{{$data['status']}}</td>
+                                                <td>{{$data['new_status']}}</td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
-         </div>
+        </div>
     </div>
-    
+    <script src="{{asset('/js/scriptCustomerStatus.js')}}"></script>
+</div>
 @endsection
-
-@push('js')
-
-<script src="{{ asset('vendor/Datatables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('vendor/Datatables/dataTables.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('vendor/Datatables/Responsive-2.2.5/js/dataTables.responsive.min.js') }}"></script>
-<script src="{{ asset('js/custom_tms_datatable.js') }}"></script>
-
-<script>
-    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-
-    $(document).ready(function() {
-
-        // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        // JS Function On Load
-        // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        populate_dtItem('#tms_MasterItem_Datatable');
-
-        // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        // JS Function On Other Function Changes
-        // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        $('#add_form').click(function() {
-            $('#form_addItem').toggle();
-        });
-
-        $('#post_Item').click(function() {
-            var email = $('#exampleInputEmail1').val();
-            if(email != ''){
-                post_entryItem(email);
-            } else {
-                alert('Fill all fields');
-            };
-        });
-
-        // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        // JS Nested Function
-        // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        function post_entryItem(email){
-            $.ajax({
-                type:'POST',
-                url:'post_entryItem', //Make sure your URL is correct
-                dataType: 'json', //Make sure your returning data type dffine as json
-                data:{
-                    _token: CSRF_TOKEN,
-                    email: email
-                },
-                success:function(response){
-                    if(response == 'success'){
-                        Swal.fire("Data posting successfully!", "", "success");
-                        $('#form_addItem').toggle();
-                        populate_dtItem('#tms_MasterItem_Datatable');
-                    } else {
-                        Swal.fire("Data posting failed!", "", "warning");
-                    }
-                }
-            });
-        };
-        // const trS = document.querySelectorAll('.invoice');
-        // trS.forEach(tr=>tr.addEventListener('click',function (e) {
-        //     console.log(e.target);
-        //  }))
-    } );
-    // const trS = document.querySelectorAll('.invoice');
-    //     trS.forEach(tr=>tr.addEventListener('click',function (e) {
-    //         console.log(e.target.dataset.id);
-    //         $.get('/tms/acc',{
-    //             id:e.target.dataset.id
-    //         },function (data) {
-    //             $("#tms_MasterItem_Datatable").html(data)
-    //          })
-        //  }))
-
-    // console.log(dataId);
-
-
-
-</script>
-<script src="{{asset('/js/scriptCustomerFile.js')}}"></script>
-@endpush
