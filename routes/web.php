@@ -855,16 +855,18 @@ Route::group([ 'middleware' => 'app.user'], function (){
             Route::get('/list_standart','TMS\Acc\ListStandartController@index')->name('list_standart');
             Route::post('/list_standart/getInvoice','TMS\Acc\ListStandartController@getInvoice');
             Route::post('/list_standart/getCustomer','TMS\Acc\ListStandartController@getCustomer');
-            Route::get('/list_standart/print','TMS\Acc\ListStandartController@print');
+            Route::post('/list_standart/print','TMS\Acc\ListStandartController@print');
 
             //List Of Invoices (Due)
             Route::get('/list_due','TMS\Acc\ListDueController@index')->name('list_due');
             Route::post('/list_due/getCustomer','TMS\Acc\ListDueController@getCustomer');
+            Route::post('/list_due/print','TMS\Acc\ListDueController@print');
 
             //List Of Item Sold (Standart)
             Route::get('/list_item_standart','TMS\Acc\ListItemStandartController@index')->name('list_item_standart');
             Route::post('/list_item_standart/getItem','TMS\Acc\ListItemStandartController@getItem');
             Route::post('/list_item_standart/getCustomer','TMS\Acc\ListItemStandartController@getCustomer');
+            Route::post('/list_item_standart/print','TMS\Acc\ListItemStandartController@print');
 
             //List Of Item Sold (Hartana)
             Route::get('/list_item_hartana','TMS\Acc\ListItemHartanaController@index')->name('list_item_hartana');

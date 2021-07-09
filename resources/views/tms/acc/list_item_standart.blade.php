@@ -20,7 +20,7 @@ $tgl = date('Y-m-d');
     <div class="row mb-5">
         <div class="col-1">
             <div class="#">
-                <a href="#" class="btn btn-primary btn-round" id="printItem" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                <a href="#" class="btn btn-primary btn-round" id="printItem">
                     Print Item
                 </a>
             </div>
@@ -43,7 +43,7 @@ $tgl = date('Y-m-d');
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="printBy" id="item" value="item">
+                                        <input class="form-check-input" type="radio" name="printBy" id="item" value="item" checked>
                                         <label class="form-check-label" for="item">
                                             Item
                                         </label>
@@ -88,7 +88,7 @@ $tgl = date('Y-m-d');
                                     <label for="startWithItemCode">Start with Item Code :</label>
                                 </div>
                                 <div class="col-md-2">
-                                    <input type="text" name="startWithItemCode" autocomplete="off" class="form-control form-control-sm" id="startWithItemCode" value="{{$datas[0]['ITEMCODE']}}" disabled>
+                                    <input type="text" name="startWithItemCode" autocomplete="off" class="form-control form-control-sm" id="startWithItemCode" value="{{$datas[0]['ITEMCODE']}}">
                                 </div>
                             </div>
                             <div class="form-row">
@@ -96,7 +96,7 @@ $tgl = date('Y-m-d');
                                     <label for="endWithItemCode">End with Item Code :</label>
                                 </div>
                                 <div class="col-md-2">
-                                    <input type="text" name="endWithItemCode" autocomplete="off" class="form-control form-control-sm" id="endWithItemCode" value="{{$datas[1]['ITEMCODE']}}" disabled>
+                                    <input type="text" name="endWithItemCode" autocomplete="off" class="form-control form-control-sm" id="endWithItemCode" value="{{$datas[1]['ITEMCODE']}}">
                                 </div>
                             </div>
                             <div class="form-row">
@@ -297,7 +297,7 @@ $tgl = date('Y-m-d');
                   <div class="row" style="height: 35vh;overflow: auto;">
                     <div class="col-12">
                       <table class="table table-hover">
-                        <tbody id="tBodyInvoice"></tbody>
+                        <tbody id="tBodyItem"></tbody>
                       </table>
                     </div>
                   </div>
@@ -341,7 +341,7 @@ $tgl = date('Y-m-d');
                   <div class="row" style="height: 35vh;overflow: auto;">
                     <div class="col-12">
                       <table class="table table-hover">
-                        <tbody id="tBodyInvoice2"></tbody>
+                        <tbody id="tBodyItem2"></tbody>
                       </table>
                     </div>
                   </div>

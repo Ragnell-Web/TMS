@@ -56,4 +56,9 @@ class ListItemStandartController extends Controller
         ])->get($this->api_url . $this->list_item_standart . 'getCustomer');
         return $getCustomer['data'];
     }
+    public function print(Request $request)
+    {
+        $reportTitle = $request->input('reportTitle');
+        return view('tms.acc.print.list_item_standart')->with('reportTitle',$reportTitle);
+    }
 }

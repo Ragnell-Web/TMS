@@ -15,7 +15,7 @@
     <div class="row mb-5">
         <div class="col-1">
             <div class="#">
-                <a href="/tms/list_standart/print" class="btn btn-primary btn-round" id="printItem">
+                <a href="#" class="btn btn-primary btn-round" id="printItem">
                     Print Item
                 </a>
             </div>
@@ -38,7 +38,7 @@
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="printBy" id="number" value="number">
+                                        <input class="form-check-input" type="radio" name="printBy" id="number" value="number" checked>
                                         <label class="form-check-label" for="number">
                                             Number
                                         </label>
@@ -83,7 +83,7 @@
                                     <label for="startInvoiceNo">Start with Invoice no :</label>
                                 </div>
                                 <div class="col-md-2">
-                                    <input type="text" name="startInvoiceNo" autocomplete="off" class="form-control form-control-sm" id="startInvoiceNo" value="{{$datas[0]['invoice']}}" disabled>
+                                    <input type="text" name="startInvoiceNo" autocomplete="off" class="form-control form-control-sm" id="startInvoiceNo" value="{{$datas[0]['invoice']}}">
                                 </div>
                             </div>
                             <div class="form-row">
@@ -91,7 +91,7 @@
                                     <label for="endInvoiceNo">End with Invoice no :</label>
                                 </div>
                                 <div class="col-md-2">
-                                    <input type="text" name="endInvoiceNo" autocomplete="off" class="form-control form-control-sm" id="endInvoiceNo" value="{{$datas[1]['invoice']}}" disabled>
+                                    <input type="text" name="endInvoiceNo" autocomplete="off" class="form-control form-control-sm" id="endInvoiceNo" value="{{$datas[1]['invoice']}}">
                                 </div>
                             </div>
                             <div class="form-row">

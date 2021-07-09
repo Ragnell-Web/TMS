@@ -3,7 +3,21 @@
 @section('title', 'TMS | List Of Invoices (Due)')
 
 @section('content')
-
+@php
+date_default_timezone_set('Asia/Calcutta');
+$tgl = date('Y-m-d');
+function firstDay($month = '', $year = '')
+{
+    if (empty($month)) {
+      $month = date('m');
+   }
+   if (empty($year)) {
+      $year = date('Y');
+   }
+   $result = strtotime("{$year}-{$month}-01");
+   return date('Y-m-d', $result);
+}
+@endphp
 <div class="main-content-inner">
     @if (session('status'))
     <div class="alert alert-success">
@@ -39,7 +53,7 @@
                                 <div class="col-md-2">
                                     <input type="date" name="startWithDate" autocomplete="off"
                                         class="form-control form-control-sm" id="startWithDate"
-                                        value=""  >
+                                        value="{{ firstDay() }}"  >
                                 </div>
                             </div>
                             <div class="form-row">
@@ -49,7 +63,7 @@
                                 <div class="col-md-2">
                                     <input type="date" name="endWithDate" autocomplete="off"
                                         class="form-control form-control-sm" id="endWithDate"
-                                        value=""  >
+                                        value="{{ $tgl }}"  >
                                 </div>
                             </div>
                             <div class="form-row">
@@ -268,10 +282,4 @@
 </div>
 <script src="{{asset('/js/scriptListDue.js')}}"></script>
 <script src="{{asset('/js/date.js')}}"></script>
-<script>
-  const fd = Date.today().clearTime().moveToFirstDayOfMonth();
-  const firstday = fd.toString("yyyy-MM-dd");
-
-  startWithDate.value = firstday;
-</script>
 @endsection

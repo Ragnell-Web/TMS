@@ -49,4 +49,12 @@ class ListDueController extends Controller
         ])->get($this->api_url . $this->list_due . 'getCustomer');
         return $getCustomer['data'];
     }
+    public function print(Request $request)
+    {
+        $datas = Http::withHeaders([
+            'Authorization' => $this->api_key,
+        ])->get($this->api_url . $this->list_due . 'list');
+        $reportTitle = $request->input('reportTitle');
+        return view('tms.acc.print.list_due')->with('reportTitle',$reportTitle)->with('datas',$datas['data']);
+    }
 }

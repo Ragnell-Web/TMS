@@ -40,14 +40,62 @@ class ListStandartController extends Controller
         $datas = Http::withHeaders([
             'Authorization' => $this->api_key,
         ])->get($this->api_url . $this->list_standart . 'list');
+
     	return view('tms.acc.list_standart')->with('datas',$datas['data']);
     }
+
     public function print(Request $request)
     {
         $datas = Http::withHeaders([
             'Authorization' => $this->api_key,
         ])->get($this->api_url . $this->list_standart . 'list');
-        return view('tms.acc.print.list_standart')->with('datas',$datas['data']);
+
+        $reportTitle = $request->input('reportTitle');
+
+        // nembak ke b/e
+            if(
+                    $request->filled('invoice1') AND
+                    $request->filled('written1') AND
+                    $request->filled('custcode1')
+                ){
+                $dataInvoice = Http::withHeaders([
+                'Authorization' => $this->api_key,
+                ])->asJson()->post($this->api_url . $this->list_standart . 'print',[
+                    'invoice1'=>$request->input('invoice1'),
+                    'invoice2'=>$request->input('invoice2'),
+                    'written1'=>$request->input('written1'),
+                    'written2'=>$request->input('written2'),
+                    'custcode1'=>$request->input('custcode1'),
+                    'custcode2'=>$request->input('custcode2'),
+                ]);
+                return view('tms.acc.print.list_standart')->with('datas',$datas['data'])->with('dataInvoice',$dataInvoice['data'])->with('reportTitle',$reportTitle);
+            }elseif ($request->filled('invoice1')) {
+                $dataInvoice = Http::withHeaders([
+                'Authorization' => $this->api_key,
+                ])->asJson()->post($this->api_url . $this->list_standart . 'print',[
+                    'invoice1'=>$request->input('invoice1'),
+                    'invoice2'=>$request->input('invoice2'),
+                ]);
+                return view('tms.acc.print.list_standart')->with('datas',$datas['data'])->with('dataInvoice',$dataInvoice['data'])->with('reportTitle',$reportTitle);
+            }elseif ($request->filled('written1')) {
+                $dataInvoice = Http::withHeaders([
+                'Authorization' => $this->api_key,
+                ])->asJson()->post($this->api_url . $this->list_standart . 'print',[
+                    'written1'=>$request->input('written1'),
+                    'written2'=>$request->input('written2'),
+                ]);
+                return view('tms.acc.print.list_standart')->with('datas',$datas['data'])->with('dataInvoice',$dataInvoice['data'])->with('reportTitle',$reportTitle);
+            }elseif ($request->filled('custcode1')) {
+                $dataInvoice = Http::withHeaders([
+                'Authorization' => $this->api_key,
+                ])->asJson()->post($this->api_url . $this->list_standart . 'print',[
+                    'custcode1'=>$request->input('custcode1'),
+                    'custcode2'=>$request->input('custcode2'),
+                ]);
+                return view('tms.acc.print.list_standart')->with('datas',$datas['data'])->with('dataInvoice',$dataInvoice['data'])->with('reportTitle',$reportTitle);
+            }
+
+        //response dari b/e
     }
     public function getInvoice(Request $request)
     {

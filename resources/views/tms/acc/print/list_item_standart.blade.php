@@ -33,7 +33,7 @@
         <div class="col-4">
           <p class="dateNow"></p>
         </div>
-        <div class="col-4"><h5>PT TRIMITRA CHITRAHASTA <br> <span class="textTitle">{{$reportTitle}}</span></h5>
+        <div class="col-4"><h5>PT TRIMITRA CHITRAHASTA <br><span class="textTitle">{{$reportTitle}}</span></h5>
         </div>
         <div class="col-4 cons1"><p>page 1</p></div>
       </div>
@@ -42,31 +42,13 @@
           <table class="table table-stripped table-bordered text-center">
             <thead>
               <tr>
-              <th rowspan="2">Inv.#</th>
-              <th rowspan="2">Customer Id</th>
-              <th colspan="2">Amount  + Vat (IDR)</th>
-              <th colspan="3">as of {{ $datas[3]['written'] }}</th>
-            </tr>
-            <tr>
-              <th>Debit</th>
-              <th>Credit</th>
-              <th>Written</th>
-              <th>Due</th>
-              <th>Days</th>
-            </tr>
+                <th width="40%">Item Id / Name</th>
+                <th width="20%">Type</th>
+                <th width="20%">Qty</th>
+                <th width="20%">Value</th>
+              </tr>
             </thead>
             <tbody>
-              @foreach ($dataInvoice as $data)
-                  <tr>
-                      <td>{{ $data['invoice'] }}</td>
-                      <td>{{ $data['custcode'] }}</td>
-                      <td>0.00</td>
-                      <td>{{ $data['credit'] }}</td>
-                      <td>{{ $data['written'] }}</td>
-                      <td>{{ $data['due'] }}</td>
-                      <td>9088</td>
-                  </tr>
-              @endforeach
             </tbody>
           </table>
         </div>
@@ -76,7 +58,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdn.rawgit.com/JDMcKinstry/JavaScriptDateFormat/master/Date.format.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="{{ asset('js/print/scriptListStandart.js') }}"></script>
+    <script src="{{ asset('js/print/scriptListItemStandart.js') }}"></script>
 
   </body>
 </html>

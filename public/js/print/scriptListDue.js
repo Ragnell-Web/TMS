@@ -6,10 +6,8 @@ function setTime() {
     }, 1000);
 }
 
-setTime()
-
+setTime();
 
 $("#downloadBtn").click(function () {
     window.print();
 });
-
